@@ -1,5 +1,5 @@
 {
-    "name": "beastbytes/yii-leaflet",
+    "name": "beastbytes/leaflet",
     "description": "Leaflet JavaScript mapping library integration for Yii3",
     "type": "yii3-extension",
     "keywords": [

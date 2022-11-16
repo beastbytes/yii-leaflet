@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a3f8ad1ac4a5176b0d7aeb58eb8a2ee4",
+    "content-hash": "fc41038947e1688aaf3afefcaae30061",
     "packages": [
         {
             "name": "npm-asset/leaflet",
