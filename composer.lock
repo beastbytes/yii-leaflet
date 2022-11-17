@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc41038947e1688aaf3afefcaae30061",
+    "content-hash": "1402b3dcdae3190df37cb1dcb7a89f0e",
     "packages": [
         {
             "name": "npm-asset/leaflet",
@@ -72,56 +72,6 @@
             "time": "2021-11-05T16:47:00+00:00"
         },
         {
-            "name": "psr/event-dispatcher",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/event-dispatcher.git",
-                "reference": "dbefd12671e8a14ec7f180cab83036ed26714bb0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/event-dispatcher/zipball/dbefd12671e8a14ec7f180cab83036ed26714bb0",
-                "reference": "dbefd12671e8a14ec7f180cab83036ed26714bb0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\EventDispatcher\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Standard interfaces for event handling.",
-            "keywords": [
-                "events",
-                "psr",
-                "psr-14"
-            ],
-            "support": {
-                "issues": "https://github.com/php-fig/event-dispatcher/issues",
-                "source": "https://github.com/php-fig/event-dispatcher/tree/1.0.0"
-            },
-            "time": "2019-01-08T18:20:26+00:00"
-        },
-        {
             "name": "psr/log",
             "version": "3.0.0",
             "source": {
@@ -170,57 +120,6 @@
                 "source": "https://github.com/php-fig/log/tree/3.0.0"
             },
             "time": "2021-07-14T16:46:02+00:00"
-        },
-        {
-            "name": "psr/simple-cache",
-            "version": "3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/simple-cache.git",
-                "reference": "764e0b3939f5ca87cb904f570ef9be2d78a07865"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/764e0b3939f5ca87cb904f570ef9be2d78a07865",
-                "reference": "764e0b3939f5ca87cb904f570ef9be2d78a07865",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.0.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\SimpleCache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interfaces for simple caching",
-            "keywords": [
-                "cache",
-                "caching",
-                "psr",
-                "psr-16",
-                "simple-cache"
-            ],
-            "support": {
-                "source": "https://github.com/php-fig/simple-cache/tree/3.0.0"
-            },
-            "time": "2021-10-29T13:26:27+00:00"
         },
         {
             "name": "yiisoft/aliases",
@@ -351,16 +250,16 @@
         },
         {
             "name": "yiisoft/assets",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/assets.git",
-                "reference": "aefee9563c0974c91ecd82ef1c64b2bfe1fe5e0b"
+                "reference": "7ddd32273d4a63bbfa76e5c648190e6389517330"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/assets/zipball/aefee9563c0974c91ecd82ef1c64b2bfe1fe5e0b",
-                "reference": "aefee9563c0974c91ecd82ef1c64b2bfe1fe5e0b",
+                "url": "https://api.github.com/repos/yiisoft/assets/zipball/7ddd32273d4a63bbfa76e5c648190e6389517330",
+                "reference": "7ddd32273d4a63bbfa76e5c648190e6389517330",
                 "shasum": ""
             },
             "require": {
@@ -368,7 +267,7 @@
                 "php": "^7.4|^8.0",
                 "psr/log": "^1.1|^2.0|^3.0",
                 "yiisoft/aliases": "^1.1|^2.0",
-                "yiisoft/files": "^1.0",
+                "yiisoft/files": "^2.0",
                 "yiisoft/json": "^1.0"
             },
             "require-dev": {
@@ -422,89 +321,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-06-15T08:31:59+00:00"
-        },
-        {
-            "name": "yiisoft/cache",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/cache.git",
-                "reference": "42da72dbb91ca1e6d82a3cc0cde48cd60ca0326d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/cache/zipball/42da72dbb91ca1e6d82a3cc0cde48cd60ca0326d",
-                "reference": "42da72dbb91ca1e6d82a3cc0cde48cd60ca0326d",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-mbstring": "*",
-                "php": "^8.0",
-                "psr/simple-cache": "^2.0|^3.0"
-            },
-            "provide": {
-                "psr/simple-cache-implementation": "2.0|3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.5",
-                "roave/infection-static-analysis-plugin": "^1.16",
-                "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.18"
-            },
-            "suggest": {
-                "yiisoft/cache-apcu": "Allows to store cache using APCu PECL extension",
-                "yiisoft/cache-db": "Allows storing cache to the database",
-                "yiisoft/cache-file": "Allows storing cache to the files",
-                "yiisoft/cache-memcached": "Allows to store cache using Memcached PECL extension",
-                "yiisoft/cache-redis": "Allows storing cache to the Redis",
-                "yiisoft/cache-wincache": "Allows to store cache using WinCache PECL extension"
-            },
-            "type": "library",
-            "extra": {
-                "config-plugin-options": {
-                    "source-directory": "config"
-                },
-                "config-plugin": {
-                    "common": "common.php"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Yiisoft\\Cache\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Yii Caching Library",
-            "homepage": "https://www.yiiframework.com/",
-            "keywords": [
-                "cache",
-                "psr-16",
-                "yii"
-            ],
-            "support": {
-                "chat": "https://t.me/yii3en",
-                "forum": "https://www.yiiframework.com/forum/",
-                "irc": "irc://irc.freenode.net/yii",
-                "issues": "https://github.com/yiisoft/cache/issues?state=open",
-                "source": "https://github.com/yiisoft/cache",
-                "wiki": "https://www.yiiframework.com/wiki/"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sponsors/yiisoft",
-                    "type": "github"
-                },
-                {
-                    "url": "https://opencollective.com/yiisoft",
-                    "type": "opencollective"
-                }
-            ],
-            "time": "2022-06-29T06:31:18+00:00"
+            "time": "2022-07-18T14:29:53+00:00"
         },
         {
             "name": "yiisoft/definitions",
@@ -567,72 +384,6 @@
                 }
             ],
             "time": "2022-11-08T08:41:18+00:00"
-        },
-        {
-            "name": "yiisoft/event-dispatcher",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/event-dispatcher.git",
-                "reference": "2b1262a56260030aaac386bf8ef75ec072abc7e3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/event-dispatcher/zipball/2b1262a56260030aaac386bf8ef75ec072abc7e3",
-                "reference": "2b1262a56260030aaac386bf8ef75ec072abc7e3",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.0",
-                "psr/event-dispatcher": "1.0.0"
-            },
-            "provide": {
-                "psr/event-dispatcher-implementation": "1.0.0"
-            },
-            "require-dev": {
-                "maglnet/composer-require-checker": "^4.2",
-                "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.14.3",
-                "roave/infection-static-analysis-plugin": "^1.16",
-                "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.18"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Yiisoft\\EventDispatcher\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Yii Event Dispatcher",
-            "homepage": "https://www.yiiframework.com/",
-            "keywords": [
-                "event",
-                "event dispatcher",
-                "psr-14"
-            ],
-            "support": {
-                "chat": "https://t.me/yii3en",
-                "forum": "https://www.yiiframework.com/forum/",
-                "irc": "irc://irc.freenode.net/yii",
-                "issues": "https://github.com/yiisoft/event-dispatcher/issues?state=open",
-                "source": "https://github.com/yiisoft/event-dispatcher",
-                "wiki": "https://www.yiiframework.com/wiki/"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/yiisoft",
-                    "type": "github"
-                },
-                {
-                    "url": "https://opencollective.com/yiisoft",
-                    "type": "open_collective"
-                }
-            ],
-            "time": "2022-10-27T12:02:21+00:00"
         },
         {
             "name": "yiisoft/factory",
@@ -699,27 +450,28 @@
         },
         {
             "name": "yiisoft/files",
-            "version": "1.0.2",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/files.git",
-                "reference": "bff816cfc698a4ff7971cd4b783e2a006edc80a2"
+                "reference": "129a8f8220e1cd2530f424951b8c24f426bd219c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/files/zipball/bff816cfc698a4ff7971cd4b783e2a006edc80a2",
-                "reference": "bff816cfc698a4ff7971cd4b783e2a006edc80a2",
+                "url": "https://api.github.com/repos/yiisoft/files/zipball/129a8f8220e1cd2530f424951b8c24f426bd219c",
+                "reference": "129a8f8220e1cd2530f424951b8c24f426bd219c",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4|^8.0",
+                "php": "^8.0",
                 "yiisoft/strings": "^2.0"
             },
             "require-dev": {
+                "ext-zlib": "*",
                 "phpunit/phpunit": "^9.5",
-                "roave/infection-static-analysis-plugin": "^1.14",
+                "roave/infection-static-analysis-plugin": "^1.18",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.3"
+                "vimeo/psalm": "^4.22"
             },
             "type": "library",
             "autoload": {
@@ -731,16 +483,18 @@
             "license": [
                 "BSD-3-Clause"
             ],
-            "homepage": "http://www.yiiframework.com/",
+            "description": "Helper to manage files and directories",
+            "homepage": "https://www.yiiframework.com/",
             "keywords": [
                 "files"
             ],
             "support": {
-                "forum": "http://www.yiiframework.com/forum/",
+                "chat": "https://t.me/yii3en",
+                "forum": "https://www.yiiframework.com/forum/",
                 "irc": "irc://irc.freenode.net/yii",
                 "issues": "https://github.com/yiisoft/files/issues?state=open",
                 "source": "https://github.com/yiisoft/files",
-                "wiki": "http://www.yiiframework.com/wiki/"
+                "wiki": "https://www.yiiframework.com/wiki/"
             },
             "funding": [
                 {
@@ -752,7 +506,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-01-11T21:46:37+00:00"
+            "time": "2022-07-05T06:43:38+00:00"
         },
         {
             "name": "yiisoft/friendly-exception",
@@ -996,85 +750,6 @@
                 }
             ],
             "time": "2022-08-20T04:26:16+00:00"
-        },
-        {
-            "name": "yiisoft/view",
-            "version": "5.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/view.git",
-                "reference": "d2976b1bdebb8f48b43a8399aa3c90dafa36fbe8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/view/zipball/d2976b1bdebb8f48b43a8399aa3c90dafa36fbe8",
-                "reference": "d2976b1bdebb8f48b43a8399aa3c90dafa36fbe8",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4|^8.0",
-                "psr/event-dispatcher": "1.0.0",
-                "psr/event-dispatcher-implementation": "1.0.0",
-                "yiisoft/arrays": "^2.0",
-                "yiisoft/cache": "^1.0|^2.0",
-                "yiisoft/files": "^1.0",
-                "yiisoft/html": "^2.0",
-                "yiisoft/json": "^1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.5",
-                "roave/infection-static-analysis-plugin": "^1.16",
-                "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.19",
-                "yiisoft/aliases": "^2.0",
-                "yiisoft/psr-dummy-provider": "^1.0",
-                "yiisoft/test-support": "^1.3"
-            },
-            "type": "library",
-            "extra": {
-                "config-plugin-options": {
-                    "source-directory": "config"
-                },
-                "config-plugin": {
-                    "params": "params.php",
-                    "common": "common.php",
-                    "web": "web.php"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Yiisoft\\View\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Yii View Rendering Library",
-            "homepage": "https://www.yiiframework.com/",
-            "keywords": [
-                "view",
-                "yii"
-            ],
-            "support": {
-                "chat": "https://t.me/yii3en",
-                "forum": "https://www.yiiframework.com/forum/",
-                "irc": "irc://irc.freenode.net/yii",
-                "issues": "https://github.com/yiisoft/view/issues",
-                "source": "https://github.com/yiisoft/view",
-                "wiki": "https://www.yiiframework.com/wiki/"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sponsors/yiisoft",
-                    "type": "github"
-                },
-                {
-                    "url": "https://opencollective.com/yiisoft",
-                    "type": "opencollective"
-                }
-            ],
-            "time": "2022-06-30T12:15:00+00:00"
         },
         {
             "name": "yiisoft/widget",
@@ -1872,17 +1547,118 @@
             "time": "2022-10-28T06:00:21+00:00"
         },
         {
+            "name": "psr/event-dispatcher",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/event-dispatcher.git",
+                "reference": "dbefd12671e8a14ec7f180cab83036ed26714bb0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/event-dispatcher/zipball/dbefd12671e8a14ec7f180cab83036ed26714bb0",
+                "reference": "dbefd12671e8a14ec7f180cab83036ed26714bb0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\EventDispatcher\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Standard interfaces for event handling.",
+            "keywords": [
+                "events",
+                "psr",
+                "psr-14"
+            ],
+            "support": {
+                "issues": "https://github.com/php-fig/event-dispatcher/issues",
+                "source": "https://github.com/php-fig/event-dispatcher/tree/1.0.0"
+            },
+            "time": "2019-01-08T18:20:26+00:00"
+        },
+        {
+            "name": "psr/simple-cache",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/simple-cache.git",
+                "reference": "764e0b3939f5ca87cb904f570ef9be2d78a07865"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/764e0b3939f5ca87cb904f570ef9be2d78a07865",
+                "reference": "764e0b3939f5ca87cb904f570ef9be2d78a07865",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\SimpleCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interfaces for simple caching",
+            "keywords": [
+                "cache",
+                "caching",
+                "psr",
+                "psr-16",
+                "simple-cache"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/simple-cache/tree/3.0.0"
+            },
+            "time": "2021-10-29T13:26:27+00:00"
+        },
+        {
             "name": "roave/security-advisories",
             "version": "dev-latest",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "5317244268eb40e418f1cf8afa6d1d9df4e1f4a3"
+                "reference": "ed33734832e5a87eaa4341be7ce580de54157460"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/5317244268eb40e418f1cf8afa6d1d9df4e1f4a3",
-                "reference": "5317244268eb40e418f1cf8afa6d1d9df4e1f4a3",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/ed33734832e5a87eaa4341be7ce580de54157460",
+                "reference": "ed33734832e5a87eaa4341be7ce580de54157460",
                 "shasum": ""
             },
             "conflict": {
@@ -1939,7 +1715,7 @@
                 "codeigniter4/shield": "= 1.0.0-beta",
                 "codiad/codiad": "<=2.8.4",
                 "composer/composer": "<1.10.26|>=2-alpha.1,<2.2.12|>=2.3,<2.3.5",
-                "concrete5/concrete5": "<9",
+                "concrete5/concrete5": ">= 9.0.0RC1, < 9.1.3|<9",
                 "concrete5/core": "<8.5.8|>=9,<9.1",
                 "contao-components/mediaelement": ">=2.14.2,<2.21.1",
                 "contao/contao": ">=4,<4.4.56|>=4.5,<4.9.18|>=4.10,<4.11.7|>=4.13,<4.13.3",
@@ -2407,7 +2183,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-11-11T00:18:57+00:00"
+            "time": "2022-11-16T22:04:17+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -3424,6 +3200,154 @@
             "time": "2021-07-28T10:34:58+00:00"
         },
         {
+            "name": "yiisoft/cache",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/cache.git",
+                "reference": "42da72dbb91ca1e6d82a3cc0cde48cd60ca0326d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/cache/zipball/42da72dbb91ca1e6d82a3cc0cde48cd60ca0326d",
+                "reference": "42da72dbb91ca1e6d82a3cc0cde48cd60ca0326d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": "^8.0",
+                "psr/simple-cache": "^2.0|^3.0"
+            },
+            "provide": {
+                "psr/simple-cache-implementation": "2.0|3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5",
+                "roave/infection-static-analysis-plugin": "^1.16",
+                "spatie/phpunit-watcher": "^1.23",
+                "vimeo/psalm": "^4.18"
+            },
+            "suggest": {
+                "yiisoft/cache-apcu": "Allows to store cache using APCu PECL extension",
+                "yiisoft/cache-db": "Allows storing cache to the database",
+                "yiisoft/cache-file": "Allows storing cache to the files",
+                "yiisoft/cache-memcached": "Allows to store cache using Memcached PECL extension",
+                "yiisoft/cache-redis": "Allows storing cache to the Redis",
+                "yiisoft/cache-wincache": "Allows to store cache using WinCache PECL extension"
+            },
+            "type": "library",
+            "extra": {
+                "config-plugin-options": {
+                    "source-directory": "config"
+                },
+                "config-plugin": {
+                    "common": "common.php"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Yiisoft\\Cache\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Yii Caching Library",
+            "homepage": "https://www.yiiframework.com/",
+            "keywords": [
+                "cache",
+                "psr-16",
+                "yii"
+            ],
+            "support": {
+                "chat": "https://t.me/yii3en",
+                "forum": "https://www.yiiframework.com/forum/",
+                "irc": "irc://irc.freenode.net/yii",
+                "issues": "https://github.com/yiisoft/cache/issues?state=open",
+                "source": "https://github.com/yiisoft/cache",
+                "wiki": "https://www.yiiframework.com/wiki/"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/yiisoft",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/yiisoft",
+                    "type": "opencollective"
+                }
+            ],
+            "time": "2022-06-29T06:31:18+00:00"
+        },
+        {
+            "name": "yiisoft/event-dispatcher",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/event-dispatcher.git",
+                "reference": "2b1262a56260030aaac386bf8ef75ec072abc7e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/event-dispatcher/zipball/2b1262a56260030aaac386bf8ef75ec072abc7e3",
+                "reference": "2b1262a56260030aaac386bf8ef75ec072abc7e3",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0",
+                "psr/event-dispatcher": "1.0.0"
+            },
+            "provide": {
+                "psr/event-dispatcher-implementation": "1.0.0"
+            },
+            "require-dev": {
+                "maglnet/composer-require-checker": "^4.2",
+                "phpunit/phpunit": "^9.5",
+                "rector/rector": "^0.14.3",
+                "roave/infection-static-analysis-plugin": "^1.16",
+                "spatie/phpunit-watcher": "^1.23",
+                "vimeo/psalm": "^4.18"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Yiisoft\\EventDispatcher\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Yii Event Dispatcher",
+            "homepage": "https://www.yiiframework.com/",
+            "keywords": [
+                "event",
+                "event dispatcher",
+                "psr-14"
+            ],
+            "support": {
+                "chat": "https://t.me/yii3en",
+                "forum": "https://www.yiiframework.com/forum/",
+                "irc": "irc://irc.freenode.net/yii",
+                "issues": "https://github.com/yiisoft/event-dispatcher/issues?state=open",
+                "source": "https://github.com/yiisoft/event-dispatcher",
+                "wiki": "https://www.yiiframework.com/wiki/"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/yiisoft",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/yiisoft",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2022-10-27T12:02:21+00:00"
+        },
+        {
             "name": "yiisoft/test-support",
             "version": "3.0.0",
             "source": {
@@ -3485,6 +3409,85 @@
                 }
             ],
             "time": "2022-06-29T10:38:13+00:00"
+        },
+        {
+            "name": "yiisoft/view",
+            "version": "6.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/view.git",
+                "reference": "fc0b33cd869159977816dfc6e317b7bd2d81455b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/view/zipball/fc0b33cd869159977816dfc6e317b7bd2d81455b",
+                "reference": "fc0b33cd869159977816dfc6e317b7bd2d81455b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0",
+                "psr/event-dispatcher": "1.0.0",
+                "psr/event-dispatcher-implementation": "1.0.0",
+                "yiisoft/arrays": "^2.0",
+                "yiisoft/cache": "^1.0|^2.0",
+                "yiisoft/files": "^1.0|^2.0",
+                "yiisoft/html": "^2.5",
+                "yiisoft/json": "^1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5",
+                "roave/infection-static-analysis-plugin": "^1.18",
+                "spatie/phpunit-watcher": "^1.23",
+                "vimeo/psalm": "^4.24",
+                "yiisoft/aliases": "^2.0",
+                "yiisoft/psr-dummy-provider": "^1.0",
+                "yiisoft/test-support": "^1.4|^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "config-plugin-options": {
+                    "source-directory": "config"
+                },
+                "config-plugin": {
+                    "params": "params.php",
+                    "common": "common.php",
+                    "web": "web.php"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Yiisoft\\View\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Yii View Rendering Library",
+            "homepage": "https://www.yiiframework.com/",
+            "keywords": [
+                "view",
+                "yii"
+            ],
+            "support": {
+                "chat": "https://t.me/yii3en",
+                "forum": "https://www.yiiframework.com/forum/",
+                "irc": "irc://irc.freenode.net/yii",
+                "issues": "https://github.com/yiisoft/view/issues",
+                "source": "https://github.com/yiisoft/view",
+                "wiki": "https://www.yiiframework.com/wiki/"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/yiisoft",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/yiisoft",
+                    "type": "opencollective"
+                }
+            ],
+            "time": "2022-07-21T16:20:05+00:00"
         }
     ],
     "aliases": [],
