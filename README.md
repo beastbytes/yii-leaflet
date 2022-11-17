@@ -29,6 +29,9 @@ or add
 to the require section of your composer.json.
 
 ## Usage
+An instance of the map widget must be assigned to a variable; this instance is used to render the HTML then
+to get the JavaScript to be registered in the view.
+
 The example below displays a map using OpenStreetMap as the tile provider. It has a marker in the centre of the map and a 5km radius circle centred on the marker; these are in a layer group that is not initially displayed. When the layer is shown using the Layers control, the centre marker can be dragged and dropped and its new position is shown - this demonstrates using component events. Three other markers are added in another layer group, and a layers and fullscreen control is added to the map; the fullscreen control is a plugin.
 
 ### Example
