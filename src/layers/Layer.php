@@ -20,13 +20,7 @@ use BeastBytes\Widgets\Leaflet\layers\ui\Tooltip;
  */
 abstract class Layer extends Component
 {
-    /**
-     * @var \BeastBytes\Leaflet\layers\ui\Popup|null
-     */
     private ?Popup $popup = null;
-    /**
-     * @var \BeastBytes\Leaflet\layers\ui\Tooltip|null
-     */
     private ?Tooltip $tooltip = null;
 
     /**
@@ -73,17 +67,27 @@ abstract class Layer extends Component
         $js = '';
 
         if (!empty($this->popup)) {
+            $popupOptions = $this
+                ->popup
+                ->options2Js($leafletVar)
+            ;
             $js .= '.bindPopup("'
-                . addslashes($this->popup->getContent()) . '",'
-                . $this->popup->options2Js($leafletVar)
-                . ')';
+                . addslashes($this->popup->getContent()) . '"'
+                . (!empty($popupOptions) ? ",$popupOptions" : '')
+                . ')'
+            ;
         }
 
         if (!empty($this->tooltip)) {
+            $tooltipOptions = $this
+                ->tooltip
+                ->options2Js($leafletVar)
+            ;
             $js .= '.bindTooltip("'
-                . addslashes($this->tooltip->getContent()) . '",'
-                . $this->tooltip->options2Js($leafletVar)
-                . ')';
+                . addslashes($this->tooltip->getContent()) . '"'
+                . (!empty($tooltipOptions) ? ",$tooltipOptions" : '')
+                . ')'
+            ;
         }
 
         return $js;

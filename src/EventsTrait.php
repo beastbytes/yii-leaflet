@@ -26,7 +26,7 @@ trait EventsTrait
      * Returns a new instance with the events added
      *
      * @param array<string, array|string> $events Events for the object
-     * @return \BeastBytes\Leaflet\EventsTrait|\BeastBytes\Leaflet\Component|\BeastBytes\Leaflet\Map
+     * @return \BeastBytes\Widgets\Leaflet\EventsTrait|\BeastBytes\Widgets\Leaflet\Component|\BeastBytes\Widgets\Leaflet\Map
      */
     public function events(array $events): self
     {
@@ -42,8 +42,9 @@ trait EventsTrait
      *
      * @param array<string, array|string> $events The events to encode
      * @return string The encoded events
+     * @internal
      */
-    private function events2Js(): string
+    public function events2Js(): string
     {
         $js = '';
 

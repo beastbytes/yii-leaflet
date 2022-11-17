@@ -33,7 +33,7 @@ class SvgOverlayTest extends TestCase
         $svgOverlay = new SvgOverlay($innerHtml, $viewBox, $latLngBounds, ['alt' => 'svgOverlay']);
 
         $this->assertSame(
-            'var svgElement0=document.createElementNS("http://www.w3.org/2000/svg","svg");'
+            'const svgElement0=document.createElementNS("http://www.w3.org/2000/svg","svg");'
             . 'svgElement0.setAttribute("xmlns","http://www.w3.org/2000/svg");'
             . 'svgElement0.setAttribute("viewBox","' . $viewBox . '");'
             . "svgElement0.innerHTML='$innerHtml';"

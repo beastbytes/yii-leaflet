@@ -8,6 +8,9 @@ declare(strict_types=1);
 
 namespace BeastBytes\Widgets\Leaflet;
 
+use BeastBytes\Widgets\Leaflet\controls\Control;
+use BeastBytes\Widgets\Leaflet\layers\Layer;
+
 /**
  * Base class for Leaflet components
  */
@@ -22,13 +25,27 @@ abstract class Component extends Base
     private bool $addToMap = true;
 
     /**
-     * @var bool $value The component's JavaScript variable name
+     * @var string Component JavaScript variable name
+     */
+    private string $jsVar = '';
+
+    /**
+     * @var array Counters to ensure all components on a page are unique
+     */
+    private static array $counters = [
+        'control' => 0,
+        'layer' => 0,
+        'plugin' => 0
+    ];
+
+    /**
+     * @var bool $addToMap Whether to add the component to the map
      * @return self
      */
-    public function addToMap(bool $value): self
+    public function addToMap(bool $addToMap): self
     {
         $new = clone $this;
-        $new->addToMap = $value;
+        $new->addToMap = $addToMap;
         return $new;
     }
 
@@ -42,12 +59,13 @@ abstract class Component extends Base
     }
 
     /**
-     * @var string $value The component's JavaScript variable name
-     * @internal
+     * @var string $jsVar The component's JavaScript variable name
      */
-    public function setJsVar(string $value): void
+    public function jsVar(string $jsVar): self
     {
-        $this->jsVar = $value;
+        $new = clone $this;
+        $new->jsVar = $jsVar;
+        return $new;
     }
 
     /**
@@ -56,6 +74,18 @@ abstract class Component extends Base
      */
     public function getJsVar(): string
     {
+        if (empty($this->jsVar)) {
+            if ($this instanceof Control) {
+                $key = 'control';
+            } elseif ($this instanceof Layer) {
+                $key = 'layer';
+            } else {
+                $key = 'plugin';
+            }
+
+            $this->jsVar = $key . self::$counters[$key]++;
+        }
+
         return $this->jsVar;
     }
 }

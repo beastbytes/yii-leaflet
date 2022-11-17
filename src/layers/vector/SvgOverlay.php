@@ -79,19 +79,6 @@ final class SvgOverlay extends Layer implements LeafletInterface
     }
 
     /**
-     * Returns a new instance with the specified JavaScript variable name for the SVG element
-     *
-     * @param string $value The JavaScript variable name for the SVG element
-     * @return self
-     */
-    public function jsVar(string $value): self
-    {
-        $new = clone $this;
-        $new->jsVar = $value;
-        return $new;
-    }
-
-    /**
      * @var int Counter to ensure all Leaflet SVG elements are unique
      */
     private static int $counter = 0;
@@ -108,7 +95,7 @@ final class SvgOverlay extends Layer implements LeafletInterface
         $options = $this->options2Js($leafletVar);
 
         $svgElement = $this->jsVar . self::$counter++;
-        return "var $svgElement=document.createElementNS(\"$this->namespace\",\"svg\");"
+        return "const $svgElement=document.createElementNS(\"$this->namespace\",\"svg\");"
             . "$svgElement.setAttribute(\"xmlns\",\"$this->namespace\");"
             . "$svgElement.setAttribute(\"viewBox\",\"$this->viewBox\");"
             . "$svgElement.innerHTML='$this->innerHtml';"

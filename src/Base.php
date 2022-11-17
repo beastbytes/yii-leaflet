@@ -16,11 +16,6 @@ abstract class Base
     use OptionsTrait;
 
     /**
-     * @var string Component JavaScript variable name
-     */
-    protected string $jsVar = '';
-
-    /**
      * @param array $options Component options
      */
     public function __construct(array $options = []) {

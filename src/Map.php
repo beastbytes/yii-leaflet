@@ -8,14 +8,13 @@ declare(strict_types=1);
 
 namespace BeastBytes\Widgets\Leaflet;
 
+use BeastBytes\Widgets\Leaflet\controls\Control;
+use BeastBytes\Widgets\Leaflet\layers\Layer;
+use BeastBytes\Widgets\Leaflet\types\LatLng;
+use BeastBytes\Widgets\Leaflet\types\LatLngBounds;
 use JsonException;
-use BeastBytes\Leaflet\controls\Control;
-use BeastBytes\Leaflet\layers\Layer;
-use BeastBytes\Leaflet\types\LatLng;
-use BeastBytes\Leaflet\types\LatLngBounds;
 use Yiisoft\Definitions\Exception\InvalidConfigException;
 use Yiisoft\Html\Html;
-use Yiisoft\View\WebView;
 use Yiisoft\Widget\Widget;
 
 /**
@@ -26,6 +25,7 @@ final class Map extends Widget
     use EventsTrait;
     use OptionsTrait;
 
+    public const LEAFLET_VAR = 'L';
     private const COMPONENT_TYPE_CONTROLS = 'controls';
     private const COMPONENT_TYPE_LAYERS = 'layers';
     private const COMPONENT_TYPE_PLUGINS = 'plugins';
@@ -34,7 +34,12 @@ final class Map extends Widget
         self::COMPONENT_TYPE_CONTROLS,
         self::COMPONENT_TYPE_PLUGINS
     ];
-    public const LEAFLET_VAR = 'L';
+
+    /**
+     * @property array $options
+     * @see $layers for how to specify the layers option
+     * @link https://leafletjs.com/reference.html#map-factory
+     */
 
     /**
      * @var array HTML attributes for the container tag
@@ -62,12 +67,6 @@ final class Map extends Widget
     private string $leafletVar = self::LEAFLET_VAR;
 
     /**
-     * @property array $options
-     * @see $layers for how to specify the layers option
-     * @link https://leafletjs.com/reference.html#map-factory
-     */
-
-    /**
      * @var array Plugins
      */
     private array $plugins = [];
@@ -75,15 +74,6 @@ final class Map extends Widget
      * @psalm-param non-empty-string $tag
      */
     private string $tag = 'div';
-
-    /**
-     * @var array Counters to ensure all components on a page are unique
-     */
-    private array $counters = [
-        'control' => 0,
-        'layer' => 0,
-        'plugin' => 0
-    ];
     /**
      * @var array Map JavaScript
      */
@@ -109,15 +99,14 @@ final class Map extends Widget
         return $new;
     }
 
-    public function addLayers(Layer ...$layers): self
+    /**
+     * @param array $layers ['label' => Layer]
+     * @return $this
+     */
+    public function addLayers(array $layers): self
     {
         $new = clone $this;
-
-        foreach ($layers as $layer) {
-            $name = strtolower(substr($layer::class, strrpos($layer::class, '\\') + 1));
-            $new->layers[$name] = $layer;
-        }
-
+        $new->layers = array_merge($new->layers, $layers);
         return $new;
     }
 
@@ -211,7 +200,9 @@ final class Map extends Widget
      */
     public function run(): string
     {
-        return Html::tag($this->tag, '', $this->attributes)->render();
+        return Html::tag($this->tag, '', $this->attributes)
+            ->render()
+        ;
     }
 
     /**
@@ -234,22 +225,24 @@ final class Map extends Widget
 
         // Generate code for layers defined in the map
         if (isset($this->options['layers'])) {
-            foreach ($this->options['layers'] as $key => $component) {
-                /** @var \BeastBytes\Leaflet\Component $component */
-                $component = $component->addToMap(false);
-                $jsVar = $component->getJsVar();
-                $this->mapLayers[$key] = $jsVar;
-                $this->js[] = "const $jsVar={$component->toJs($this->leafletVar)};";
+            foreach ($this->options['layers'] as $key => $layer) {
+                /** @var \BeastBytes\Widgets\Leaflet\layers\Layer $layer */
+                $layer = $layer->addToMap(false);
+                $jsVar = $layer->getJsVar();
+                $this->mapLayers[$key] = '!!'. $jsVar . '!!'; // !! <> !! mark it as a JS variable
+                $this->js[] = "const $jsVar={$layer->toJs($this->leafletVar)};";
             }
 
             $this->options['layers'] = array_values($this->mapLayers);
         }
 
         $this->js[] = "const $id=$this->leafletVar.map(\"$id\",{$this->options2Js($this->leafletVar)})"
-            . $this->events2Js() . ';';
+            . $this->events2Js() . ';'
+        ;
 
         $this->components2Js();
 
+        //return "function f$id(){" . implode('', $this->js) . ob_get_clean() . "}f$id();";
         return "function f$id(){" . implode('', $this->js) . "}f$id();";
     }
 
@@ -263,22 +256,19 @@ final class Map extends Widget
     {
         foreach (self::COMPONENT_TYPES as $componentType) {
             /**
-             * @var \BeastBytes\Leaflet\Component $component
+             * @var \BeastBytes\Widgets\Leaflet\Component $component
              * @var string $key
              */
             foreach ($this->$componentType as $key => $component) {
                 if ($componentType === self::COMPONENT_TYPE_LAYERS) {
-                    $this->layers[$key] = $this->jsVar($component);
-                } else {
-                    if ($component instanceof LayersInterface) {
-                        $this->setComponentLayers($component);
-                    }
-                    if ($componentType === self::COMPONENT_TYPE_PLUGINS) {
-                        $this->registerPluginAssets($component);
-                    }
+                    $this->layers[$key] = $component->getJsVar();
                 }
 
-                $js = "const {$this->jsVar($component)}={$component->toJs($this->leafletVar)}";
+                if ($component instanceof LayersInterface) {
+                    $this->setComponentLayers($component);
+                }
+
+                $js = "const {$component->getJsVar()}={$component->toJs($this->leafletVar)}";
                 $js .= $component->events2Js();
                 $js .= ($component->getAddToMap() ? '.addTo(' . $this->attributes['id'] . ')' : '');
                 $this->js[] = $js . ';';
@@ -296,37 +286,9 @@ final class Map extends Widget
      */
     private function registerPluginAssets(Component $plugin): void
     {
-        /** @var Yiisoft\Assets\AssetBundle $assetClass */
+        /** @var \Yiisoft\Assets\AssetBundle $assetClass
         $assetClass = $plugin->assets ?? get_class($plugin) . 'Asset';
-        $assetClass::register($this->view);
-    }
-
-    /**
-     * Returns the JavaScript variable name for a component
-     *
-     * If the component does not have a JavaScript variable name set, one is created
-     *
-     * @param Component $component The Leaflet component
-     * @return string Component JavaScript variable name
-     */
-    private function jsVar(Component $component): string
-    {
-        $jsVar = $component->getJsVar();
-
-        if (empty($jsVar)) {
-            if ($component instanceof Control) {
-                $key = 'control';
-            } elseif ($component instanceof Layer) {
-                $key = 'layer';
-            } else {
-                $key = 'plugin';
-            }
-
-            $jsVar = $this->attributes['id'] . ucfirst($key) . $this->counters[$key]++;
-            $component->setJsVar($jsVar);
-        }
-
-        return $jsVar;
+        $assetClass::register($this->view); */
     }
 
     private function setComponentLayers(LayersInterface $component): void
