@@ -29,8 +29,8 @@
         "phpunit/phpunit": "^9.0",
         "roave/security-advisories": "dev-latest",
         "yiisoft/aliases": "^2.0",
-        "yiisoft/event-dispatcher": "^1.0",
         "yiisoft/cache": "^2.0",
+        "yiisoft/event-dispatcher": "^1.0",
         "yiisoft/test-support": "^3.0",
         "yiisoft/view": "^6.0"
     },
