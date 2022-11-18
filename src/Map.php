@@ -242,7 +242,6 @@ final class Map extends Widget
 
         $this->components2Js();
 
-        //return "function f$id(){" . implode('', $this->js) . ob_get_clean() . "}f$id();";
         return "function f$id(){" . implode('', $this->js) . "}f$id();";
     }
 

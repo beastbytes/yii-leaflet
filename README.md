@@ -150,6 +150,6 @@ $map = Map::widget()
     ->addPlugins(new FullscreenControl())
 ]);
 
-$map->render(); // before $map->getJs()
+echo $map->render();
 $this->registerJs($map->getJs()); // $this is the view
 ```
