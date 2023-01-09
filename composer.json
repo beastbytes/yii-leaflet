@@ -21,7 +21,7 @@
     "require": {
         "php": ">=8.0",
         "yiisoft/assets": "^2.0",
-        "yiisoft/html": "^2.0",
+        "yiisoft/html": "^3.0",
         "yiisoft/widget": "^1.0",
         "npm-asset/leaflet": "^1.0"
     },
@@ -32,7 +32,7 @@
         "yiisoft/cache": "^2.0",
         "yiisoft/event-dispatcher": "^1.0",
         "yiisoft/test-support": "^3.0",
-        "yiisoft/view": "^6.0"
+        "yiisoft/view": "^7.0"
     },
     "autoload": {
         "psr-4": {
