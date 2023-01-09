@@ -38,10 +38,6 @@ trait EventsTrait
     }
 
     /**
-     * Encodes events to JavaScript
-     *
-     * @param array<string, array|string> $events The events to encode
-     * @return string The encoded events
      * @internal
      */
     public function events2Js(): string
