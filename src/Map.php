@@ -32,26 +32,26 @@ final class Map extends Widget
     private const COMPONENT_TYPES = [
         self::COMPONENT_TYPE_LAYERS, // self::COMPONENT_TYPE_LAYERS must be first
         self::COMPONENT_TYPE_CONTROLS,
-        self::COMPONENT_TYPE_PLUGINS
+        self::COMPONENT_TYPE_PLUGINS,
     ];
 
     /**
-     * @property array $options
+     * @var array $options
      * @see $layers for how to specify the layers option
      * @link https://leafletjs.com/reference.html#map-factory
      */
 
     /**
-     * @var array HTML attributes for the container tag
+     * @var array<string, string> HTML attributes for the container tag
      * The `style` attribute must be set and specify a height
      */
     private array $attributes = [];
     /**
-     * @var array Array of map controls
+     * @var array Map controls
      */
     private array $controls = [];
     /**
-     * @var array Array of map layers
+     * @var array Map layers
      *
      * If a LayersControl is being added to the map use ["Layer Label" => Layer object] (the same applies to
      * $options['layers']) then provide the layer labels to LayersControl::baseLayers and LayersControl::overlays
@@ -70,18 +70,22 @@ final class Map extends Widget
      * @var array Plugins
      */
     private array $plugins = [];
+
     /**
-     * @psalm-param non-empty-string $tag
+     * @psalm-var non-empty-string $tag
      */
     private string $tag = 'div';
+
     /**
-     * @var array Map JavaScript
+     * @var array<array-key, string> Map JavaScript
      */
     private array $js = [];
+
     /**
-     * @var array Layers initially added to the map
+     * @var array<Layer> Layers initially added to the map
      */
     private array $mapLayers = [];
+
     /**
      * @var int Counter to ensure all generated map ids are unique
      */
@@ -100,8 +104,7 @@ final class Map extends Widget
     }
 
     /**
-     * @param array $layers ['label' => Layer]
-     * @return $this
+     * @param array<string, Layer> $layers
      */
     public function addLayers(array $layers): self
     {
@@ -122,6 +125,10 @@ final class Map extends Widget
         return $new;
     }
 
+    /**
+     * @param array<string, string> $attributes
+     * @return $this
+     */
     public function attributes(array $attributes): self
     {
         $new = clone $this;
@@ -143,6 +150,9 @@ final class Map extends Widget
         return $new;
     }
 
+    /**
+     * @psalm-param non-empty-string $tag
+     */
     public function tag(string $tag): self
     {
         $new = clone $this;
@@ -169,7 +179,9 @@ final class Map extends Widget
                 !isset($this->attributes['style'])
                 || preg_match('/height:.*;/', $this->attributes['style']) === 0
             ) {
-                throw new InvalidConfigException("`attributes['style']` must be set and define the height of the map");
+                throw new InvalidConfigException(
+                    "`attributes['style']` must be set and define the height of the map"
+                );
             }
 
             if (is_array($this->options['center'])) {
@@ -193,23 +205,14 @@ final class Map extends Widget
         return false;
     }
 
-    /**
-     * Runs the widget
-     *
-     * @return string HTML for the widget
-     */
     public function run(): string
     {
-        return Html::tag($this->tag, '', $this->attributes)
-            ->render()
-        ;
+        return Html::tag($this->tag, '', $this->attributes)->render();
     }
 
     /**
      * Returns the map JavaScript
      *
-     * @return string
-     * @throws InvalidConfigException
      * @throws JsonException
      */
     public function getJs(): string
@@ -225,30 +228,30 @@ final class Map extends Widget
 
         // Generate code for layers defined in the map
         if (isset($this->options['layers'])) {
+            /** @var int $key */
+            /** @var \BeastBytes\Widgets\Leaflet\layers\Layer $layer */
             foreach ($this->options['layers'] as $key => $layer) {
-                /** @var \BeastBytes\Widgets\Leaflet\layers\Layer $layer */
                 $layer = $layer->addToMap(false);
                 $jsVar = $layer->getJsVar();
                 $this->mapLayers[$key] = '!!'. $jsVar . '!!'; // !! <> !! mark it as a JS variable
-                $this->js[] = "const $jsVar={$layer->toJs($this->leafletVar)};";
+                $this->js[] = "const $jsVar={$layer->toJs($this->leafletVar)}";
             }
 
             $this->options['layers'] = array_values($this->mapLayers);
         }
 
         $this->js[] = "const $id=$this->leafletVar.map(\"$id\",{$this->options2Js($this->leafletVar)})"
-            . $this->events2Js() . ';'
+            . $this->events2Js()
         ;
 
         $this->components2Js();
 
-        return "function f$id(){" . implode('', $this->js) . "}f$id();";
+        return implode(';', $this->js) . ';';
     }
 
     /**
      * Generates JavaScript for map components - layers, controls, and plugins
      *
-     * @return void
      * @throws JsonException
      */
     private function components2Js(): void
@@ -269,31 +272,18 @@ final class Map extends Widget
 
                 $js = "const {$component->getJsVar()}={$component->toJs($this->leafletVar)}";
                 $js .= $component->events2Js();
-                $js .= ($component->getAddToMap() ? '.addTo(' . $this->attributes['id'] . ')' : '');
-                $this->js[] = $js . ';';
+                $js .= ($component->getAddToMap() ? ".addTo({$this->attributes['id']})" : '');
+                $this->js[] = $js;
             }
         }
     }
 
-    /**
-     * Registers a plugin's assets
-     *
-     * Given a plugin whose class is Plugin, if Plugin::$assets exists and is set it is used as the FQCN of the
-     * plugin's asset bundle, otherwise PluginAsset in the same directory as Plugin is registered as the asset bundle
-     *
-     * @param Component $plugin Plugin component
-     */
-    private function registerPluginAssets(Component $plugin): void
-    {
-        /** @var \Yiisoft\Assets\AssetBundle $assetClass
-        $assetClass = $plugin->assets ?? get_class($plugin) . 'Asset';
-        $assetClass::register($this->view); */
-    }
 
     private function setComponentLayers(LayersInterface $component): void
     {
         $baseLayers = $overlays = [];
 
+        /** @var string $label */
         foreach ($component->getBaseLayers() as $label) {
             if (isset($this->layers[$label])) {
                 $baseLayers[$label] = $this->layers[$label];
@@ -301,6 +291,8 @@ final class Map extends Widget
                 $baseLayers[$label] = $this->mapLayers[$label];
             }
         }
+
+        /** @var string $label */
         foreach ($component->getOverlays() as $label) {
             if (isset($this->layers[$label])) {
                 $overlays[$label] = $this->layers[$label];
