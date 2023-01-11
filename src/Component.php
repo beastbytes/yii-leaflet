@@ -88,4 +88,6 @@ abstract class Component extends Base
 
         return $this->jsVar;
     }
+
+    abstract public function toJs(string $leafletVar): string;
 }
