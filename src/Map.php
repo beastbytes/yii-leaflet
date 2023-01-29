@@ -161,52 +161,42 @@ final class Map extends Widget
     }
 
     /**
-     * @inheritdoc
      * @throws InvalidConfigException
      */
-    public function beforeRun(): bool
+    public function render(): string
     {
-        if (parent::beforeRun()) {
-            if (!isset($this->options['center'])) {
-                throw new InvalidConfigException("`options['center']` must be set");
-            }
-
-            if (!isset($this->options['zoom'])) {
-                throw new InvalidConfigException("`options['zoom']` must be set");
-            }
-
-            if (
-                !isset($this->attributes['style'])
-                || preg_match('/height:.*;/', $this->attributes['style']) === 0
-            ) {
-                throw new InvalidConfigException(
-                    "`attributes['style']` must be set and define the height of the map"
-                );
-            }
-
-            if (is_array($this->options['center'])) {
-                $this->options['center'] = new LatLng($this->options['center']);
-            }
-
-            if (isset($this->options['maxBounds']) && is_array($this->options['maxBounds'])) {
-                $this->options['maxBounds'] = new LatLngBounds(
-                    $this->options['maxBounds'][0],
-                    $this->options['maxBounds'][1]
-                );
-            }
-
-            if (!isset($this->attributes['id'])) {
-                $this->attributes['id'] = 'map' . self::$counter++;
-            }
-
-            return true;
+        if (!isset($this->options['center'])) {
+            throw new InvalidConfigException("`options['center']` must be set");
         }
 
-        return false;
-    }
+        if (!isset($this->options['zoom'])) {
+            throw new InvalidConfigException("`options['zoom']` must be set");
+        }
 
-    public function run(): string
-    {
+        if (
+            !isset($this->attributes['style'])
+            || preg_match('/height:.*;/', $this->attributes['style']) === 0
+        ) {
+            throw new InvalidConfigException(
+                "`attributes['style']` must be set and define the height of the map"
+            );
+        }
+
+        if (is_array($this->options['center'])) {
+            $this->options['center'] = new LatLng($this->options['center']);
+        }
+
+        if (isset($this->options['maxBounds']) && is_array($this->options['maxBounds'])) {
+            $this->options['maxBounds'] = new LatLngBounds(
+                $this->options['maxBounds'][0],
+                $this->options['maxBounds'][1]
+            );
+        }
+
+        if (!isset($this->attributes['id'])) {
+            $this->attributes['id'] = 'map' . self::$counter++;
+        }
+
         return Html::tag($this->tag, '', $this->attributes)->render();
     }
 
