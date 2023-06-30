@@ -21,12 +21,34 @@ use BeastBytes\Widgets\Leaflet\types\Point;
 use PHPUnit\Framework\TestCase;
 use Tests\support\TestTrait;
 use Yiisoft\Definitions\Exception\InvalidConfigException;
+use Yiisoft\Test\Support\Container\SimpleContainer;
+use Yiisoft\Test\Support\EventDispatcher\SimpleEventDispatcher;
+use Yiisoft\View\WebView;
+use Yiisoft\Widget\WidgetFactory;
 
 class MapTest extends TestCase
 {
     use TestTrait;
 
-    const LEAFLET_VAR = 'L';
+    private WebView $webView;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $container = new SimpleContainer(
+            [
+                WebView::class => new WebView(__DIR__ . '/public/view', new SimpleEventDispatcher()),
+            ]
+        );
+
+        WidgetFactory::initialize($container, []);
+
+        $this->webView = $container
+            ->get(WebView::class)
+            ->withBasePath(__DIR__ . '/support/view')
+        ;
+    }
 
     public function test_no_center()
     {
