@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\controls;
+namespace BeastBytes\Widgets\Leaflet\Tests\controls;
 
 use BeastBytes\Widgets\Leaflet\controls\ZoomControl;
 use BeastBytes\Widgets\Leaflet\types\Point;

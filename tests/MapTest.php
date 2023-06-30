@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace BeastBytes\Widgets\Leaflet\Tests;
 
 use BeastBytes\Widgets\Leaflet\controls\LayersControl;
 use BeastBytes\Widgets\Leaflet\controls\ScaleControl;

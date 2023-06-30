@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\renderers;
+namespace BeastBytes\Widgets\Leaflet\Tests\renderers;
 
 use BeastBytes\Widgets\Leaflet\renderers\Svg;
 use BeastBytes\Widgets\Leaflet\types\Point;

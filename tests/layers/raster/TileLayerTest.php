@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\layers\raster;
+namespace BeastBytes\Widgets\Leaflet\Tests\layers\raster;
 
 use BeastBytes\Widgets\Leaflet\layers\raster\TileLayer;
 use PHPUnit\Framework\TestCase;

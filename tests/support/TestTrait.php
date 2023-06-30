@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\support;
+namespace BeastBytes\Widgets\Leaflet\Tests\support;
 
 use Yiisoft\Aliases\Aliases;
 use Yiisoft\Cache\Cache;

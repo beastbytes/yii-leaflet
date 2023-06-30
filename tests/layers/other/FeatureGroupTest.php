@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\layers\other;
+namespace BeastBytes\Widgets\Leaflet\Tests\layers\other;
 
 use BeastBytes\Widgets\Leaflet\layers\other\FeatureGroup;
 use BeastBytes\Widgets\Leaflet\layers\ui\Marker;

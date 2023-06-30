@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\types;
+namespace BeastBytes\Widgets\Leaflet\Tests\types;
 
 use BeastBytes\Widgets\Leaflet\types\Bounds;
 use BeastBytes\Widgets\Leaflet\types\Point;

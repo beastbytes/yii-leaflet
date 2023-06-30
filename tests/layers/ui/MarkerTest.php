@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\layers\ui;
+namespace BeastBytes\Widgets\Leaflet\Tests\layers\ui;
 
 use BeastBytes\Widgets\Leaflet\layers\ui\Marker;
 use BeastBytes\Widgets\Leaflet\types\Icon;

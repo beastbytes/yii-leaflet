@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\controls;
+namespace BeastBytes\Widgets\Leaflet\Tests\controls;
 
 use BeastBytes\Widgets\Leaflet\controls\LayersControl;
 use BeastBytes\Widgets\Leaflet\layers\ui\Marker;

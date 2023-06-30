@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\layers\vector;
+namespace BeastBytes\Widgets\Leaflet\Tests\layers\vector;
 
 use BeastBytes\Widgets\Leaflet\layers\vector\Circle;
 use BeastBytes\Widgets\Leaflet\types\LatLng;
