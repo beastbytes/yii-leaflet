@@ -151,5 +151,4 @@ $map = Map::widget()
 ]);
 
 echo $map->render();
-$this->registerJs($map->getJs()); // $this is the view
 ```
