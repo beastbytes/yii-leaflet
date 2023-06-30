@@ -19,7 +19,8 @@ Thumbs.db
 # composer vendor dir
 /vendor
 
-# composer itself is not needed
+# Composer
+composer.lock
 composer.phar
 
 # Mac DS_Store Files
@@ -28,6 +29,7 @@ composer.phar
 # phpunit itself is not needed
 phpunit.phar
 .phpunit.result.cache
+/.phpunit.cache
 
 # local phpunit config
 /phpunit.xml
@@ -39,5 +41,7 @@ phpunit.phar
 # Codeception
 c3.php
 
-# Composer
-composer.lock
+# logs
+/logs
+
+/.editorconfig

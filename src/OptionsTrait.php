@@ -48,7 +48,7 @@ trait OptionsTrait
             JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
         ));
 
-        if (strpos($options, '!!') !== false) {
+        if (str_contains($options, '!!')) {
             $options = str_replace(['\"', '"!!', '!!"'], ['"', '', ''], $options);
         }
 
