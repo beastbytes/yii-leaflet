@@ -1,7 +1,7 @@
 <?php
 /**
  * Polyline Class file
- * @copyright Copyright (c) 2022 BeastBytes - All Rights Reserved
+ * @copyright Copyright © 2023 BeastBytes - All Rights Reserved
  * @license BSD 3-Clause
  */
 
