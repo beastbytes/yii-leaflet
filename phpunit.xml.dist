@@ -17,7 +17,7 @@
     <testsuites>
         <testsuite name="Leaflet Tests">
             <directory suffix=".php">./tests</directory>
-            <exclude>./tests/support/*</exclude>
+            <exclude>./tests/support</exclude>
         </testsuite>
     </testsuites>
 
