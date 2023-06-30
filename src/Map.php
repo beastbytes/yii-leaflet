@@ -15,7 +15,6 @@ use BeastBytes\Widgets\Leaflet\types\LatLngBounds;
 use JsonException;
 use Yiisoft\Definitions\Exception\InvalidConfigException;
 use Yiisoft\Html\Html;
-use Yiisoft\View\WebView;
 use Yiisoft\Widget\Widget;
 
 /**
@@ -26,7 +25,6 @@ final class Map extends Widget
     use EventsTrait;
     use OptionsTrait;
 
-    public const ID_PREFIX = 'map';
     public const LEAFLET_VAR = 'L';
     private const COMPONENT_TYPE_CONTROLS = 'controls';
     private const COMPONENT_TYPE_LAYERS = 'layers';
@@ -60,8 +58,10 @@ final class Map extends Widget
      */
     private array $layers = [];
     /**
-     * @var string The variable used by Leaflet.
+     * @var string The variable used by Leaflet
+     *
      * If this is not the default `L` the noConflict() method is called and the new variable used for Leaflet.
+     *
      * **WARNING:** _Some plugins require the default variable name for Leaflet_
      */
     private string $leafletVar = self::LEAFLET_VAR;
@@ -86,11 +86,12 @@ final class Map extends Widget
      */
     private array $mapLayers = [];
 
-    public function __construct(private WebView $webView)
-    {
-    }
+    /**
+     * @var int Counter to ensure all generated map ids are unique
+     */
+    private static int $counter = 0;
 
-    public function controls(Control ...$controls): self
+    public function addControls(Control ...$controls): self
     {
         $new = clone $this;
 
@@ -109,7 +110,6 @@ final class Map extends Widget
     {
         $new = clone $this;
         $new->layers = array_merge($new->layers, $layers);
-
         return $new;
     }
 
@@ -126,16 +126,13 @@ final class Map extends Widget
     }
 
     /**
-     * Returns a new instance with the HTML attributes.
-     *
-     * @param array $valuesMap Attribute values indexed by attribute names.
+     * @param array<string, string> $attributes
      * @return $this
      */
-    public function attributes(array $valuesMap): self
+    public function attributes(array $attributes): self
     {
         $new = clone $this;
-        $new->attributes = $valuesMap;
-
+        $new->attributes = array_merge($this->attributes, $attributes);
         return $new;
     }
 
@@ -143,36 +140,28 @@ final class Map extends Widget
     {
         $new = clone $this;
         $new->leafletVar = $leafletVar;
-
         return $new;
     }
 
-    /**
-     * @param array $valuesMap Map options
-     * @return $this
-     */
-    public function options(array $valuesMap): self
+    public function options(array $options): self
     {
         $new = clone $this;
-        $new->options = $valuesMap;
-
+        $new->options = array_merge($this->options, $options);
         return $new;
     }
 
     /**
-     * @psalm-param non-empty-string $tag HTML tag for the map - defaults to 'div'
-     * @return $this
+     * @psalm-param non-empty-string $tag
      */
     public function tag(string $tag): self
     {
         $new = clone $this;
         $new->tag = $tag;
-
         return $new;
     }
 
     /**
-     * @throws InvalidConfigException|JsonException
+     * @throws InvalidConfigException
      */
     public function render(): string
     {
@@ -204,20 +193,19 @@ final class Map extends Widget
             );
         }
 
-        if (!array_key_exists('id', $this->attributes)) {
-            $this->attributes['id'] = Html::generateId(self::ID_PREFIX);
+        if (!isset($this->attributes['id'])) {
+            $this->attributes['id'] = 'map' . self::$counter++;
         }
 
-        $this->registerJS();
         return Html::tag($this->tag, '', $this->attributes)->render();
     }
 
     /**
-     * Registers the map JavaScript with the view
+     * Returns the map JavaScript
      *
      * @throws JsonException
      */
-    public function registerJs(): void
+    public function getJs(): string
     {
         $id = $this->attributes['id'];
 
@@ -231,7 +219,7 @@ final class Map extends Widget
         // Generate code for layers defined in the map
         if (isset($this->options['layers'])) {
             /** @var int $key */
-            /** @var Layer $layer */
+            /** @var \BeastBytes\Widgets\Leaflet\layers\Layer $layer */
             foreach ($this->options['layers'] as $key => $layer) {
                 $layer = $layer->addToMap(false);
                 $jsVar = $layer->getJsVar();
@@ -248,7 +236,7 @@ final class Map extends Widget
 
         $this->components2Js();
 
-        $this->webView->registerJs(implode(';', $this->js) . ';');
+        return implode(';', $this->js) . ';';
     }
 
     /**
@@ -260,7 +248,7 @@ final class Map extends Widget
     {
         foreach (self::COMPONENT_TYPES as $componentType) {
             /**
-             * @var Component $component
+             * @var \BeastBytes\Widgets\Leaflet\Component $component
              * @var string $key
              */
             foreach ($this->$componentType as $key => $component) {
@@ -280,10 +268,12 @@ final class Map extends Widget
         }
     }
 
+
     private function setComponentLayers(LayersInterface $component): void
     {
         $baseLayers = $overlays = [];
 
+        /** @var string $label */
         foreach ($component->getBaseLayers() as $label) {
             if (isset($this->layers[$label])) {
                 $baseLayers[$label] = $this->layers[$label];
@@ -292,6 +282,7 @@ final class Map extends Widget
             }
         }
 
+        /** @var string $label */
         foreach ($component->getOverlays() as $label) {
             if (isset($this->layers[$label])) {
                 $overlays[$label] = $this->layers[$label];
