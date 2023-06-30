@@ -37,12 +37,9 @@ trait TestTrait
         WidgetFactory::initialize($container, []);
 
         $this->cache = $container->get(CacheInterface::class);
-        $this->webView = $container->get(WebView::class);
+        $this->webView = $container
+            ->get(WebView::class)
+            ->withBasePath(__DIR__ . '/view')
+        ;
     }
-}
-
-namespace Yiisoft\Html;
-
-function hrtime(bool $getAsNumber = false): void
-{
 }
