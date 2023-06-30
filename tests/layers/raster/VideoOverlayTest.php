@@ -9,15 +9,13 @@ declare(strict_types=1);
 namespace BeastBytes\Widgets\Leaflet\Tests\layers\raster;
 
 use BeastBytes\Widgets\Leaflet\layers\raster\VideoOverlay;
-use BeastBytes\Widgets\Leaflet\types\Bounds;
+use BeastBytes\Widgets\Leaflet\Map;
 use BeastBytes\Widgets\Leaflet\types\LatLng;
 use BeastBytes\Widgets\Leaflet\types\LatLngBounds;
 use PHPUnit\Framework\TestCase;
 
 class VideoOverlayTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_video_overlay()
     {
         $url = 'https://example.com/videooverlay.webm';
@@ -32,13 +30,13 @@ class VideoOverlayTest extends TestCase
         $videoOverlay = new VideoOverlay($url, $latLngBounds, ['alt' => 'videoOverlay']);
 
         $this->assertSame(
-            self::LEAFLET_VAR . ".videoOverlay(\"$url\","
-            . self::LEAFLET_VAR . ".latLngBounds("
-                . self::LEAFLET_VAR . ".latLng($lat1,$lng1),"
-                . self::LEAFLET_VAR . ".latLng($lat2,$lng2)"
+            Map::LEAFLET_VAR . ".videoOverlay(\"$url\","
+            . Map::LEAFLET_VAR . ".latLngBounds("
+                . Map::LEAFLET_VAR . ".latLng($lat1,$lng1),"
+                . Map::LEAFLET_VAR . ".latLng($lat2,$lng2)"
             . "),"
             . '{alt:"videoOverlay"})',
-            $videoOverlay->toJs(self::LEAFLET_VAR)
+            $videoOverlay->toJs(Map::LEAFLET_VAR)
         );
     }
 }

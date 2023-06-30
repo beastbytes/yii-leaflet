@@ -9,20 +9,18 @@ declare(strict_types=1);
 namespace BeastBytes\Widgets\Leaflet\Tests\controls;
 
 use BeastBytes\Widgets\Leaflet\controls\ScaleControl;
-use BeastBytes\Widgets\Leaflet\types\Point;
+use BeastBytes\Widgets\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 
 class ScaleControlTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_scale_control()
     {
         $control = new ScaleControl();
 
         $this->assertSame(
-            self::LEAFLET_VAR . ".control.scale()",
-            $control->toJs(self::LEAFLET_VAR)
+            Map::LEAFLET_VAR . ".control.scale()",
+            $control->toJs(Map::LEAFLET_VAR)
         );
     }
 }

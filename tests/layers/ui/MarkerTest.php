@@ -9,15 +9,13 @@ declare(strict_types=1);
 namespace BeastBytes\Widgets\Leaflet\Tests\layers\ui;
 
 use BeastBytes\Widgets\Leaflet\layers\ui\Marker;
-use BeastBytes\Widgets\Leaflet\types\Icon;
+use BeastBytes\Widgets\Leaflet\Map;
 use BeastBytes\Widgets\Leaflet\types\LatLng;
 use BeastBytes\Widgets\Leaflet\types\Point;
 use PHPUnit\Framework\TestCase;
 
 class MarkerTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_marker()
     {
         $lat = random_int(-9000, 9000) / 100;
@@ -33,17 +31,17 @@ class MarkerTest extends TestCase
         ]);
 
         $this->assertSame(
-            self::LEAFLET_VAR . '.marker(' . self::LEAFLET_VAR . ".latLng($lat,$lng),"
+            Map::LEAFLET_VAR . '.marker(' . Map::LEAFLET_VAR . ".latLng($lat,$lng),"
                 . '{'
-                    . 'icon:' . self::LEAFLET_VAR . '.icon({'
-                        . 'iconAnchor:' . self::LEAFLET_VAR . '.point(12,40),'
+                    . 'icon:' . Map::LEAFLET_VAR . '.icon({'
+                        . 'iconAnchor:' . Map::LEAFLET_VAR . '.point(12,40),'
                         . 'iconUrl:"leaflet/images/marker-icon.png",'
                         . 'shadowUrl:"leaflet/images/marker-shadow.png"'
                     . '}),'
                     . 'riseOnHover:true'
                 . '}'
             . ')',
-            $marker->toJs(self::LEAFLET_VAR)
+            $marker->toJs(Map::LEAFLET_VAR)
         );
     }
 }

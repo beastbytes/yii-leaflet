@@ -8,14 +8,11 @@ declare(strict_types=1);
 
 namespace BeastBytes\Widgets\Leaflet\Tests\layers\ui;
 
-use BeastBytes\Widgets\Leaflet\layers\ui\Popup;
-use BeastBytes\Widgets\Leaflet\types\LatLng;
+use BeastBytes\Widgets\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 
 class PopupTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_popup()
     {
 /*        $lat = random_int(-9000, 9000) / 100;
@@ -25,8 +22,8 @@ class PopupTest extends TestCase
         $popup = new Popup($latLng, ['radius' => $radius]);
 
         $this->assertSame(
-            self::LEAFLET_VAR . ".circle(" . self::LEAFLET_VAR . ".latLng($lat,$lng),{radius:$radius})",
-            $circle->toJs(self::LEAFLET_VAR)
+            Map::LEAFLET_VAR . ".circle(" . Map::LEAFLET_VAR . ".latLng($lat,$lng),{radius:$radius})",
+            $circle->toJs(Map::LEAFLET_VAR)
         );*/
         $this->assertSame(1,1);
     }

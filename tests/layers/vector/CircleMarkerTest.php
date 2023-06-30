@@ -9,13 +9,12 @@ declare(strict_types=1);
 namespace BeastBytes\Widgets\Leaflet\Tests\layers\vector;
 
 use BeastBytes\Widgets\Leaflet\layers\vector\CircleMarker;
+use BeastBytes\Widgets\Leaflet\Map;
 use BeastBytes\Widgets\Leaflet\types\LatLng;
 use PHPUnit\Framework\TestCase;
 
 class CircleMarkerTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_circle_marker()
     {
         $lat = random_int(-9000, 9000) / 100;
@@ -25,8 +24,8 @@ class CircleMarkerTest extends TestCase
         $circle = new CircleMarker($latLng, ['radius' => $radius]);
 
         $this->assertSame(
-            self::LEAFLET_VAR . ".circleMarker(" . self::LEAFLET_VAR . ".latLng($lat,$lng),{radius:$radius})",
-            $circle->toJs(self::LEAFLET_VAR)
+            Map::LEAFLET_VAR . ".circleMarker(" . Map::LEAFLET_VAR . ".latLng($lat,$lng),{radius:$radius})",
+            $circle->toJs(Map::LEAFLET_VAR)
         );
     }
 }

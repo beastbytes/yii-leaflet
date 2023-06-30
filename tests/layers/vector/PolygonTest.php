@@ -9,13 +9,12 @@ declare(strict_types=1);
 namespace BeastBytes\Widgets\Leaflet\Tests\layers\vector;
 
 use BeastBytes\Widgets\Leaflet\layers\vector\Polygon;
+use BeastBytes\Widgets\Leaflet\Map;
 use BeastBytes\Widgets\Leaflet\types\LatLng;
 use PHPUnit\Framework\TestCase;
 
 class PolygonTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_polygon()
     {
         $lat1 = random_int(-9000, 9000) / 100;
@@ -33,13 +32,13 @@ class PolygonTest extends TestCase
         $polygon = new Polygon([$latLng1, $latLng2, $latLng3, $latLng4], ['weight' => 2]);
 
         $this->assertSame(
-            self::LEAFLET_VAR . ".polygon(["
-                . self::LEAFLET_VAR . ".latLng($lat1,$lng1),"
-                . self::LEAFLET_VAR . ".latLng($lat2,$lng2),"
-                . self::LEAFLET_VAR . ".latLng($lat3,$lng3),"
-                . self::LEAFLET_VAR . ".latLng($lat4,$lng4)"
+            Map::LEAFLET_VAR . ".polygon(["
+                . Map::LEAFLET_VAR . ".latLng($lat1,$lng1),"
+                . Map::LEAFLET_VAR . ".latLng($lat2,$lng2),"
+                . Map::LEAFLET_VAR . ".latLng($lat3,$lng3),"
+                . Map::LEAFLET_VAR . ".latLng($lat4,$lng4)"
             . "],{weight:2})",
-            $polygon->toJs(self::LEAFLET_VAR)
+            $polygon->toJs(Map::LEAFLET_VAR)
         );
     }
 }

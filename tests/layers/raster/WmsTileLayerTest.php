@@ -9,12 +9,11 @@ declare(strict_types=1);
 namespace BeastBytes\Widgets\Leaflet\Tests\layers\raster;
 
 use BeastBytes\Widgets\Leaflet\layers\raster\WmsTileLayer;
+use BeastBytes\Widgets\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 
 class WmsTileLayerTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_wms_tile_layer()
     {
         $url = 'https://example.com/tiles/wms';
@@ -23,8 +22,8 @@ class WmsTileLayerTest extends TestCase
         $wmsTileLayer = new WmsTileLayer($url, ['layers' => $layers]);
 
         $this->assertSame(
-            self::LEAFLET_VAR . ".tileLayer.wms(\"$url\",{layers:\"$layers\"})",
-            $wmsTileLayer->toJs(self::LEAFLET_VAR)
+            Map::LEAFLET_VAR . ".tileLayer.wms(\"$url\",{layers:\"$layers\"})",
+            $wmsTileLayer->toJs(Map::LEAFLET_VAR)
         );
     }
 }

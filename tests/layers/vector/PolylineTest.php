@@ -9,13 +9,12 @@ declare(strict_types=1);
 namespace BeastBytes\Widgets\Leaflet\Tests\layers\vector;
 
 use BeastBytes\Widgets\Leaflet\layers\vector\Polyline;
+use BeastBytes\Widgets\Leaflet\Map;
 use BeastBytes\Widgets\Leaflet\types\LatLng;
 use PHPUnit\Framework\TestCase;
 
 class PolylineTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_polyline()
     {
         $lat1 = random_int(-9000, 9000) / 100;
@@ -33,13 +32,13 @@ class PolylineTest extends TestCase
         $polyline = new Polyline([$latLng1, $latLng2, $latLng3, $latLng4], ['weight' => 2]);
 
         $this->assertSame(
-            self::LEAFLET_VAR . ".polyline(["
-                . self::LEAFLET_VAR . ".latLng($lat1,$lng1),"
-                . self::LEAFLET_VAR . ".latLng($lat2,$lng2),"
-                . self::LEAFLET_VAR . ".latLng($lat3,$lng3),"
-                . self::LEAFLET_VAR . ".latLng($lat4,$lng4)"
+            Map::LEAFLET_VAR . ".polyline(["
+                . Map::LEAFLET_VAR . ".latLng($lat1,$lng1),"
+                . Map::LEAFLET_VAR . ".latLng($lat2,$lng2),"
+                . Map::LEAFLET_VAR . ".latLng($lat3,$lng3),"
+                . Map::LEAFLET_VAR . ".latLng($lat4,$lng4)"
             . "],{weight:2})",
-            $polyline->toJs(self::LEAFLET_VAR)
+            $polyline->toJs(Map::LEAFLET_VAR)
         );
     }
 }

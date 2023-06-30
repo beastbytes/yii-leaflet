@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace BeastBytes\Widgets\Leaflet\Tests;
 
+use BeastBytes\Widgets\Leaflet\Tests\support\TestTrait;
 use BeastBytes\Widgets\Leaflet\controls\LayersControl;
 use BeastBytes\Widgets\Leaflet\controls\ScaleControl;
 use BeastBytes\Widgets\Leaflet\layers\other\LayerGroup;
@@ -19,14 +20,11 @@ use BeastBytes\Widgets\Leaflet\types\Icon;
 use BeastBytes\Widgets\Leaflet\types\LatLng;
 use BeastBytes\Widgets\Leaflet\types\Point;
 use PHPUnit\Framework\TestCase;
-use Tests\support\TestTrait;
 use Yiisoft\Definitions\Exception\InvalidConfigException;
 
 class MapTest extends TestCase
 {
     use TestTrait;
-
-    const LEAFLET_VAR = 'L';
 
     public function test_no_center()
     {

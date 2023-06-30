@@ -9,15 +9,13 @@ declare(strict_types=1);
 namespace BeastBytes\Widgets\Leaflet\Tests\layers\raster;
 
 use BeastBytes\Widgets\Leaflet\layers\raster\ImageOverlay;
-use BeastBytes\Widgets\Leaflet\types\Bounds;
+use BeastBytes\Widgets\Leaflet\Map;
 use BeastBytes\Widgets\Leaflet\types\LatLng;
 use BeastBytes\Widgets\Leaflet\types\LatLngBounds;
 use PHPUnit\Framework\TestCase;
 
 class ImageOverlayTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_image_overlay()
     {
         $url = 'https://example.com/imageoverlay.jpg';
@@ -32,13 +30,13 @@ class ImageOverlayTest extends TestCase
         $imageOverlay = new ImageOverlay($url, $latLngBounds, ['alt' => 'imageOverlay']);
 
         $this->assertSame(
-            self::LEAFLET_VAR . ".imageOverlay(\"$url\","
-            . self::LEAFLET_VAR . ".latLngBounds("
-                . self::LEAFLET_VAR . ".latLng($lat1,$lng1),"
-                . self::LEAFLET_VAR . ".latLng($lat2,$lng2)"
+            Map::LEAFLET_VAR . ".imageOverlay(\"$url\","
+            . Map::LEAFLET_VAR . ".latLngBounds("
+                . Map::LEAFLET_VAR . ".latLng($lat1,$lng1),"
+                . Map::LEAFLET_VAR . ".latLng($lat2,$lng2)"
             . "),"
             . '{alt:"imageOverlay"})',
-            $imageOverlay->toJs(self::LEAFLET_VAR)
+            $imageOverlay->toJs(Map::LEAFLET_VAR)
         );
     }
 }

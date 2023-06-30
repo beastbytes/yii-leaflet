@@ -9,14 +9,13 @@ declare(strict_types=1);
 namespace BeastBytes\Widgets\Leaflet\Tests\layers\vector;
 
 use BeastBytes\Widgets\Leaflet\layers\vector\Rectangle;
+use BeastBytes\Widgets\Leaflet\Map;
 use BeastBytes\Widgets\Leaflet\types\LatLng;
 use BeastBytes\Widgets\Leaflet\types\LatLngBounds;
 use PHPUnit\Framework\TestCase;
 
 class RectangleTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_rectangle()
     {
         $lat1 = random_int(-9000, 9000) / 100;
@@ -30,13 +29,13 @@ class RectangleTest extends TestCase
         $rectangle = new Rectangle($latLngBounds, ['stroke' => false, 'weight' => 2]);
 
         $this->assertSame(
-            self::LEAFLET_VAR . ".rectangle("
-                . self::LEAFLET_VAR . ".latLngBounds("
-                    . self::LEAFLET_VAR . ".latLng($lat1,$lng1),"
-                    . self::LEAFLET_VAR . ".latLng($lat2,$lng2)"
+            Map::LEAFLET_VAR . ".rectangle("
+                . Map::LEAFLET_VAR . ".latLngBounds("
+                    . Map::LEAFLET_VAR . ".latLng($lat1,$lng1),"
+                    . Map::LEAFLET_VAR . ".latLng($lat2,$lng2)"
                 . "),"
                 . "{stroke:false,weight:2})",
-            $rectangle->toJs(self::LEAFLET_VAR)
+            $rectangle->toJs(Map::LEAFLET_VAR)
         );
     }
 }

@@ -9,13 +9,11 @@ declare(strict_types=1);
 namespace BeastBytes\Widgets\Leaflet\Tests\controls;
 
 use BeastBytes\Widgets\Leaflet\controls\LayersControl;
-use BeastBytes\Widgets\Leaflet\layers\ui\Marker;
+use BeastBytes\Widgets\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 
 class LayersControlTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_layers_control()
     {
         $overlays = [
@@ -26,8 +24,8 @@ class LayersControlTest extends TestCase
         $control->setOverlays($overlays);
 
         $this->assertSame(
-            self::LEAFLET_VAR . '.control.layers(null,{"Marker":marker},{hideSingleBase:true})',
-            $control->toJs(self::LEAFLET_VAR)
+            Map::LEAFLET_VAR . '.control.layers(null,{"Marker":marker},{hideSingleBase:true})',
+            $control->toJs(Map::LEAFLET_VAR)
         );
     }
 }

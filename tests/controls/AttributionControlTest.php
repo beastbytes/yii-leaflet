@@ -9,20 +9,18 @@ declare(strict_types=1);
 namespace BeastBytes\Widgets\Leaflet\Tests\controls;
 
 use BeastBytes\Widgets\Leaflet\controls\AttributionControl;
-use BeastBytes\Widgets\Leaflet\types\Point;
+use BeastBytes\Widgets\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 
 class AttributionControlTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_attribution_control()
     {
         $control = new AttributionControl();
 
         $this->assertSame(
-            self::LEAFLET_VAR . ".control.attribution()",
-            $control->toJs(self::LEAFLET_VAR)
+            Map::LEAFLET_VAR . ".control.attribution()",
+            $control->toJs(Map::LEAFLET_VAR)
         );
     }
 }

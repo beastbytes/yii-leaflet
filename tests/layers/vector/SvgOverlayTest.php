@@ -9,15 +9,13 @@ declare(strict_types=1);
 namespace BeastBytes\Widgets\Leaflet\Tests\layers\vector;
 
 use BeastBytes\Widgets\Leaflet\layers\vector\SvgOverlay;
-use BeastBytes\Widgets\Leaflet\types\Bounds;
+use BeastBytes\Widgets\Leaflet\Map;
 use BeastBytes\Widgets\Leaflet\types\LatLng;
 use BeastBytes\Widgets\Leaflet\types\LatLngBounds;
 use PHPUnit\Framework\TestCase;
 
 class SvgOverlayTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_svg_overlay()
     {
         $innerHtml = '<rect width="200" height="200"/><rect x="75" y="23" width="50" height="50" style="fill:red"/><rect x="75" y="123" width="50" height="50" style="fill:#0013ff"/>';
@@ -37,13 +35,13 @@ class SvgOverlayTest extends TestCase
             . 'svgElement0.setAttribute("xmlns","http://www.w3.org/2000/svg");'
             . 'svgElement0.setAttribute("viewBox","' . $viewBox . '");'
             . "svgElement0.innerHTML='$innerHtml';"
-            . self::LEAFLET_VAR . '.svgOverlay(svgElement0,'
-            . self::LEAFLET_VAR . ".latLngBounds("
-                . self::LEAFLET_VAR . ".latLng($lat1,$lng1),"
-                . self::LEAFLET_VAR . ".latLng($lat2,$lng2)"
+            . Map::LEAFLET_VAR . '.svgOverlay(svgElement0,'
+            . Map::LEAFLET_VAR . ".latLngBounds("
+                . Map::LEAFLET_VAR . ".latLng($lat1,$lng1),"
+                . Map::LEAFLET_VAR . ".latLng($lat2,$lng2)"
             . "),"
             . '{alt:"svgOverlay"})',
-            $svgOverlay->toJs(self::LEAFLET_VAR)
+            $svgOverlay->toJs(Map::LEAFLET_VAR)
         );
     }
 }

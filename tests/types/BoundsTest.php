@@ -8,14 +8,13 @@ declare(strict_types=1);
 
 namespace BeastBytes\Widgets\Leaflet\Tests\types;
 
+use BeastBytes\Widgets\Leaflet\Map;
 use BeastBytes\Widgets\Leaflet\types\Bounds;
 use BeastBytes\Widgets\Leaflet\types\Point;
 use PHPUnit\Framework\TestCase;
 
 class BoundsTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_bounds()
     {
         $x1 = random_int(0, 10000);
@@ -27,20 +26,20 @@ class BoundsTest extends TestCase
 
         $bounds = new Bounds($point1, $point2);
         $this->assertSame(
-            self::LEAFLET_VAR . ".bounds("
-            . self::LEAFLET_VAR . ".point($x1,$y1),"
-            . self::LEAFLET_VAR . ".point($x2,$y2)"
+            Map::LEAFLET_VAR . ".bounds("
+            . Map::LEAFLET_VAR . ".point($x1,$y1),"
+            . Map::LEAFLET_VAR . ".point($x2,$y2)"
             . ")",
-            $bounds->toJs(self::LEAFLET_VAR)
+            $bounds->toJs(Map::LEAFLET_VAR)
         );
 
         $bounds = new Bounds([$x1, $y1], [$x2, $y2]);
         $this->assertSame(
-            self::LEAFLET_VAR . ".bounds("
-            . self::LEAFLET_VAR . ".point($x1,$y1),"
-            . self::LEAFLET_VAR . ".point($x2,$y2)"
+            Map::LEAFLET_VAR . ".bounds("
+            . Map::LEAFLET_VAR . ".point($x1,$y1),"
+            . Map::LEAFLET_VAR . ".point($x2,$y2)"
             . ")",
-            $bounds->toJs(self::LEAFLET_VAR)
+            $bounds->toJs(Map::LEAFLET_VAR)
         );
     }
 }

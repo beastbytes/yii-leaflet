@@ -8,16 +8,13 @@ declare(strict_types=1);
 
 namespace BeastBytes\Widgets\Leaflet\Tests\types;
 
-use BeastBytes\Widgets\Leaflet\types\Bounds;
+use BeastBytes\Widgets\Leaflet\Map;
 use BeastBytes\Widgets\Leaflet\types\LatLng;
 use BeastBytes\Widgets\Leaflet\types\LatLngBounds;
-use BeastBytes\Widgets\Leaflet\types\Point;
 use PHPUnit\Framework\TestCase;
 
 class LatLngBoundsTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_Lat_lng_bounds()
     {
         $lat1 = random_int(-9000, 9000) / 100;
@@ -29,29 +26,29 @@ class LatLngBoundsTest extends TestCase
 
         $latLngBounds = new LatLngBounds($latLng1, $latLng2);
         $this->assertSame(
-            self::LEAFLET_VAR . ".latLngBounds("
-            . self::LEAFLET_VAR . ".latLng($lat1,$lng1),"
-            . self::LEAFLET_VAR . ".latLng($lat2,$lng2)"
+            Map::LEAFLET_VAR . ".latLngBounds("
+            . Map::LEAFLET_VAR . ".latLng($lat1,$lng1),"
+            . Map::LEAFLET_VAR . ".latLng($lat2,$lng2)"
             . ")",
-            $latLngBounds->toJs(self::LEAFLET_VAR)
+            $latLngBounds->toJs(Map::LEAFLET_VAR)
         );
 
         $latLngBounds = new LatLngBounds($latLng1, $latLng2);
         $this->assertSame(
-            self::LEAFLET_VAR . ".latLngBounds("
-            . self::LEAFLET_VAR . ".latLng($lat1,$lng1),"
-            . self::LEAFLET_VAR . ".latLng($lat2,$lng2)"
+            Map::LEAFLET_VAR . ".latLngBounds("
+            . Map::LEAFLET_VAR . ".latLng($lat1,$lng1),"
+            . Map::LEAFLET_VAR . ".latLng($lat2,$lng2)"
             . ")",
-            $latLngBounds->toJs(self::LEAFLET_VAR)
+            $latLngBounds->toJs(Map::LEAFLET_VAR)
         );
 
         $latLngBounds = new LatLngBounds([$lat1, $lng1], [$lat2, $lng2]);
         $this->assertSame(
-            self::LEAFLET_VAR . ".latLngBounds("
-            . self::LEAFLET_VAR . ".latLng($lat1,$lng1),"
-            . self::LEAFLET_VAR . ".latLng($lat2,$lng2)"
+            Map::LEAFLET_VAR . ".latLngBounds("
+            . Map::LEAFLET_VAR . ".latLng($lat1,$lng1),"
+            . Map::LEAFLET_VAR . ".latLng($lat2,$lng2)"
             . ")",
-            $latLngBounds->toJs(self::LEAFLET_VAR)
+            $latLngBounds->toJs(Map::LEAFLET_VAR)
         );
     }
 }

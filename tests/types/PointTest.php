@@ -8,19 +8,18 @@ declare(strict_types=1);
 
 namespace BeastBytes\Widgets\Leaflet\Tests\types;
 
+use BeastBytes\Widgets\Leaflet\Map;
 use BeastBytes\Widgets\Leaflet\types\Point;
 use PHPUnit\Framework\TestCase;
 
 class PointTest extends TestCase
 {
-    const LEAFLET_VAR = 'L';
-
     public function test_point()
     {
         $x = random_int(0, 10000);
         $y = random_int(0, 10000);
         $point = new Point($x, $y);
 
-        $this->assertSame(self::LEAFLET_VAR . ".point($x,$y)", $point->toJs(self::LEAFLET_VAR));
+        $this->assertSame(Map::LEAFLET_VAR . ".point($x,$y)", $point->toJs(Map::LEAFLET_VAR));
     }
 }
