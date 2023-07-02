@@ -44,7 +44,12 @@ abstract class Control extends Component implements LeafletInterface
      */
     public function toJs(string $leafletVar): string
     {
-        $name = lcfirst(substr(static::class, strrpos(static::class, '\\') + 1, -7));
+        $name = lcfirst(substr(
+            static::class,
+            strrpos(static::class, '\\') + 1,
+            -7
+        ));
+
         return "$leafletVar.control.$name({$this->options2Js($leafletVar)})";
     }
 }

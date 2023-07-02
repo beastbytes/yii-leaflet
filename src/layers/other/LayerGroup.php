@@ -52,6 +52,7 @@ class LayerGroup extends Layer implements LeafletInterface
             $layer->addToMap(false); // the LayerGroup is added to the map, not individual layers
             $new->layers[] = $layer;
         }
+
         return $new;
     }
 

@@ -36,6 +36,7 @@ abstract class Layer extends Component
     {
         $new = clone $this;
         $new->popup = new Popup(content: $content, options: $options);
+
         return $new;
     }
 
@@ -52,6 +53,7 @@ abstract class Layer extends Component
     {
         $new = clone $this;
         $new->tooltip = new Tooltip(content: $content, options: $options);
+
         return $new;
     }
 

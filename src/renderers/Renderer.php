@@ -28,6 +28,7 @@ abstract class Renderer extends Component implements LeafletInterface
     public function toJs(string $leafletVar): string
     {
         $name = lcfirst(substr(static::class, strrpos(static::class, '\\') + 1));
+
         return "$leafletVar.$name({$this->options2Js($leafletVar)})";
     }
 }

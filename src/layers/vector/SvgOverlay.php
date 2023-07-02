@@ -40,25 +40,18 @@ final class SvgOverlay extends Layer implements LeafletInterface
      * @var string SVG namespace
      */
     private string $namespace = 'http://www.w3.org/2000/svg';
-    /**
-     * @var string View box. The viewBox attribute is required on the SVG element to zoom in and out properly.
-     */
-    private string $viewBox = '';
-    /** @param string SVG Inner HTML */
 
     /**
      */
     public function __construct(
         private string $innerHtml,
-        array|string $viewBox,
+        private array|string $viewBox,
         array|LatLngBounds $bounds,
         array $options = []
     )
     {
         if (is_array($viewBox)) {
             $this->viewBox = implode(' ', $viewBox);
-        } else {
-            $this->viewBox = $viewBox;
         }
 
         $this->setBounds($bounds);
@@ -75,6 +68,7 @@ final class SvgOverlay extends Layer implements LeafletInterface
     {
         $new = clone $this;
         $new->namespace = $value;
+
         return $new;
     }
 

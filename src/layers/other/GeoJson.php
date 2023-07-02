@@ -52,6 +52,7 @@ final class GeoJson extends Layer implements LeafletInterface
             return "$leafletVar.geoJson($this->data" . (!empty($options) ? ",$options" : '') . ')'
                 . $this->bind($leafletVar);
         }
+
         return "$leafletVar.geoJson(" . (!empty($options) ? ",$options" : '') . ')'
             . $this->bind($leafletVar);
     }
