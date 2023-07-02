@@ -44,7 +44,8 @@ final class Tooltip extends Layer implements LeafletInterface
      */
     public function toJs(string $leafletVar): string
     {
-        return "$leafletVar.tooltip({$this->options2Js($leafletVar)}).setContent('$this->content')"
+        return "$leafletVar.tooltip({$this->options2Js($leafletVar)})"
+            . ".setContent('$this->content')"
             . $this->bind($leafletVar);
     }
 }

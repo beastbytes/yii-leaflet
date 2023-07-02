@@ -52,7 +52,8 @@ final class Popup extends Layer implements LeafletInterface
     public function toJs(string $leafletVar): string
     {
         return "$leafletVar.popup({$this->options2Js($leafletVar)})"
-            . ".setContent('$this->content').setLatLng({$this->location->toJs($leafletVar)})"
+            . ".setContent('$this->content')"
+            . ".setLatLng({$this->location->toJs($leafletVar)})"
             . $this->bind($leafletVar);
     }
 }

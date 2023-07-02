@@ -36,6 +36,7 @@ final class GridLayer extends Layer implements LeafletInterface
      */
     public function toJs(string $leafletVar): string
     {
-        return "$leafletVar.gridLayer({$this->options2Js($leafletVar)})" . $this->bind($leafletVar);
+        return "$leafletVar.gridLayer({$this->options2Js($leafletVar)})"
+            . $this->bind($leafletVar);
     }
 }

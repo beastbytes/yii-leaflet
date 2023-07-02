@@ -72,6 +72,7 @@ class LayerGroup extends Layer implements LeafletInterface
         $classname = static::class;
         $name = lcfirst(substr($classname, strrpos($classname, '\\') + 1));
 
-        return "$leafletVar.$name(" . '[' . implode(',', $layers) . ']' . ')' . $this->bind($leafletVar);
+        return "$leafletVar.$name(" . '[' . implode(',', $layers) . ']' . ')'
+            . $this->bind($leafletVar);
     }
 }
