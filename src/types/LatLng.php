@@ -76,7 +76,7 @@ final class LatLng implements LeafletInterface
      */
     public function toJs(string $leafletVar): string
     {
-        return isset($this->alt)
+        return isset($this->altitude)
             ? "$leafletVar.latLng($this->latitude,$this->longitude,$this->altitude)"
             : "$leafletVar.latLng($this->latitude,$this->longitude)";
     }
