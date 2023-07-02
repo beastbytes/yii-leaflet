@@ -19,8 +19,8 @@ use BeastBytes\Widgets\Leaflet\Map;
 use BeastBytes\Widgets\Leaflet\types\Icon;
 use BeastBytes\Widgets\Leaflet\types\LatLng;
 use BeastBytes\Widgets\Leaflet\types\Point;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Yiisoft\Definitions\Exception\InvalidConfigException;
 
 class MapTest extends TestCase
 {
@@ -28,16 +28,16 @@ class MapTest extends TestCase
 
     public function test_no_center()
     {
-        $this->expectException(InvalidConfigException::class);
-        $this->expectExceptionMessage("`options['center']` must be set");
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(Map::CENTER_NOT_SET_MESSAGE);
         Map::widget()
             ->render();
     }
 
     public function test_no_zoom()
     {
-        $this->expectException(InvalidConfigException::class);
-        $this->expectExceptionMessage("`options['zoom']` must be set");
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(Map::ZOOM_NOT_SET_MESSAGE);
 
         $centre = new LatLng(0, 0);
         Map::widget()
@@ -49,8 +49,8 @@ class MapTest extends TestCase
 
     public function test_no_height()
     {
-        $this->expectException(InvalidConfigException::class);
-        $this->expectExceptionMessage("`attributes['style']` must be set and define the height of the map");
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(Map::HEIGHT_NOT_SET_MESSAGE);
 
         $centre = new LatLng(0, 0);
         Map::widget()
@@ -83,8 +83,60 @@ class MapTest extends TestCase
         $id = $matches[1];
 
         $this->assertStringContainsString(
-            'const ' . $id . '=L.map("' . $id . '",{center:L.latLng(0,0),zoom:10});',
+            'const ' . $id . '='
+            . Map::LEAFLET_VAR . '.map("' . $id . '",{center:' . Map::LEAFLET_VAR . '.latLng(0,0),zoom:10});',
             $html
+        );
+    }
+
+    public function test_leaflet_var()
+    {
+        $leafletVar = 'X';
+
+        $centre = new LatLng(0, 0);
+        $map = Map::widget()
+            ->attributes(['style' => 'height:800px;'])
+            ->leafletVar($leafletVar)
+            ->options([
+                'center' => $centre,
+                'zoom' => 10
+            ]);
+
+        $content = $map->render();
+        $this->assertStringMatchesFormat(
+            '<div id="' . Map::ID_PREFIX . '%d" style="height:800px;"></div>',
+            $content
+        );
+
+        $html = $this->webView->render( '/layout.php', ['content' => $content]);
+        $matches = [];
+        preg_match('/id="(' . Map::ID_PREFIX . '\d+)"/', $html, $matches);
+        $id = $matches[1];
+
+        $this->assertStringContainsString(
+            'const ' . $leafletVar . '=' . Map::LEAFLET_VAR . '.noConflict();'
+            . 'const ' . $id . '='
+            . $leafletVar . '.map("' . $id . '",{center:' . $leafletVar . '.latLng(0,0),zoom:10});',
+            $html
+        );
+    }
+
+    public function test_tag()
+    {
+        $tag = 'tag';
+        $centre = new LatLng(0, 0);
+        $map = Map::widget()
+            ->attributes(['style' => 'height:800px;'])
+            ->tag($tag)
+            ->options([
+                'center' => $centre,
+                'zoom' => 10
+            ]);
+
+        $content = $map->render();
+        $this->assertStringMatchesFormat(
+            '<' . $tag . ' id="' . Map::ID_PREFIX . '%d" style="height:800px;"></' . $tag . '>',
+            $content
         );
     }
 
@@ -214,7 +266,7 @@ class MapTest extends TestCase
         $id = $matches[1];
 
         $this->assertStringContainsString(
-            'const layer0=L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"});const ' . $id . '=L.map("' . $id . '",{center:L.latLng(51.77255,-4.95325),layers:[layer0],zoom:12});const layer1=L.layerGroup([L.circle(L.latLng(51.77255,-4.95325),{radius:15000,color:"#20ffcd"}).bindTooltip("15km radius"),L.circle(L.latLng(51.77255,-4.95325),{radius:10000,color:"#3388ff"}).bindTooltip("10km radius"),L.circle(L.latLng(51.77255,-4.95325),{radius:5000,color:"#573CFF"}).bindTooltip("5km radius"),L.marker(L.latLng(51.77255,-4.95325),{icon:L.icon({iconAnchor:L.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("<p><b>Little Dumpledale Farm</b></p><p>Ashdale Lane<br>Sardis<br>Haverfordwest<br>Pembrokeshire<br>SA62 4NT</p><p>Tel: +44 1646 602754</p>")]).addTo(' . $id . ');const layer2=L.layerGroup([L.marker(L.latLng(51.749151,-4.913822),{icon:L.icon({iconAnchor:L.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("<p><b>The Cottage Inn</b></p><p>Llangwm<br>Haverfordwest<br>Pembrokeshire<br>SA62 4HH</p><p>Tel: +44 1437 891494</p>"),L.marker(L.latLng(51.7079864,-4.925951),{icon:L.icon({iconAnchor:L.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("<p><b>Jolly Sailor</b></p><p>Burton<br>Milford Haven<br>Pembrokeshire<br>SA73 1NX</p><p>Tel: +44 1646 600378</p>")]);const layer3=L.marker(L.latLng(51.786979,-4.977206),{draggable:true,icon:L.icon({iconAnchor:L.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("Drag me and see what happens").on("dragend",function(e){const position=e.target.getLatLng();window.alert("Moved by " + Math.floor(e.distance) + " pixels\nNew position " + position.lat + ", " + position.lng);});const control0=L.control.layers(null,{"Little Dumpledale":layer1,"Pubs":layer2,"Draggable":layer3}).addTo(' . $id . ');const control1=L.control.scale().addTo(' . $id . ');',
+            'const layer0=' . Map::LEAFLET_VAR . '.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"});const ' . $id . '=' . Map::LEAFLET_VAR . '.map("' . $id . '",{center:' . Map::LEAFLET_VAR . '.latLng(51.77255,-4.95325),layers:[layer0],zoom:12});const layer1=' . Map::LEAFLET_VAR . '.layerGroup([' . Map::LEAFLET_VAR . '.circle(' . Map::LEAFLET_VAR . '.latLng(51.77255,-4.95325),{radius:15000,color:"#20ffcd"}).bindTooltip("15km radius"),' . Map::LEAFLET_VAR . '.circle(' . Map::LEAFLET_VAR . '.latLng(51.77255,-4.95325),{radius:10000,color:"#3388ff"}).bindTooltip("10km radius"),' . Map::LEAFLET_VAR . '.circle(' . Map::LEAFLET_VAR . '.latLng(51.77255,-4.95325),{radius:5000,color:"#573CFF"}).bindTooltip("5km radius"),' . Map::LEAFLET_VAR . '.marker(' . Map::LEAFLET_VAR . '.latLng(51.77255,-4.95325),{icon:' . Map::LEAFLET_VAR . '.icon({iconAnchor:' . Map::LEAFLET_VAR . '.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("<p><b>Little Dumpledale Farm</b></p><p>Ashdale Lane<br>Sardis<br>Haverfordwest<br>Pembrokeshire<br>SA62 4NT</p><p>Tel: +44 1646 602754</p>")]).addTo(' . $id . ');const layer2=' . Map::LEAFLET_VAR . '.layerGroup([' . Map::LEAFLET_VAR . '.marker(' . Map::LEAFLET_VAR . '.latLng(51.749151,-4.913822),{icon:' . Map::LEAFLET_VAR . '.icon({iconAnchor:' . Map::LEAFLET_VAR . '.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("<p><b>The Cottage Inn</b></p><p>Llangwm<br>Haverfordwest<br>Pembrokeshire<br>SA62 4HH</p><p>Tel: +44 1437 891494</p>"),' . Map::LEAFLET_VAR . '.marker(' . Map::LEAFLET_VAR . '.latLng(51.7079864,-4.925951),{icon:' . Map::LEAFLET_VAR . '.icon({iconAnchor:' . Map::LEAFLET_VAR . '.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("<p><b>Jolly Sailor</b></p><p>Burton<br>Milford Haven<br>Pembrokeshire<br>SA73 1NX</p><p>Tel: +44 1646 600378</p>")]);const layer3=' . Map::LEAFLET_VAR . '.marker(' . Map::LEAFLET_VAR . '.latLng(51.786979,-4.977206),{draggable:true,icon:' . Map::LEAFLET_VAR . '.icon({iconAnchor:' . Map::LEAFLET_VAR . '.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("Drag me and see what happens").on("dragend",function(e){const position=e.target.getLatLng();window.alert("Moved by " + Math.floor(e.distance) + " pixels\nNew position " + position.lat + ", " + position.lng);});const control0=' . Map::LEAFLET_VAR . '.control.layers(null,{"Little Dumpledale":layer1,"Pubs":layer2,"Draggable":layer3}).addTo(' . $id . ');const control1=' . Map::LEAFLET_VAR . '.control.scale().addTo(' . $id . ');',
             $html
         );
     }

@@ -10,6 +10,7 @@ namespace BeastBytes\Widgets\Leaflet\Tests\types;
 
 use BeastBytes\Widgets\Leaflet\Map;
 use BeastBytes\Widgets\Leaflet\types\Icon;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class IconTest extends TestCase
@@ -30,15 +31,30 @@ class IconTest extends TestCase
 
         $this->assertSame(
             Map::LEAFLET_VAR .
-                '.icon({'
-                    . 'iconUrl:"my-icon.png",'
-                    . 'iconSize:[38,95],'
-                    . 'iconAnchor:[22,94],'
-                    . 'popupAnchor:[-3,-76],'
-                    . 'shadowUrl:"my-icon-shadow.png",'
-                    . 'shadowSize:[68,95],'
-                    . 'shadowAnchor:[22,94]'
-                . '})',
+            '.icon({'
+            . 'iconUrl:"my-icon.png",'
+            . 'iconSize:[38,95],'
+            . 'iconAnchor:[22,94],'
+            . 'popupAnchor:[-3,-76],'
+            . 'shadowUrl:"my-icon-shadow.png",'
+            . 'shadowSize:[68,95],'
+            . 'shadowAnchor:[22,94]'
+            . '})',
             $icon->toJs(Map::LEAFLET_VAR));
+    }
+    public function test_bad_icon()
+    {
+        $options = [
+            'iconSize' => [38, 95],
+            'iconAnchor' => [22, 94],
+            'popupAnchor' => [-3, -76],
+            'shadowUrl' => 'my-icon-shadow.png',
+            'shadowSize' => [68, 95],
+            'shadowAnchor' => [22, 94]
+        ];
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(Icon::URL_NOT_SET_MESSAGE);
+        new Icon($options);
     }
 }
