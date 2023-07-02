@@ -12,8 +12,8 @@ use BeastBytes\Widgets\Leaflet\controls\Control;
 use BeastBytes\Widgets\Leaflet\layers\Layer;
 use BeastBytes\Widgets\Leaflet\types\LatLng;
 use BeastBytes\Widgets\Leaflet\types\LatLngBounds;
+use InvalidArgumentException;
 use JsonException;
-use Yiisoft\Definitions\Exception\InvalidConfigException;
 use Yiisoft\Html\Html;
 use Yiisoft\View\WebView;
 use Yiisoft\Widget\Widget;
@@ -26,8 +26,12 @@ final class Map extends Widget
     use EventsTrait;
     use OptionsTrait;
 
+    public const CENTER_NOT_SET_MESSAGE = "`options['center']` must be set";
+    public const HEIGHT_NOT_SET_MESSAGE = "`attributes['style']` must be set and define the height of the map";
     public const ID_PREFIX = 'map_';
     public const LEAFLET_VAR = 'L';
+    public const ZOOM_NOT_SET_MESSAGE = "`options['zoom']` must be set";
+
     private const COMPONENT_TYPE_CONTROLS = 'controls';
     private const COMPONENT_TYPE_LAYERS = 'layers';
     private const COMPONENT_TYPE_PLUGINS = 'plugins';
@@ -167,25 +171,23 @@ final class Map extends Widget
     }
 
     /**
-     * @throws InvalidConfigException|JsonException
+     * @throws InvalidArgumentException|JsonException
      */
     public function render(): string
     {
         if (!isset($this->options['center'])) {
-            throw new InvalidConfigException("`options['center']` must be set");
+            throw new InvalidArgumentException(self::CENTER_NOT_SET_MESSAGE);
         }
 
         if (!isset($this->options['zoom'])) {
-            throw new InvalidConfigException("`options['zoom']` must be set");
+            throw new InvalidArgumentException(self::ZOOM_NOT_SET_MESSAGE);
         }
 
         if (
             !isset($this->attributes['style'])
             || preg_match('/height:.*;/', $this->attributes['style']) === 0
         ) {
-            throw new InvalidConfigException(
-                "`attributes['style']` must be set and define the height of the map"
-            );
+            throw new InvalidArgumentException(self::HEIGHT_NOT_SET_MESSAGE);
         }
 
         if (is_array($this->options['center'])) {
@@ -220,7 +222,7 @@ final class Map extends Widget
         if ($this->leafletVar !== self::LEAFLET_VAR) {
             array_unshift(
                 $this->js,
-                "const $this->leafletVar=" . self::LEAFLET_VAR . '.noConflict();'
+                "const $this->leafletVar=" . self::LEAFLET_VAR . '.noConflict()'
             );
         }
 
