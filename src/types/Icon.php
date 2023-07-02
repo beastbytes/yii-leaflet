@@ -20,7 +20,7 @@ use JsonException;
  */
 final class Icon extends Base implements LeafletInterface
 {
-    public const URL_NOT_SET_MESSAGE = 'The `iconUrl` option must be set in options';
+    public const URL_NOT_SET_MESSAGE = "`options['iconUrl']` must be set";
 
     /**
      * @param array $options Options for the icon
