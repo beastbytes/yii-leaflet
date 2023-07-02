@@ -111,6 +111,7 @@ final class Map extends Widget
     {
         $new = clone $this;
         $new->layers = array_merge($new->layers, $layers);
+
         return $new;
     }
 
@@ -134,6 +135,7 @@ final class Map extends Widget
     {
         $new = clone $this;
         $new->attributes = array_merge($this->attributes, $attributes);
+
         return $new;
     }
 
@@ -141,6 +143,7 @@ final class Map extends Widget
     {
         $new = clone $this;
         $new->leafletVar = $leafletVar;
+
         return $new;
     }
 
@@ -148,6 +151,7 @@ final class Map extends Widget
     {
         $new = clone $this;
         $new->options = array_merge($this->options, $options);
+
         return $new;
     }
 
@@ -158,6 +162,7 @@ final class Map extends Widget
     {
         $new = clone $this;
         $new->tag = $tag;
+
         return $new;
     }
 
