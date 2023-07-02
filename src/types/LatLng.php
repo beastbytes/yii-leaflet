@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace BeastBytes\Widgets\Leaflet\types;
 
 use BeastBytes\Widgets\Leaflet\LeafletInterface;
-use RangeException;
+use InvalidArgumentException;
 
 /**
  * Represents a geographical point with a certain latitude and longitude
@@ -18,6 +18,10 @@ use RangeException;
  */
 final class LatLng implements LeafletInterface
 {
+    public const INVALID_LATITUDE_MESSAGE = 'Invalid `latitude`: {value}; must be in range -' . self::LATITUDE_MAX
+        . ' and ' . self::LATITUDE_MAX;
+    public const INVALID_LONGITUDE_MESSAGE = 'Invalid `longitude`: {value}; must be in range -' . self::LONGITUDE_MAX
+    . ' and ' . self::LONGITUDE_MAX;
     /**
      * Maximum latitude value
      */
@@ -53,19 +57,11 @@ final class LatLng implements LeafletInterface
         }
 
         if (abs($this->latitude) > self::LATITUDE_MAX) {
-            throw new RangeException(
-                "Invalid `latitude` value: {$this->latitude}; [-"
-                . self::LATITUDE_MAX . ' <= lat <= ' . self::LATITUDE_MAX .
-                ']'
-            );
+            throw new InvalidArgumentException(strtr(self::INVALID_LATITUDE_MESSAGE, ['{value}' => $this->latitude]));
         }
 
         if (abs($this->longitude) > self::LONGITUDE_MAX) {
-            throw new RangeException(
-                "Invalid `longitude` value: {$this->longitude}; [-"
-                . self::LONGITUDE_MAX . ' <= longitude <= ' . self::LONGITUDE_MAX
-                . ']'
-            );
+            throw new InvalidArgumentException(strtr(self::INVALID_LONGITUDE_MESSAGE, ['{value}' => $this->longitude]));
         }
     }
 
