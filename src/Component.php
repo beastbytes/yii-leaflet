@@ -46,6 +46,7 @@ abstract class Component extends Base
     {
         $new = clone $this;
         $new->addToMap = $addToMap;
+
         return $new;
     }
 
@@ -65,6 +66,7 @@ abstract class Component extends Base
     {
         $new = clone $this;
         $new->jsVar = $jsVar;
+
         return $new;
     }
 
