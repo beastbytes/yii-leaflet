@@ -42,7 +42,7 @@ class LayerGroup extends Layer implements LeafletInterface
     public function addLayers(array $layers): self
     {
         $new = clone $this;
-        $this->layers = array_merge($this->layers, $layers);
+        $new->layers = array_merge($this->layers, $layers);
 
         return $new;
     }

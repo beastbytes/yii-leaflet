@@ -22,6 +22,8 @@ namespace BeastBytes\Widgets\Leaflet\layers\raster;
  */
 final class TileProvider
 {
+    public const FORCE_HTTP = true;
+
     private const ATTRIBUTION_PATTERN = '/\{attribution.(\w*)}/';
     private const TILE_PROVIDERS = 'tileProviders.php';
 
@@ -44,7 +46,7 @@ final class TileProvider
      * @param string $name Name of the tile provider. Variants are specified using 'dot' format, e.g. OpenStreetMap.HOT
      * @param array $options Additional options for the tile provider
      * @param bool $forceHttp Whether to force HTTP only if URL is protocol-relative. By default, HTTPS is tried first.
-     * @return \BeastBytes\Leaflet\layers\raster\TileLayer
+     * @return TileLayer
      */
     public function use(string $name, array $options = [], bool $forceHttp = false): TileLayer
     {

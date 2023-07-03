@@ -16,6 +16,16 @@ class GeoJsonTest extends TestCase
 {
     public function test_geo_json()
     {
+        $geoJson = new GeoJson();
+
+        $this->assertSame(
+            Map::LEAFLET_VAR . '.geoJson()',
+            $geoJson->toJs(Map::LEAFLET_VAR)
+        );
+    }
+
+    public function test_geo_json_with_data()
+    {
         $data = [
             'type' => 'Feature',
             'properties' => [
@@ -33,8 +43,8 @@ class GeoJsonTest extends TestCase
 
         $this->assertSame(
             Map::LEAFLET_VAR . '.geoJson({"type":"Feature","properties":'
-                . '{"name":"Twickenham Stadium","amenity":"Rugby Union Stadium","popupContent":"The home of English Rugby"},'
-                . '"geometry":{"type":"Point","coordinates":[51.45517,-0.33873]}})',
+            . '{"name":"Twickenham Stadium","amenity":"Rugby Union Stadium","popupContent":"The home of English Rugby"},'
+            . '"geometry":{"type":"Point","coordinates":[51.45517,-0.33873]}})',
             $geoJson->toJs(Map::LEAFLET_VAR)
         );
     }
