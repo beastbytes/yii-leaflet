@@ -18,14 +18,14 @@ class LayerGroupTest extends TestCase
 {
     public function test_layer_group()
     {
-        $layers = [];
-
         $locations = [
             [51.749151, -4.913822],
             [51.7079864, -4.925951],
         ];
 
-        foreach ($locations as $location) {
+        $layers = [];
+
+        foreach ($locations as $i => $location) {
             $layers[] = new Marker($location, [
                 'icon' => [
                     'iconAnchor' => new Point(12, 40),

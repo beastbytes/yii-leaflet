@@ -63,7 +63,10 @@ class MapTest extends TestCase
 
     public function test_minimal_config()
     {
-        $centre = new LatLng(0, 0);
+        $lat = 51.5032359;
+        $lng = -0.127242;
+        $centre = [$lat, $lng];
+
         $map = Map::widget()
             ->attributes(['style' => 'height:800px;'])
             ->options([
@@ -84,7 +87,81 @@ class MapTest extends TestCase
 
         $this->assertStringContainsString(
             'const ' . $id . '='
-            . Map::LEAFLET_VAR . '.map("' . $id . '",{center:' . Map::LEAFLET_VAR . '.latLng(0,0),zoom:10});',
+            . Map::LEAFLET_VAR . '.map("' . $id . '",{center:' . Map::LEAFLET_VAR . ".latLng($lat,$lng),zoom:10});",
+            $html
+        );
+    }
+
+    public function test_centre_as_LatLng()
+    {
+        $lat = 51.5018582;
+        $lng = -0.1243539;
+        $centre = new LatLng($lat, $lng);
+
+        $map = Map::widget()
+            ->attributes(['style' => 'height:800px;'])
+            ->options([
+                'center' => $centre,
+                'zoom' => 10
+            ]);
+
+        $content = $map->render();
+        $this->assertStringMatchesFormat(
+            '<div id="' . Map::ID_PREFIX . '%d" style="height:800px;"></div>',
+            $content
+        );
+
+        $html = $this->webView->render( '/layout.php', ['content' => $content]);
+        $matches = [];
+        preg_match('/id="(' . Map::ID_PREFIX . '\d+)"/', $html, $matches);
+        $id = $matches[1];
+
+        $this->assertStringContainsString(
+            'const ' . $id . '='
+            . Map::LEAFLET_VAR . '.map("' . $id . '",{center:' . Map::LEAFLET_VAR . ".latLng($lat,$lng),zoom:10});",
+            $html
+        );
+    }
+
+    public function test_MaxBounds()
+    {
+        $lat = 51.5183446;
+        $lng = -0.1228841;
+        $latNW = 51.5422190;
+        $lngNW = -0.17459705;
+        $latSE = 51.4947917;
+        $lngSE = -0.0650771;
+        $centre = new LatLng($lat, $lng);
+
+        $map = Map::widget()
+            ->attributes(['style' => 'height:800px;'])
+            ->options([
+                'center' => $centre,
+                'maxBounds' => [[$latNW, $lngNW], [$latSE, $lngSE]],
+                'zoom' => 10
+            ]);
+
+        $content = $map->render();
+        $this->assertStringMatchesFormat(
+            '<div id="' . Map::ID_PREFIX . '%d" style="height:800px;"></div>',
+            $content
+        );
+
+        $html = $this->webView->render( '/layout.php', ['content' => $content]);
+        $matches = [];
+        preg_match('/id="(' . Map::ID_PREFIX . '\d+)"/', $html, $matches);
+        $id = $matches[1];
+
+        $this->assertStringContainsString(
+            'const ' . $id . '='
+            . Map::LEAFLET_VAR . '.map("' . $id . '",{'
+            . 'center:' . Map::LEAFLET_VAR . ".latLng($lat,$lng),"
+            . 'maxBounds:' . Map::LEAFLET_VAR . '.latLngBounds('
+            . Map::LEAFLET_VAR . ".latLng($latNW,$lngNW),"
+            . Map::LEAFLET_VAR . ".latLng($latSE,$lngSE)"
+            . '),'
+            . 'zoom:10'
+            . '});',
             $html
         );
     }
@@ -195,7 +272,7 @@ class MapTest extends TestCase
             ]
         ];
 
-        foreach ($pubs as $pub) {
+        foreach ($pubs as $i => $pub) {
             $pubLayers[] = (new Marker($pub['location'], [
                 'icon' => [
                     'iconAnchor' => new Point(12, 40),
