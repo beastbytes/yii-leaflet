@@ -28,30 +28,21 @@ use JsonException;
  */
 class LayerGroup extends Layer implements LeafletInterface
 {
-    protected array $layers = [];
-
-    public function __construct(array $layers = [], $options = [])
+    public function __construct(private array $layers, $options = [])
     {
-        foreach ($layers as $layer) {
-            $this->layers[] = $layer->addToMap(false); // the LayerGroup is added to the map, not individual layers
-        }
-
         parent::__construct($options);
     }
 
     /**
-     * Adds layers to the group
+     * Adds layers to the layer group
      *
-     * @param Layer $layers The layer(s) to add
+     * @param array<Layer> $layers The layer(s) to add
      * @return self
      */
-    public function addLayers(Layer ...$layers): self
+    public function addLayers(array $layers): self
     {
         $new = clone $this;
-        foreach ($layers as $layer) {
-            $layer->addToMap(false); // the LayerGroup is added to the map, not individual layers
-            $new->layers[] = $layer;
-        }
+        $this->layers = array_merge($this->layers, $layers);
 
         return $new;
     }
@@ -66,6 +57,7 @@ class LayerGroup extends Layer implements LeafletInterface
     {
         $layers = [];
         foreach ($this->layers as $layer) {
+            $layer->addToMap(false); // the LayerGroup is added to the map, not individual layers
             $layers[] = $layer->toJs($leafletVar);
         }
 
