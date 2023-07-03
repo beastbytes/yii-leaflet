@@ -50,8 +50,8 @@ final class SvgOverlay extends Layer implements LeafletInterface
         array $options = []
     )
     {
-        if (is_array($viewBox)) {
-            $this->viewBox = implode(' ', $viewBox);
+        if (is_array($this->viewBox)) {
+            $this->viewBox = implode(' ', $this->viewBox);
         }
 
         $this->setBounds($bounds);
