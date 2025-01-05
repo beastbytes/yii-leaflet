@@ -1,5 +1,5 @@
-# BeastBytes\Widgets\Leaflet
-Widget that integrates the [Leaflet](https://leafletjs.com/) JavaScript mapping library.
+# BeastBytes\Widgets\Yii-Leaflet
+Widget that integrates the [Leaflet](https://leafletjs.com/) JavaScript mapping library with Yii3.
 
 ## Features
 
@@ -23,7 +23,7 @@ php composer.phar require --prefer-dist beastbytes/leaflet
 or add
 
 ```json
-"beastbytes/leaflet": "*"
+"beastbytes/yii-leaflet": "*"
 ```
 
 to the require section of your composer.json.
