@@ -20,7 +20,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.0",
-        "yiisoft/assets": "^4.0",
+        "yiisoft/assets": "^5.0",
         "yiisoft/html": "^3.0",
         "yiisoft/widget": "^2.0",
         "npm-assets/leaflet": "^1.0"
