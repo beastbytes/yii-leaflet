@@ -23,7 +23,7 @@
         "yiisoft/assets": "^4.0",
         "yiisoft/html": "^3.0",
         "yiisoft/widget": "^2.0",
-        "npm-asset/leaflet": "^1.0"
+        "npm-assets/leaflet": "^1.0"
     },
     "require-dev": {
         "consolidation/robo": "^4.0",
