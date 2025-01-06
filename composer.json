@@ -1,6 +1,6 @@
 {
-    "name": "beastbytes/leaflet",
-    "description": "Leaflet JavaScript mapping library integration",
+    "name": "beastbytes/yii-leaflet",
+    "description": "Leaflet JavaScript mapping library integration for Yii3",
     "type": "extension",
     "keywords": [
         "Leaflet",
@@ -34,7 +34,7 @@
         "yiisoft/cache": "^3.0",
         "yiisoft/event-dispatcher": "^1.0",
         "yiisoft/test-support": "^3.0",
-        "yiisoft/view": "^8.0",
+        "yiisoft/view": "^12.0",
         "vimeo/psalm": "^5.0"
     },
     "autoload": {
