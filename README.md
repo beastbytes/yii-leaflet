@@ -17,7 +17,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist beastbytes/leaflet
+php composer.phar require --prefer-dist beastbytes/yii-leaflet
 ```
 
 or add
@@ -27,6 +27,25 @@ or add
 ```
 
 to the require section of your composer.json.
+
+### Leaflet Package
+
+Install Leaflet using your chosen package mananger, e.g.
+
+```
+pnpm add leaflet
+```
+
+
+```
+yarn add leaflet
+```
+
+or add Leaflet to the dependencies of your package.json.
+
+```json
+"leaflet": "^1.9"
+```
 
 ## Usage
 An instance of the map widget must be assigned to a variable; this instance is used to render the HTML then
