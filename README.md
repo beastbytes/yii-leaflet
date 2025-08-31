@@ -3,7 +3,7 @@ Widget that integrates the [Leaflet](https://leafletjs.com/) JavaScript mapping 
 
 ## Features
 
--   For Leaflet V1.*
+-   For Leaflet V2.*
 -   Easy to use predefined tile providers (port of [Leaflet Providers](https://github.com/leaflet-extras/leaflet-providers))
 -   Simple popup creation for markers and vector components; just set the 'content' option
 -   Leaflet plugin support
@@ -23,7 +23,7 @@ php composer.phar require --prefer-dist beastbytes/yii-leaflet
 or add
 
 ```json
-"beastbytes/yii-leaflet": "*"
+"beastbytes/yii-leaflet": "<version-constraint>"
 ```
 
 to the require section of your composer.json.
