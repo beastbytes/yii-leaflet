@@ -14,6 +14,7 @@ use BeastBytes\Widgets\Leaflet\types\LatLng;
 use BeastBytes\Widgets\Leaflet\types\LatLngBounds;
 use InvalidArgumentException;
 use JsonException;
+use Yiisoft\Assets\AssetManager;
 use Yiisoft\Html\Html;
 use Yiisoft\View\WebView;
 use Yiisoft\Widget\Widget;
@@ -92,8 +93,9 @@ final class Map extends Widget
      */
     private array $mapLayers = [];
 
-    public function __construct(private WebView $webView)
+    public function __construct(AssetManager $assetManager, private WebView $webView)
     {
+        $assetManager->register(LeafletAsset::class);
     }
 
     public function addControls(Control ...$controls): self
