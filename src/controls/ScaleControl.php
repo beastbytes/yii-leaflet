@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\controls;
+namespace BeastBytes\Yii\Leaflet\controls;
 
 /**
  * Represents a scale control

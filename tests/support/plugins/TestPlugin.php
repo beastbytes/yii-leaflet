@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\Tests\support\plugins;
+namespace BeastBytes\Yii\Leaflet\Tests\support\plugins;
 
-use BeastBytes\Widgets\Leaflet\Component;
+use BeastBytes\Yii\Leaflet\Component;
 
 class TestPlugin extends Component
 {

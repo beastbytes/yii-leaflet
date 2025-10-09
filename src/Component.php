@@ -6,10 +6,10 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet;
+namespace BeastBytes\Yii\Leaflet;
 
-use BeastBytes\Widgets\Leaflet\controls\Control;
-use BeastBytes\Widgets\Leaflet\layers\Layer;
+use BeastBytes\Yii\Leaflet\controls\Control;
+use BeastBytes\Yii\Leaflet\layers\Layer;
 
 /**
  * Base class for Leaflet components

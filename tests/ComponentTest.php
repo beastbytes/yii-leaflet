@@ -6,13 +6,14 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\Tests;
+namespace BeastBytes\Yii\Leaflet\Tests;
 
-use BeastBytes\Widgets\Leaflet\controls\ZoomControl;
-use BeastBytes\Widgets\Leaflet\Map;
-use BeastBytes\Widgets\Leaflet\Tests\support\plugins\TestPlugin;
-use BeastBytes\Widgets\Leaflet\Tests\support\TestTrait;
+use BeastBytes\Yii\Leaflet\controls\ZoomControl;
+use BeastBytes\Yii\Leaflet\Map;
+use BeastBytes\Yii\Leaflet\Tests\support\plugins\TestPlugin;
+use BeastBytes\Yii\Leaflet\Tests\support\TestTrait;
 use PHPUnit\Framework\TestCase;
+use Yiisoft\Strings\Inflector;
 
 class ComponentTest extends TestCase
 {
@@ -23,12 +24,11 @@ class ComponentTest extends TestCase
         $jsVar = 'jsVar';
         $lat = 51.5032359;
         $lng = -0.127242;
-        $centre = [$lat, $lng];
 
         $map = Map::widget()
             ->attributes(['style' => 'height:800px;'])
             ->options([
-                'center' => $centre,
+                'center' => [$lat, $lng],
                 'zoom' => 10
             ])
             ->addControls(
@@ -37,19 +37,23 @@ class ComponentTest extends TestCase
 
         $content = $map->render();
         $this->assertStringMatchesFormat(
-            '<div id="' . Map::ID_PREFIX . '%d" style="height:800px;"></div>',
+            sprintf('<div id="%s" style="height:800px;"></div>', $map->getId()),
             $content
         );
 
-        $html = $this->webView->render( '/layout.php', ['content' => $content]);
-        $matches = [];
-        preg_match('/id="(' . Map::ID_PREFIX . '\d+)"/', $html, $matches);
-        $id = $matches[1];
+        $html = $this->view->render( '//view.php', ['content' => $content]);
 
         $this->assertStringContainsString(
-            "const $id="
-            . Map::LEAFLET_VAR . '.map("' . $id . '",{center:' . Map::LEAFLET_VAR . ".latLng($lat,$lng),zoom:10});"
-            . "const $jsVar=L.control.zoom().addTo($id);",
+            sprintf(
+                'const %s=%s.map("%s",{center:%2$s.latLng(%s,%s),zoom:10});const %s=%2$s.control.zoom().addTo(%s);',
+                (new Inflector())->toSnakeCase($map->getId()),
+                $map->getLeafletVar(),
+                $map->getId(),
+                $lat,
+                $lng,
+                $jsVar,
+                $map->getId()
+            ),
             $html
         );
     }
@@ -70,19 +74,22 @@ class ComponentTest extends TestCase
 
         $content = $map->render();
         $this->assertStringMatchesFormat(
-            '<div id="' . Map::ID_PREFIX . '%d" style="height:800px;"></div>',
+            sprintf('<div id="%s" style="height:800px;"></div>', $map->getId()),
             $content
         );
 
-        $html = $this->webView->render( '/layout.php', ['content' => $content]);
-        $matches = [];
-        preg_match('/id="(' . Map::ID_PREFIX . '\d+)"/', $html, $matches);
-        $id = $matches[1];
+        $html = $this->view->render( '//view.php', ['content' => $content]);
 
         $this->assertStringContainsString(
-            'const ' . $id . '='
-            . Map::LEAFLET_VAR . '.map("' . $id . '",{center:' . Map::LEAFLET_VAR . ".latLng($lat,$lng),zoom:10});"
-            . "const plugin0=L.testPlugin().addTo($id);",
+            sprintf(
+                'const %s=%s.map("%s",{center:%2$s.latLng(%s,%s),zoom:10});const plugin0=%2$s.testPlugin().addTo(%s);',
+                (new Inflector())->toSnakeCase($map->getId()),
+                $map->getLeafletVar(),
+                $map->getId(),
+                $lat,
+                $lng,
+                $map->getId()
+            ),
             $html
         );
     }

@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\layers\vector;
+namespace BeastBytes\Yii\Leaflet\layers\vector;
 
 /**
  * Represents a circle of a fixed size with radius specified in pixels; default radius 10 pixels

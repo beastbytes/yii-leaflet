@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet;
+namespace BeastBytes\Yii\Leaflet;
 
-use BeastBytes\Widgets\Leaflet\types\LatLngBounds;
+use BeastBytes\Yii\Leaflet\types\LatLngBounds;
 
 /**
  * Defines the LatLngBounds for Leaflet components

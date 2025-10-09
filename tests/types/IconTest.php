@@ -6,10 +6,10 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\Tests\types;
+namespace BeastBytes\Yii\Leaflet\Tests\types;
 
-use BeastBytes\Widgets\Leaflet\Map;
-use BeastBytes\Widgets\Leaflet\types\Icon;
+use BeastBytes\Yii\Leaflet\Map;
+use BeastBytes\Yii\Leaflet\types\Icon;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

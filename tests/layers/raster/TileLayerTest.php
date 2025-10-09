@@ -6,10 +6,10 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\Tests\layers\raster;
+namespace BeastBytes\Yii\Leaflet\Tests\layers\raster;
 
-use BeastBytes\Widgets\Leaflet\layers\raster\TileLayer;
-use BeastBytes\Widgets\Leaflet\Map;
+use BeastBytes\Yii\Leaflet\layers\raster\TileLayer;
+use BeastBytes\Yii\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 
 class TileLayerTest extends TestCase

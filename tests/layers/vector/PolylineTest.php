@@ -6,11 +6,11 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\Tests\layers\vector;
+namespace BeastBytes\Yii\Leaflet\Tests\layers\vector;
 
-use BeastBytes\Widgets\Leaflet\layers\vector\Polyline;
-use BeastBytes\Widgets\Leaflet\Map;
-use BeastBytes\Widgets\Leaflet\types\LatLng;
+use BeastBytes\Yii\Leaflet\layers\vector\Polyline;
+use BeastBytes\Yii\Leaflet\Map;
+use BeastBytes\Yii\Leaflet\types\LatLng;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;

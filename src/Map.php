@@ -6,16 +6,17 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet;
+namespace BeastBytes\Yii\Leaflet;
 
-use BeastBytes\Widgets\Leaflet\controls\Control;
-use BeastBytes\Widgets\Leaflet\layers\Layer;
-use BeastBytes\Widgets\Leaflet\types\LatLng;
-use BeastBytes\Widgets\Leaflet\types\LatLngBounds;
+use BeastBytes\Yii\Leaflet\controls\Control;
+use BeastBytes\Yii\Leaflet\layers\Layer;
+use BeastBytes\Yii\Leaflet\types\LatLng;
+use BeastBytes\Yii\Leaflet\types\LatLngBounds;
 use InvalidArgumentException;
 use JsonException;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Html\Html;
+use Yiisoft\Strings\Inflector;
 use Yiisoft\View\WebView;
 use Yiisoft\Widget\Widget;
 
@@ -98,6 +99,20 @@ final class Map extends Widget
         $assetManager->register(LeafletAsset::class);
     }
 
+    public function addAttributes(array $valuesMap): self
+    {
+        $new = clone $this;
+        $new->attributes = array_merge($this->attributes, $valuesMap);
+        return $new;
+    }
+
+    public function addClass(string $value): self
+    {
+        $new = clone $this;
+        Html::addCssClass($new->attributes, $value);
+        return $new;
+    }
+
     public function addControls(Control ...$controls): self
     {
         $new = clone $this;
@@ -117,7 +132,6 @@ final class Map extends Widget
     {
         $new = clone $this;
         $new->layers = array_merge($new->layers, $layers);
-
         return $new;
     }
 
@@ -133,15 +147,31 @@ final class Map extends Widget
         return $new;
     }
 
-    /**
-     * @param array<string, string> $attributes
-     * @return $this
-     */
-    public function attributes(array $attributes): self
+    public function attributes(array $valuesMap): self
     {
         $new = clone $this;
-        $new->attributes = array_merge($this->attributes, $attributes);
+        $new->attributes = $valuesMap;
+        return $new;
+    }
 
+    public function getId(): string
+    {
+        if (!isset($this->attributes['id'])) {
+            $this->attributes['id'] = Html::generateId(self::ID_PREFIX);
+        }
+
+        return $this->attributes['id'];
+    }
+
+    public function getLeafletVar(): string
+    {
+        return $this->leafletVar;
+    }
+
+    public function id(string $value): self
+    {
+        $new = clone $this;
+        $new->attributes['id'] = $value;
         return $new;
     }
 
@@ -149,7 +179,6 @@ final class Map extends Widget
     {
         $new = clone $this;
         $new->leafletVar = $leafletVar;
-
         return $new;
     }
 
@@ -157,7 +186,6 @@ final class Map extends Widget
     {
         $new = clone $this;
         $new->options = array_merge($this->options, $options);
-
         return $new;
     }
 
@@ -168,7 +196,6 @@ final class Map extends Widget
     {
         $new = clone $this;
         $new->tag = $tag;
-
         return $new;
     }
 
@@ -219,7 +246,7 @@ final class Map extends Widget
      */
     private function registerJs(): void
     {
-        $id = $this->attributes['id'];
+        $id = $this->getId();
 
         if ($this->leafletVar !== self::LEAFLET_VAR) {
             array_unshift(
@@ -242,7 +269,13 @@ final class Map extends Widget
             $this->options['layers'] = array_values($this->mapLayers);
         }
 
-        $this->js[] = "const $id=$this->leafletVar.map(\"$id\",{$this->options2Js($this->leafletVar)})"
+        $this->js[] = sprintf(
+            'const %s=%s.map("%s",%s)',
+            (new Inflector())->toSnakeCase($this->getId()),
+            $this->leafletVar,
+            $this->getId(),
+            $this->options2Js($this->leafletVar)
+        )
             . $this->events2Js()
         ;
 
@@ -272,14 +305,16 @@ final class Map extends Widget
                     $this->setComponentLayers($component);
                 }
 
-                $js = "const {$component->getJsVar()}={$component->toJs($this->leafletVar)}";
-                $js .= $component->events2Js();
-                $js .= ($component->getAddToMap() ? ".addTo({$this->attributes['id']})" : '');
-                $this->js[] = $js;
+                $this->js[] = sprintf(
+                    'const %s=%s%s%s',
+                    $component->getJsVar(),
+                    $component->toJs($this->leafletVar),
+                    $component->events2Js(),
+                    ($component->getAddToMap() ? ".addTo({$this->attributes['id']})" : '')
+                );
             }
         }
     }
-
 
     private function setComponentLayers(LayersInterface $component): void
     {

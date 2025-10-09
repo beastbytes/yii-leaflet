@@ -1,4 +1,4 @@
-The BeastBytes\Widgets\Leaflet widget is free software. It is released under the terms of the following BSD License.
+The BeastBytes\Yii\Leaflet widget is free software. It is released under the terms of the following BSD License.
 
 Copyright © 2022 by BeastBytes - All rights reserved.
 

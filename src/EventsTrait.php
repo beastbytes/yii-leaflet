@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet;
+namespace BeastBytes\Yii\Leaflet;
 
 /**
  * @author Chris Yates
@@ -26,7 +26,7 @@ trait EventsTrait
      * Returns a new instance with the events added
      *
      * @param array<string, array|string> $events Events for the object
-     * @return \BeastBytes\Widgets\Leaflet\EventsTrait|\BeastBytes\Widgets\Leaflet\Component|\BeastBytes\Widgets\Leaflet\Map
+     * @return \BeastBytes\Yii\Leaflet\EventsTrait|\BeastBytes\Yii\Leaflet\Component|\BeastBytes\Yii\Leaflet\Map
      */
     public function events(array $events): self
     {

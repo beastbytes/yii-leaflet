@@ -6,11 +6,11 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\Tests\types;
+namespace BeastBytes\Yii\Leaflet\Tests\types;
 
-use BeastBytes\Widgets\Leaflet\Map;
-use BeastBytes\Widgets\Leaflet\types\Bounds;
-use BeastBytes\Widgets\Leaflet\types\Point;
+use BeastBytes\Yii\Leaflet\Map;
+use BeastBytes\Yii\Leaflet\types\Bounds;
+use BeastBytes\Yii\Leaflet\types\Point;
 use PHPUnit\Framework\TestCase;
 
 class BoundsTest extends TestCase

@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\layers\raster;
+namespace BeastBytes\Yii\Leaflet\layers\raster;
 
-use BeastBytes\Widgets\Leaflet\types\LatLngBounds;
+use BeastBytes\Yii\Leaflet\types\LatLngBounds;
 
 /**
  * Represents a VideoOverlay on the map

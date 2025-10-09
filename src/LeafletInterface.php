@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet;
+namespace BeastBytes\Yii\Leaflet;
 
 /**
  * LeafletInterface should be implemented by all Leaflet objects

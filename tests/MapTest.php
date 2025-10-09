@@ -6,21 +6,22 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\Tests;
+namespace BeastBytes\Yii\Leaflet\Tests;
 
-use BeastBytes\Widgets\Leaflet\Tests\support\TestTrait;
-use BeastBytes\Widgets\Leaflet\controls\LayersControl;
-use BeastBytes\Widgets\Leaflet\controls\ScaleControl;
-use BeastBytes\Widgets\Leaflet\layers\other\LayerGroup;
-use BeastBytes\Widgets\Leaflet\layers\raster\TileProvider;
-use BeastBytes\Widgets\Leaflet\layers\ui\Marker;
-use BeastBytes\Widgets\Leaflet\layers\vector\Circle;
-use BeastBytes\Widgets\Leaflet\Map;
-use BeastBytes\Widgets\Leaflet\types\Icon;
-use BeastBytes\Widgets\Leaflet\types\LatLng;
-use BeastBytes\Widgets\Leaflet\types\Point;
+use BeastBytes\Yii\Leaflet\Tests\support\TestTrait;
+use BeastBytes\Yii\Leaflet\controls\LayersControl;
+use BeastBytes\Yii\Leaflet\controls\ScaleControl;
+use BeastBytes\Yii\Leaflet\layers\other\LayerGroup;
+use BeastBytes\Yii\Leaflet\layers\raster\TileProvider;
+use BeastBytes\Yii\Leaflet\layers\ui\Marker;
+use BeastBytes\Yii\Leaflet\layers\vector\Circle;
+use BeastBytes\Yii\Leaflet\Map;
+use BeastBytes\Yii\Leaflet\types\Icon;
+use BeastBytes\Yii\Leaflet\types\LatLng;
+use BeastBytes\Yii\Leaflet\types\Point;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use Yiisoft\Strings\Inflector;
 
 class MapTest extends TestCase
 {
@@ -76,18 +77,21 @@ class MapTest extends TestCase
 
         $content = $map->render();
         $this->assertStringMatchesFormat(
-            '<div id="' . Map::ID_PREFIX . '%d" style="height:800px;"></div>',
+            sprintf('<div id="%s" style="height:800px;"></div>', $map->getId()),
             $content
         );
 
-        $html = $this->webView->render( '/layout.php', ['content' => $content]);
-        $matches = [];
-        preg_match('/id="(' . Map::ID_PREFIX . '\d+)"/', $html, $matches);
-        $id = $matches[1];
+        $html = $this->view->render( '//view.php', ['content' => $content]);
 
         $this->assertStringContainsString(
-            'const ' . $id . '='
-            . Map::LEAFLET_VAR . '.map("' . $id . '",{center:' . Map::LEAFLET_VAR . ".latLng($lat,$lng),zoom:10});",
+            sprintf(
+                'const %s=%s.map("%s",{center:%2$s.latLng(%s,%s),zoom:10});',
+                (new Inflector())->toSnakeCase($map->getId()),
+                $map->getLeafletVar(),
+                $map->getId(),
+                $lat,
+                $lng
+            ),
             $html
         );
     }
@@ -107,18 +111,21 @@ class MapTest extends TestCase
 
         $content = $map->render();
         $this->assertStringMatchesFormat(
-            '<div id="' . Map::ID_PREFIX . '%d" style="height:800px;"></div>',
+            sprintf('<div id="%s" style="height:800px;"></div>', $map->getId()),
             $content
         );
 
-        $html = $this->webView->render( '/layout.php', ['content' => $content]);
-        $matches = [];
-        preg_match('/id="(' . Map::ID_PREFIX . '\d+)"/', $html, $matches);
-        $id = $matches[1];
+        $html = $this->view->render( '//view.php', ['content' => $content]);
 
         $this->assertStringContainsString(
-            'const ' . $id . '='
-            . Map::LEAFLET_VAR . '.map("' . $id . '",{center:' . Map::LEAFLET_VAR . ".latLng($lat,$lng),zoom:10});",
+            sprintf(
+                'const %s=%s.map("%s",{center:%2$s.latLng(%s,%s),zoom:10});',
+                (new Inflector())->toSnakeCase($map->getId()),
+                $map->getLeafletVar(),
+                $map->getId(),
+                $lat,
+                $lng
+            ),
             $html
         );
     }
@@ -143,25 +150,25 @@ class MapTest extends TestCase
 
         $content = $map->render();
         $this->assertStringMatchesFormat(
-            '<div id="' . Map::ID_PREFIX . '%d" style="height:800px;"></div>',
+            sprintf('<div id="%s" style="height:800px;"></div>', $map->getId()),
             $content
         );
 
-        $html = $this->webView->render( '/layout.php', ['content' => $content]);
-        $matches = [];
-        preg_match('/id="(' . Map::ID_PREFIX . '\d+)"/', $html, $matches);
-        $id = $matches[1];
+        $html = $this->view->render( '//view.php', ['content' => $content]);
 
         $this->assertStringContainsString(
-            'const ' . $id . '='
-            . Map::LEAFLET_VAR . '.map("' . $id . '",{'
-            . 'center:' . Map::LEAFLET_VAR . ".latLng($lat,$lng),"
-            . 'maxBounds:' . Map::LEAFLET_VAR . '.latLngBounds('
-            . Map::LEAFLET_VAR . ".latLng($latNW,$lngNW),"
-            . Map::LEAFLET_VAR . ".latLng($latSE,$lngSE)"
-            . '),'
-            . 'zoom:10'
-            . '});',
+            sprintf(
+                'const %s=%s.map("%s",{center:%2$s.latLng(%s,%s),maxBounds:%2$s.latLngBounds(%2$s.latLng(%s,%s),%2$s.latLng(%s,%s)),zoom:10});',
+                (new Inflector())->toSnakeCase($map->getId()),
+                $map->getLeafletVar(),
+                $map->getId(),
+                $lat,
+                $lng,
+                $latNW,
+                $lngNW,
+                $latSE,
+                $lngSE
+            ),
             $html
         );
     }
@@ -181,19 +188,19 @@ class MapTest extends TestCase
 
         $content = $map->render();
         $this->assertStringMatchesFormat(
-            '<div id="' . Map::ID_PREFIX . '%d" style="height:800px;"></div>',
+            sprintf('<div id="%s" style="height:800px;"></div>', $map->getId()),
             $content
         );
 
-        $html = $this->webView->render( '/layout.php', ['content' => $content]);
-        $matches = [];
-        preg_match('/id="(' . Map::ID_PREFIX . '\d+)"/', $html, $matches);
-        $id = $matches[1];
+        $html = $this->view->render( '//view.php', ['content' => $content]);
 
         $this->assertStringContainsString(
-            'const ' . $leafletVar . '=' . Map::LEAFLET_VAR . '.noConflict();'
-            . 'const ' . $id . '='
-            . $leafletVar . '.map("' . $id . '",{center:' . $leafletVar . '.latLng(0,0),zoom:10});',
+            sprintf(
+                'const %s=%s.noConflict();const %s=%1$s.map("%3$s",{center:%1$s.latLng(0,0),zoom:10});',
+                $map->getLeafletVar(),
+                Map::LEAFLET_VAR,
+                $map->getId()
+        ),
             $html
         );
     }
@@ -212,7 +219,7 @@ class MapTest extends TestCase
 
         $content = $map->render();
         $this->assertStringMatchesFormat(
-            '<' . $tag . ' id="' . Map::ID_PREFIX . '%d" style="height:800px;"></' . $tag . '>',
+            sprintf('<%s id="%s" style="height:800px;"></%1$s>', $tag, $map->getId()),
             $content
         );
     }
@@ -333,17 +340,18 @@ class MapTest extends TestCase
 
         $content = $map->render();
         $this->assertStringMatchesFormat(
-            '<div id="' . Map::ID_PREFIX . '%d" style="height:800px;"></div>',
+            sprintf('<div id="%s" style="height:800px;"></div>', $map->getId()),
             $content
         );
 
-        $html = $this->webView->render( '/layout.php', ['content' => $content]);
-        $matches = [];
-        preg_match('/id="(' . Map::ID_PREFIX . '\d+)"/', $html, $matches);
-        $id = $matches[1];
+        $html = $this->view->render( '//view.php', ['content' => $content]);
 
         $this->assertStringContainsString(
-            'const layer0=' . Map::LEAFLET_VAR . '.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"});const ' . $id . '=' . Map::LEAFLET_VAR . '.map("' . $id . '",{center:' . Map::LEAFLET_VAR . '.latLng(51.77255,-4.95325),layers:[layer0],zoom:12});const layer1=' . Map::LEAFLET_VAR . '.layerGroup([' . Map::LEAFLET_VAR . '.circle(' . Map::LEAFLET_VAR . '.latLng(51.77255,-4.95325),{radius:15000,color:"#20ffcd"}).bindTooltip("15km radius"),' . Map::LEAFLET_VAR . '.circle(' . Map::LEAFLET_VAR . '.latLng(51.77255,-4.95325),{radius:10000,color:"#3388ff"}).bindTooltip("10km radius"),' . Map::LEAFLET_VAR . '.circle(' . Map::LEAFLET_VAR . '.latLng(51.77255,-4.95325),{radius:5000,color:"#573CFF"}).bindTooltip("5km radius"),' . Map::LEAFLET_VAR . '.marker(' . Map::LEAFLET_VAR . '.latLng(51.77255,-4.95325),{icon:' . Map::LEAFLET_VAR . '.icon({iconAnchor:' . Map::LEAFLET_VAR . '.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("<p><b>Little Dumpledale Farm</b></p><p>Ashdale Lane<br>Sardis<br>Haverfordwest<br>Pembrokeshire<br>SA62 4NT</p><p>Tel: +44 1646 602754</p>")]).addTo(' . $id . ');const layer2=' . Map::LEAFLET_VAR . '.layerGroup([' . Map::LEAFLET_VAR . '.marker(' . Map::LEAFLET_VAR . '.latLng(51.749151,-4.913822),{icon:' . Map::LEAFLET_VAR . '.icon({iconAnchor:' . Map::LEAFLET_VAR . '.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("<p><b>The Cottage Inn</b></p><p>Llangwm<br>Haverfordwest<br>Pembrokeshire<br>SA62 4HH</p><p>Tel: +44 1437 891494</p>"),' . Map::LEAFLET_VAR . '.marker(' . Map::LEAFLET_VAR . '.latLng(51.7079864,-4.925951),{icon:' . Map::LEAFLET_VAR . '.icon({iconAnchor:' . Map::LEAFLET_VAR . '.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("<p><b>Jolly Sailor</b></p><p>Burton<br>Milford Haven<br>Pembrokeshire<br>SA73 1NX</p><p>Tel: +44 1646 600378</p>")]);const layer3=' . Map::LEAFLET_VAR . '.marker(' . Map::LEAFLET_VAR . '.latLng(51.786979,-4.977206),{draggable:true,icon:' . Map::LEAFLET_VAR . '.icon({iconAnchor:' . Map::LEAFLET_VAR . '.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("Drag me and see what happens").on("dragend",function(e){const position=e.target.getLatLng();window.alert("Moved by " + Math.floor(e.distance) + " pixels\nNew position " + position.lat + ", " + position.lng);});const control0=' . Map::LEAFLET_VAR . '.control.layers(null,{"Little Dumpledale":layer1,"Pubs":layer2,"Draggable":layer3}).addTo(' . $id . ');const control1=' . Map::LEAFLET_VAR . '.control.scale().addTo(' . $id . ');',
+            sprintf(
+            'const layer0=%1$s.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"});const %2$s=%1$s.map("%2$s",{center:%1$s.latLng(51.77255,-4.95325),layers:[layer0],zoom:12});const layer1=%1$s.layerGroup([' . Map::LEAFLET_VAR . '.circle(' . Map::LEAFLET_VAR . '.latLng(51.77255,-4.95325),{radius:15000,color:"#20ffcd"}).bindTooltip("15km radius"),%1$s.circle(%1$s.latLng(51.77255,-4.95325),{radius:10000,color:"#3388ff"}).bindTooltip("10km radius"),%1$s.circle(%1$s.latLng(51.77255,-4.95325),{radius:5000,color:"#573CFF"}).bindTooltip("5km radius"),%1$s.marker(%1$s.latLng(51.77255,-4.95325),{icon:%1$s.icon({iconAnchor:%1$s.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("<p><b>Little Dumpledale Farm</b></p><p>Ashdale Lane<br>Sardis<br>Haverfordwest<br>Pembrokeshire<br>SA62 4NT</p><p>Tel: +44 1646 602754</p>")]).addTo(%2$s);const layer2=%1$s.layerGroup([%1$s.marker(%1$s.latLng(51.749151,-4.913822),{icon:%1$s.icon({iconAnchor:%1$s.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("<p><b>The Cottage Inn</b></p><p>Llangwm<br>Haverfordwest<br>Pembrokeshire<br>SA62 4HH</p><p>Tel: +44 1437 891494</p>"),' . Map::LEAFLET_VAR . '.marker(' . Map::LEAFLET_VAR . '.latLng(51.7079864,-4.925951),{icon:%1$s.icon({iconAnchor:%1$s.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("<p><b>Jolly Sailor</b></p><p>Burton<br>Milford Haven<br>Pembrokeshire<br>SA73 1NX</p><p>Tel: +44 1646 600378</p>")]);const layer3=%1$s.marker(%1$s.latLng(51.786979,-4.977206),{draggable:true,icon:%1$s.icon({iconAnchor:%1$s.point(12,40),iconUrl:"leaflet/images/marker-icon.png",shadowUrl:"leaflet/images/marker-shadow.png"})}).bindPopup("Drag me and see what happens").on("dragend",function(e){const position=e.target.getLatLng();window.alert("Moved by " + Math.floor(e.distance) + " pixels\nNew position " + position.lat + ", " + position.lng);});const control0=%1$s.control.layers(null,{"Little Dumpledale":layer1,"Pubs":layer2,"Draggable":layer3}).addTo(%2$s);const control1=%1$s.control.scale().addTo(%2$s);',
+                $map->getLeafletVar(),
+                $map->getId()
+            ),
             $html
         );
     }

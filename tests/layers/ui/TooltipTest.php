@@ -6,10 +6,10 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\Tests\layers\ui;
+namespace BeastBytes\Yii\Leaflet\Tests\layers\ui;
 
-use BeastBytes\Widgets\Leaflet\layers\ui\Tooltip;
-use BeastBytes\Widgets\Leaflet\Map;
+use BeastBytes\Yii\Leaflet\layers\ui\Tooltip;
+use BeastBytes\Yii\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 
 class TooltipTest extends TestCase

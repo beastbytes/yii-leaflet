@@ -6,12 +6,12 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\Tests\layers\other;
+namespace BeastBytes\Yii\Leaflet\Tests\layers\other;
 
-use BeastBytes\Widgets\Leaflet\layers\other\LayerGroup;
-use BeastBytes\Widgets\Leaflet\layers\ui\Marker;
-use BeastBytes\Widgets\Leaflet\Map;
-use BeastBytes\Widgets\Leaflet\types\Point;
+use BeastBytes\Yii\Leaflet\layers\other\LayerGroup;
+use BeastBytes\Yii\Leaflet\layers\ui\Marker;
+use BeastBytes\Yii\Leaflet\Map;
+use BeastBytes\Yii\Leaflet\types\Point;
 use PHPUnit\Framework\TestCase;
 
 class LayerGroupTest extends TestCase

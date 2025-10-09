@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\layers\other;
+namespace BeastBytes\Yii\Leaflet\layers\other;
 
 /**
  * Represents a feature group

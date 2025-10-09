@@ -6,10 +6,10 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\Tests\layers\other;
+namespace BeastBytes\Yii\Leaflet\Tests\layers\other;
 
-use BeastBytes\Widgets\Leaflet\layers\other\GeoJson;
-use BeastBytes\Widgets\Leaflet\Map;
+use BeastBytes\Yii\Leaflet\layers\other\GeoJson;
+use BeastBytes\Yii\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 
 class GeoJsonTest extends TestCase

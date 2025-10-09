@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\renderers;
+namespace BeastBytes\Yii\Leaflet\renderers;
 
 /**
  * Represents the SVG renderer

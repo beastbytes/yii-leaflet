@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\types;
+namespace BeastBytes\Yii\Leaflet\types;
 
-use BeastBytes\Widgets\Leaflet\LeafletInterface;
+use BeastBytes\Yii\Leaflet\LeafletInterface;
 
 /**
  * Represents a point with x and y coordinates in pixels

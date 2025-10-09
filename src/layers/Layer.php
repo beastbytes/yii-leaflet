@@ -6,12 +6,12 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\layers;
+namespace BeastBytes\Yii\Leaflet\layers;
 
 use JsonException;
-use BeastBytes\Widgets\Leaflet\Component;
-use BeastBytes\Widgets\Leaflet\layers\ui\Popup;
-use BeastBytes\Widgets\Leaflet\layers\ui\Tooltip;
+use BeastBytes\Yii\Leaflet\Component;
+use BeastBytes\Yii\Leaflet\layers\ui\Popup;
+use BeastBytes\Yii\Leaflet\layers\ui\Tooltip;
 
 /**
  * Base class for layers

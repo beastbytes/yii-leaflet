@@ -6,9 +6,9 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\controls;
+namespace BeastBytes\Yii\Leaflet\controls;
 
-use BeastBytes\Widgets\Leaflet\LayersInterface;
+use BeastBytes\Yii\Leaflet\LayersInterface;
 use JetBrains\PhpStorm\ArrayShape;
 use JsonException;
 
@@ -54,7 +54,7 @@ final class LayersControl extends Control implements LayersInterface
 
     /**
      * @param array $layers Base Layers as ['label' => 'layerJsVar']
-     * @return \BeastBytes\Leaflet\LayersInterface
+     * @return \BeastBytes\Yii\Leaflet\LayersInterface
      * @internal
      */
     #[ArrayShape(["string" => "string"])]
@@ -66,7 +66,7 @@ final class LayersControl extends Control implements LayersInterface
 
     /**
      * @param array $layers Overlays as ['label' => 'layerJsVar']
-     * @return \BeastBytes\Leaflet\LayersInterface
+     * @return \BeastBytes\Yii\Leaflet\LayersInterface
      * @internal
      */
     #[ArrayShape(["string" => "string"])]

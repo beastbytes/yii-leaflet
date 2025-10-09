@@ -6,11 +6,11 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\Tests\types;
+namespace BeastBytes\Yii\Leaflet\Tests\types;
 
-use BeastBytes\Widgets\Leaflet\Map;
-use BeastBytes\Widgets\Leaflet\types\LatLng;
-use BeastBytes\Widgets\Leaflet\types\LatLngBounds;
+use BeastBytes\Yii\Leaflet\Map;
+use BeastBytes\Yii\Leaflet\types\LatLng;
+use BeastBytes\Yii\Leaflet\types\LatLngBounds;
 use PHPUnit\Framework\TestCase;
 
 class LatLngBoundsTest extends TestCase

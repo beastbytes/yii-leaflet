@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\layers\vector;
+namespace BeastBytes\Yii\Leaflet\layers\vector;
 
 /**
  * Represents a Polygon on the map

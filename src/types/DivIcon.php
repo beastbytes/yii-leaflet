@@ -6,10 +6,10 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\types;
+namespace BeastBytes\Yii\Leaflet\types;
 
-use BeastBytes\Widgets\Leaflet\Base;
-use BeastBytes\Widgets\Leaflet\LeafletInterface;
+use BeastBytes\Yii\Leaflet\Base;
+use BeastBytes\Yii\Leaflet\LeafletInterface;
 use JsonException;
 
 /**

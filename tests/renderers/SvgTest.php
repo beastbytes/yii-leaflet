@@ -6,10 +6,10 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\Tests\renderers;
+namespace BeastBytes\Yii\Leaflet\Tests\renderers;
 
-use BeastBytes\Widgets\Leaflet\Map;
-use BeastBytes\Widgets\Leaflet\renderers\Svg;
+use BeastBytes\Yii\Leaflet\Map;
+use BeastBytes\Yii\Leaflet\renderers\Svg;
 use PHPUnit\Framework\TestCase;
 
 class SvgTest extends TestCase

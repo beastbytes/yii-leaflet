@@ -6,12 +6,12 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\layers\vector;
+namespace BeastBytes\Yii\Leaflet\layers\vector;
 
-use BeastBytes\Widgets\Leaflet\BoundsTrait;
-use BeastBytes\Widgets\Leaflet\layers\Layer;
-use BeastBytes\Widgets\Leaflet\LeafletInterface;
-use BeastBytes\Widgets\Leaflet\types\LatLngBounds;
+use BeastBytes\Yii\Leaflet\BoundsTrait;
+use BeastBytes\Yii\Leaflet\layers\Layer;
+use BeastBytes\Yii\Leaflet\LeafletInterface;
+use BeastBytes\Yii\Leaflet\types\LatLngBounds;
 use JsonException;
 
 /**

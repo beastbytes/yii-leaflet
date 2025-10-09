@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\layers\raster;
+namespace BeastBytes\Yii\Leaflet\layers\raster;
 
 /**
  * Defines tile providers that can be used to load and display map tiles.

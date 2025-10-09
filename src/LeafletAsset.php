@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet;
+namespace BeastBytes\Yii\Leaflet;
 
 use Yiisoft\Assets\AssetBundle;
 use Yiisoft\View\WebView;
@@ -17,8 +17,6 @@ use Yiisoft\View\WebView;
 class LeafletAsset extends AssetBundle
 {
     public array $css = ['leaflet.css'];
-    public ?int $cssPosition = WebView::POSITION_HEAD;
     public array $js = ['leaflet.js'];
-    public ?int $jsPosition = WebView::POSITION_END;
     public ?string $sourcePath = '@npm/leaflet/dist';
 }

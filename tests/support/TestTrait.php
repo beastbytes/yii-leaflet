@@ -6,9 +6,11 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\Tests\support;
+namespace BeastBytes\Yii\Leaflet\Tests\support;
 
 use Yiisoft\Aliases\Aliases;
+use Yiisoft\Assets\AssetLoader;
+use Yiisoft\Assets\AssetManager;
 use Yiisoft\Cache\Cache;
 use Yiisoft\Cache\CacheInterface;
 use Yiisoft\Test\Support\Container\SimpleContainer;
@@ -20,26 +22,36 @@ use Yiisoft\Widget\WidgetFactory;
 trait TestTrait
 {
     private CacheInterface $cache;
-    private WebView $webView;
+    private WebView $view;
 
     protected function setUp(): void
     {
         parent::setUp();
 
+        $aliases = new Aliases(['@npm' => __DIR__]);
+        $loader = new AssetLoader(
+            aliases: $aliases,
+            basePath: __DIR__ . DIRECTORY_SEPARATOR . 'assets',
+            baseUrl: '/'
+        );
+
         $container = new SimpleContainer(
             [
-                Aliases::class => new Aliases(['@public' => __DIR__]),
+                AssetManager::class => new AssetManager($aliases, $loader),
                 CacheInterface::class => new Cache(new MemorySimpleCache()),
-                WebView::class => new WebView(__DIR__ . '/public/view', new SimpleEventDispatcher()),
+                WebView::class => new WebView(
+                    __DIR__ . DIRECTORY_SEPARATOR . 'views',
+                    new SimpleEventDispatcher()
+                ),
             ]
         );
 
         WidgetFactory::initialize($container, []);
 
         $this->cache = $container->get(CacheInterface::class);
-        $this->webView = $container
+        $this->view = $container
             ->get(WebView::class)
-            ->withBasePath(__DIR__ . '/view')
+            ->setParameters(['assetManager' => $container->get(AssetManager::class)])
         ;
     }
 }

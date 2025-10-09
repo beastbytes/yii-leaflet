@@ -6,10 +6,10 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\Tests\controls;
+namespace BeastBytes\Yii\Leaflet\Tests\controls;
 
-use BeastBytes\Widgets\Leaflet\controls\ZoomControl;
-use BeastBytes\Widgets\Leaflet\Map;
+use BeastBytes\Yii\Leaflet\controls\ZoomControl;
+use BeastBytes\Yii\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 
 class ZoomControlTest extends TestCase

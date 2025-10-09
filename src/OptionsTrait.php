@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet;
+namespace BeastBytes\Yii\Leaflet;
 
 use JsonException;
 use Yiisoft\Json\Json;
@@ -32,7 +32,7 @@ trait OptionsTrait
                 $value = '!!' . $value->toJs($leafletVar) . '!!';
             } elseif (is_array($value) && current($value) instanceof LeafletInterface) {
                 foreach ($value as $i => $v) {
-                    $value[$i] = '!!' . $value->toJs($leafletVar) . '!!';
+                    $value[$i] = '!!' . $v->toJs($leafletVar) . '!!';
                 }
             }
 

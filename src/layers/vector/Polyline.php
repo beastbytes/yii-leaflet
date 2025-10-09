@@ -7,11 +7,11 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\layers\vector;
+namespace BeastBytes\Yii\Leaflet\layers\vector;
 
-use BeastBytes\Widgets\Leaflet\layers\Layer;
-use BeastBytes\Widgets\Leaflet\LeafletInterface;
-use BeastBytes\Widgets\Leaflet\types\LatLng;
+use BeastBytes\Yii\Leaflet\layers\Layer;
+use BeastBytes\Yii\Leaflet\LeafletInterface;
+use BeastBytes\Yii\Leaflet\types\LatLng;
 use JsonException;
 
 /**
@@ -46,7 +46,7 @@ class Polyline extends Layer implements LeafletInterface
      * @param int|null $j Index for multidimensional array of locations
      * @return array The parsed locations
      */
-    private function parse(array $locations, int $j = null): array
+    private function parse(array $locations, ?int $j = null): array
     {
         foreach ($locations as $i => &$location) {
             if (is_array($location)) {

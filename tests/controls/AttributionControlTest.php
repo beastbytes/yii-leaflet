@@ -6,10 +6,10 @@
 
 declare(strict_types=1);
 
-namespace BeastBytes\Widgets\Leaflet\Tests\controls;
+namespace BeastBytes\Yii\Leaflet\Tests\controls;
 
-use BeastBytes\Widgets\Leaflet\controls\AttributionControl;
-use BeastBytes\Widgets\Leaflet\Map;
+use BeastBytes\Yii\Leaflet\controls\AttributionControl;
+use BeastBytes\Yii\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 
 class AttributionControlTest extends TestCase

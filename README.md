@@ -23,14 +23,14 @@ php composer.phar require --prefer-dist beastbytes/yii-leaflet
 or add
 
 ```json
-"beastbytes/yii-leaflet": "*"
+"beastbytes/yii-leaflet": "<version-constraint>"
 ```
 
-to the require section of your composer.json.
+to the `require` section of your composer.json.
 
 ### Leaflet Package
 
-Install Leaflet using your chosen package mananger, e.g.
+Install Leaflet using your chosen package manager, e.g.
 
 ```
 pnpm add leaflet
@@ -51,25 +51,22 @@ or add Leaflet to the dependencies of your package.json.
 An instance of the map widget must be assigned to a variable; this instance is used to render the HTML then
 to get the JavaScript to be registered in the view.
 
-The widget **does not** publish or register Leaflet assets, i.e. Leaflet's JavaScript and CSS. LeafletAsset is 
-provided for use in the Yii framework.
-
 The example below displays a map using OpenStreetMap as the tile provider. It has a marker in the centre of the map and a 5km radius circle centred on the marker; these are in a layer group that is not initially displayed. When the layer is shown using the Layers control, the centre marker can be dragged and dropped and its new position is shown - this demonstrates using component events. Three other markers are added in another layer group, and a layers and fullscreen control is added to the map; the fullscreen control is a plugin.
 
 ### Example
 
 ```php
-use BeastBytes\Widgets\Leaflet\Map;
-use BeastBytes\Widgets\Leaflet\controls\LayersControl;
-use BeastBytes\Widgets\Leaflet\controls\ScaleControl;
-use BeastBytes\Widgets\Leaflet\layers\other\LayerGroup;
-use BeastBytes\Widgets\Leaflet\layers\raster\TileProvider;
-use BeastBytes\Widgets\Leaflet\layers\ui\Marker;
-use BeastBytes\Widgets\Leaflet\layers\vector\Circle;
-use BeastBytes\Widgets\Leaflet\plugins\Fullscreen\FullscreenControl;
-use BeastBytes\Widgets\Leaflet\types\Icon;
-use BeastBytes\Widgets\Leaflet\types\LatLng;
-use BeastBytes\Widgets\Leaflet\types\Point;
+use BeastBytes\Yii\Leaflet\Map;
+use BeastBytes\Yii\Leaflet\controls\LayersControl;
+use BeastBytes\Yii\Leaflet\controls\ScaleControl;
+use BeastBytes\Yii\Leaflet\layers\other\LayerGroup;
+use BeastBytes\Yii\Leaflet\layers\raster\TileProvider;
+use BeastBytes\Yii\Leaflet\layers\ui\Marker;
+use BeastBytes\Yii\Leaflet\layers\vector\Circle;
+use BeastBytes\Yii\Leaflet\plugins\Fullscreen\FullscreenControl;
+use BeastBytes\Yii\Leaflet\types\Icon;
+use BeastBytes\Yii\Leaflet\types\LatLng;
+use BeastBytes\Yii\Leaflet\types\Point;
 
 // Centre of map
 $centre = new LatLng(51.772550, -4.953250);
