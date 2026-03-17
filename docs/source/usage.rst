@@ -55,25 +55,44 @@ The map uses OpenStreetMap as the tile provider.
 
     // Layer group with a marker and circles
     $centreLayerGroup = new LayerGroup([
-        new Circle($centre, [
-            'radius' => 15000,
-            'color' => '#20ffcd'
-        ])->tooltip('15km radius'),
-        new Circle($centre, [
-            'radius' => 10000,
-            'color' => '#3388ff'
-        ])->tooltip('10km radius'),
-        new Circle($centre, [
-            'radius' => 5000,
-            'color' => '#573CFF'
-        ])->tooltip('5km radius'),
-        new Marker($centre, [
-            'icon' => new Icon([
-                'iconAnchor' => new Point(12, 40),
-                'iconUrl' => '_static/leaflet/images/marker-icon-green.png',
-                'shadowUrl' => '_static/leaflet/images/marker-shadow.png'
-            ])
-        ])->popup("<p><b>St Paul's Cathedral</b></p>")
+        new Circle(
+            $centre,
+            [
+                'radius' => 15000,
+                'color' => '#20ffcd'
+            ]
+        )
+            ->tooltip('15km radius')
+        ,
+        new Circle(
+            $centre,
+            [
+                'radius' => 10000,
+                'color' => '#3388ff'
+            ]
+        )
+            ->tooltip('10km radius')
+        ,
+        new Circle(
+            $centre,
+            [
+                'radius' => 5000,
+                'color' => '#573CFF'
+            ]
+        )
+            ->tooltip('5km radius')
+        ,
+        new Marker(
+            $centre,
+            [
+                'icon' => new Icon([
+                    'iconAnchor' => new Point(12, 40),
+                    'iconUrl' => '_static/leaflet/images/marker-icon-green.png',
+                    'shadowUrl' => '_static/leaflet/images/marker-shadow.png'
+                ])
+            ]
+        )
+            ->popup("<p><b>St Paul's Cathedral</b></p>")
     ]);
 
     $churchLayers = [];
@@ -111,32 +130,40 @@ The map uses OpenStreetMap as the tile provider.
     ];
 
     foreach ($churches as $church) {
-        $churchLayers[] = new Marker($church['location'], [
-            'icon' => [
-                'iconAnchor' => new Point(12, 40),
-                'iconUrl' => '_static/leaflet/images/marker-icon.png',
-                'shadowUrl' => '_static/leaflet/images/marker-shadow.png'
+        $churchLayers[] = new Marker(
+            $church['location'],
+            [
+                'icon' => [
+                    'iconAnchor' => new Point(12, 40),
+                    'iconUrl' => '_static/leaflet/images/marker-icon.png',
+                    'shadowUrl' => '_static/leaflet/images/marker-shadow.png'
+                ]
             ]
-        ])->popup('<p><b>' . $church['name'] . '</b></p>' .
-            '<p>' . $church['line'] . '</p>');
+        )
+            ->popup('<p><b>' . $church['name'] . '</b></p>' . '<p>' . $church['line'] . '</p>')
+        ;
     }
 
     // group the church layers
-    $churchesLayerGroup = new LayerGroup($churchLayers)->addToMap(false);
+    $churchesLayerGroup = (new LayerGroup($churchLayers))->addToMap(false);
 
-    $draggable = new Marker([51.5138,-0.1000], [
+    $draggable = new Marker(
+        [51.5138,-0.1000],
+        [
             'draggable' => true,
             'icon' => new Icon([
                 'iconAnchor' => new Point(12, 40),
                 'iconUrl' => '_static/leaflet/images/marker-icon-red.png',
                 'shadowUrl' => '_static/leaflet/images/marker-shadow.png'
             ])
-        ])
+        ]
+    )
         ->addToMap(false)
-        ->popup('Drag me and see what happens'),
+        ->popup('Drag me and see what happens')
         ->events([
-            'dragend' => 'function(e){const position=e.target.getLatLng();window.alert("Moved by " + Math.floor(e.distance) + " pixels\nNew position " + position.lat + ", " + position.lng);}'
-        ]);
+            'dragend' => 'function(e) {const position=e.target.getLatLng();window.alert("Moved by " + Math.floor(e.distance) + " pixels\nNew position " + position.lat + ", " + position.lng);}'
+        ])
+    ;
 
     $overlays = [
         "St Paul's Cathedral" => $centreLayerGroup,
@@ -153,15 +180,14 @@ The map uses OpenStreetMap as the tile provider.
             'layers' => [
                 (new TileProvider())->use('OpenStreetMap') // base tile layer
             ],
-            'zoom' => self::ZOOM
+            'zoom' => 13
         ])
-        ->addCcontrols(
+        ->addControls(
             new Layers(overlays: array_keys($overlays)), // layers control to control layer visibility
             new Scale()
         )
         ->addLayers($overlays)
-        ->addPlugins(new FullscreenControl())
-    ]);
+    ;
 
     echo $map->render();
 
@@ -184,14 +210,14 @@ The PHP above generates the following JavaScript.
     const map_467619187270731 = L.map(
         "map_467619187270731",
         {
-            center: L.latLng(51.51383,-0.0985),
+            center: L.latLng(51.51383, -0.0985),
             layers: [layer0],
             zoom: 13
         }
     );
     const layer1 = L.layerGroup([
         L.circle(
-            L.latLng(51.51383,-0.0985),
+            L.latLng(51.51383, -0.0985),
             {
                 radius: 4000,
                 color: "#20ffcd"
@@ -200,28 +226,28 @@ The PHP above generates the following JavaScript.
             .bindTooltip("4km radius")
         ,
         L.circle(
-            L.latLng(51.51383,-0.0985),
+            L.latLng(51.51383, -0.0985),
             {
                 radius: 2000,
-                color:"#3388ff"
+                color: "#3388ff"
             }
         )
             .bindTooltip("2km radius")
         ,
         L.circle(
-            L.latLng(51.51383,-0.0985),
+            L.latLng(51.51383, -0.0985),
             {
-                radius:1000,
-                color:"#573CFF"
+                radius: 1000,
+                color: "#573CFF"
             }
         )
             .bindTooltip("1km radius")
         ,
         L.marker(
-            L.latLng(51.51383,-0.0985),
+            L.latLng(51.51383, -0.0985),
             {
                 icon: L.icon({
-                    iconAnchor: L.point(12,40),
+                    iconAnchor: L.point(12, 40),
                     iconUrl: "_static/leaflet/images/marker-icon-green.png",
                     shadowUrl: "_static/leaflet/images/marker-shadow.png"
                 })
@@ -236,7 +262,7 @@ The PHP above generates the following JavaScript.
             L.latLng(51.5131, -0.1139),
             {
                 icon: L.icon({
-                    iconAnchor: L.point(12,40),
+                    iconAnchor: L.point(12, 40),
                     iconUrl: "_static/leaflet/images/marker-icon.png",
                     shadowUrl: "_static/leaflet/images/marker-shadow.png"
                 })
@@ -248,19 +274,19 @@ The PHP above generates the following JavaScript.
             L.latLng(51.5088, -0.1267),
             {
                 icon: L.icon({
-                    iconAnchor:L.point(12,40),
-                    iconUrl:"_static/leaflet/images/marker-icon.png",
-                    shadowUrl:"_static/leaflet/images/marker-shadow.png"
+                    iconAnchor: L.point(12, 40),
+                    iconUrl: "_static/leaflet/images/marker-icon.png",
+                    shadowUrl: "_static/leaflet/images/marker-shadow.png"
                 })
             }
         )
             .bindPopup("<p><b>St Martin-in-the-Fields</b></p><p>You owe me five farthings</p>")
         ,
         L.marker(
-            L.latLng(51.5167,-0.10227),
+            L.latLng(51.5167, -0.10227),
             {
                 icon: L.icon({
-                    iconAnchor: L.point(12,40),
+                    iconAnchor: L.point(12, 40),
                     iconUrl: "_static/leaflet/images/marker-icon.png",
                     shadowUrl: "_static/leaflet/images/marker-shadow.png"
                 })
@@ -272,9 +298,9 @@ The PHP above generates the following JavaScript.
             L.latLng(51.5268, -0.0772),
             {
                 icon: L.icon({
-                    iconAnchor: L.point(12,40),
-                    iconUrl:"_static/leaflet/images/marker-icon.png",
-                    shadowUrl:"_static/leaflet/images/marker-shadow.png"
+                    iconAnchor: L.point(12, 40),
+                    iconUrl: "_static/leaflet/images/marker-icon.png",
+                    shadowUrl: "_static/leaflet/images/marker-shadow.png"
                 })
             }
         )
@@ -284,7 +310,7 @@ The PHP above generates the following JavaScript.
             L.latLng(51.5168, -0.0417),
             {
                 icon: L.icon({
-                    iconAnchor: L.point(12,40),
+                    iconAnchor: L.point(12, 40),
                     iconUrl: "_static/leaflet/images/marker-icon.png",
                     shadowUrl: "_static/leaflet/images/marker-shadow.png"
                 })
@@ -296,20 +322,20 @@ The PHP above generates the following JavaScript.
             L.latLng(51.5137, -0.0935),
             {
                 icon: L.icon({
-                    iconAnchor: L.point(12,40),
-                    iconUrl:"_static/leaflet/images/marker-icon.png",
-                    shadowUrl:"_static/leaflet/images/marker-shadow.png"
+                    iconAnchor: L.point(12, 40),
+                    iconUrl: "_static/leaflet/images/marker-icon.png",
+                    shadowUrl: "_static/leaflet/images/marker-shadow.png"
                 })
             }
         )
             .bindPopup("<p><b>St Mary-le-Bow</b></p><p>I do not know</p>")
     ]);
     const layer3 = L.marker(
-        L.latLng(51.5138,-0.1000),
+        L.latLng(51.5138, -0.1000),
         {
             draggable: true,
             icon: L.icon({
-                iconAnchor: L.point(12,40),
+                iconAnchor: L.point(12, 40),
                 iconUrl: "_static/leaflet/images/marker-icon-red.png",
                 shadowUrl: "_static/leaflet/images/marker-shadow.png"
             })
@@ -319,7 +345,7 @@ The PHP above generates the following JavaScript.
         .on(
             "dragend",
             function(e) {
-                const position=e.target.getLatLng();
+                const position = e.target.getLatLng();
                 window.alert("Moved by " + Math.floor(e.distance) + " pixels\nNew position " + position.lat + ", " + position.lng);
             }
         )
@@ -357,14 +383,14 @@ Map
         const map_467619187270731 = L.map(
             "map_467619187270731",
             {
-                center: L.latLng(51.51383,-0.0985),
+                center: L.latLng(51.51383, -0.0985),
                 layers: [layer0],
                 zoom: 13
             }
         );
         const layer1 = L.layerGroup([
             L.circle(
-                L.latLng(51.51383,-0.0985),
+                L.latLng(51.51383, -0.0985),
                 {
                     radius: 4000,
                     color: "#20ffcd"
@@ -373,28 +399,28 @@ Map
                 .bindTooltip("4km radius")
             ,
             L.circle(
-                L.latLng(51.51383,-0.0985),
+                L.latLng(51.51383, -0.0985),
                 {
                     radius: 2000,
-                    color:"#3388ff"
+                    color: "#3388ff"
                 }
             )
                 .bindTooltip("2km radius")
             ,
             L.circle(
-                L.latLng(51.51383,-0.0985),
+                L.latLng(51.51383, -0.0985),
                 {
-                    radius:1000,
-                    color:"#573CFF"
+                    radius: 1000,
+                    color: "#573CFF"
                 }
             )
                 .bindTooltip("1km radius")
             ,
             L.marker(
-                L.latLng(51.51383,-0.0985),
+                L.latLng(51.51383, -0.0985),
                 {
                     icon: L.icon({
-                        iconAnchor: L.point(12,40),
+                        iconAnchor: L.point(12, 40),
                         iconUrl: "_static/leaflet/images/marker-icon-green.png",
                         shadowUrl: "_static/leaflet/images/marker-shadow.png"
                     })
@@ -409,7 +435,7 @@ Map
                 L.latLng(51.5131, -0.1139),
                 {
                     icon: L.icon({
-                        iconAnchor: L.point(12,40),
+                        iconAnchor: L.point(12, 40),
                         iconUrl: "_static/leaflet/images/marker-icon.png",
                         shadowUrl: "_static/leaflet/images/marker-shadow.png"
                     })
@@ -421,19 +447,19 @@ Map
                 L.latLng(51.5088, -0.1267),
                 {
                     icon: L.icon({
-                        iconAnchor:L.point(12,40),
-                        iconUrl:"_static/leaflet/images/marker-icon.png",
-                        shadowUrl:"_static/leaflet/images/marker-shadow.png"
+                        iconAnchor: L.point(12, 40),
+                        iconUrl: "_static/leaflet/images/marker-icon.png",
+                        shadowUrl: "_static/leaflet/images/marker-shadow.png"
                     })
                 }
             )
                 .bindPopup("<p><b>St Martin-in-the-Fields</b></p><p>You owe me five farthings</p>")
             ,
             L.marker(
-                L.latLng(51.5167,-0.10227),
+                L.latLng(51.5167, -0.10227),
                 {
                     icon: L.icon({
-                        iconAnchor: L.point(12,40),
+                        iconAnchor: L.point(12, 40),
                         iconUrl: "_static/leaflet/images/marker-icon.png",
                         shadowUrl: "_static/leaflet/images/marker-shadow.png"
                     })
@@ -445,9 +471,9 @@ Map
                 L.latLng(51.5268, -0.0772),
                 {
                     icon: L.icon({
-                        iconAnchor: L.point(12,40),
-                        iconUrl:"_static/leaflet/images/marker-icon.png",
-                        shadowUrl:"_static/leaflet/images/marker-shadow.png"
+                        iconAnchor: L.point(12, 40),
+                        iconUrl: "_static/leaflet/images/marker-icon.png",
+                        shadowUrl: "_static/leaflet/images/marker-shadow.png"
                     })
                 }
             )
@@ -457,7 +483,7 @@ Map
                 L.latLng(51.5168, -0.0417),
                 {
                     icon: L.icon({
-                        iconAnchor: L.point(12,40),
+                        iconAnchor: L.point(12, 40),
                         iconUrl: "_static/leaflet/images/marker-icon.png",
                         shadowUrl: "_static/leaflet/images/marker-shadow.png"
                     })
@@ -469,20 +495,20 @@ Map
                 L.latLng(51.5137, -0.0935),
                 {
                     icon: L.icon({
-                        iconAnchor: L.point(12,40),
-                        iconUrl:"_static/leaflet/images/marker-icon.png",
-                        shadowUrl:"_static/leaflet/images/marker-shadow.png"
+                        iconAnchor: L.point(12, 40),
+                        iconUrl: "_static/leaflet/images/marker-icon.png",
+                        shadowUrl: "_static/leaflet/images/marker-shadow.png"
                     })
                 }
             )
                 .bindPopup("<p><b>St Mary-le-Bow</b></p><p>I do not know</p>")
         ]);
         const layer3 = L.marker(
-            L.latLng(51.5138,-0.1000),
+            L.latLng(51.5138, -0.1),
             {
                 draggable: true,
                 icon: L.icon({
-                    iconAnchor: L.point(12,40),
+                    iconAnchor: L.point(12, 40),
                     iconUrl: "_static/leaflet/images/marker-icon-red.png",
                     shadowUrl: "_static/leaflet/images/marker-shadow.png"
                 })
@@ -492,7 +518,7 @@ Map
             .on(
                 "dragend",
                 function(e) {
-                    const position=e.target.getLatLng();
+                    const position = e.target.getLatLng();
                     window.alert("Moved by " + Math.floor(e.distance) + " pixels\nNew position " + position.lat + ", " + position.lng);
                 }
             )
