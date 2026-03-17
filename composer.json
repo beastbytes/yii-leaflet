@@ -19,7 +19,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.1",
         "yiisoft/assets": "dev-master",
         "yiisoft/html": "^3.0",
         "yiisoft/widget": "^2.0"
