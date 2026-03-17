@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\layers\ui;
 
-use BeastBytes\Yii\Leaflet\layers\ui\Tooltip;
+use BeastBytes\Yii\Leaflet\Layers\UI\Tooltip;
 use BeastBytes\Yii\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 

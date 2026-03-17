@@ -1,6 +1,11 @@
 # phpstorm project files
 .idea
 
+# Sphinx
+/docs/build
+# Python Virtual Envirnment
+.venv
+
 # netbeans project files
 nbproject
 
@@ -19,8 +24,7 @@ Thumbs.db
 # composer vendor dir
 /vendor
 
-# Composer
-composer.lock
+# composer itself is not needed
 composer.phar
 
 # Mac DS_Store Files
@@ -34,6 +38,9 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 
+# logs
+/logs
+
 # NPM packages
 /node_modules
 .env
@@ -41,7 +48,8 @@ phpunit.phar
 # Codeception
 c3.php
 
-# logs
-/logs
+# Composer
+composer.lock
 
-/.editorconfig
+# phpDocumentor cache
+/docs/cache
