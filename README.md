@@ -9,3 +9,5 @@ Widget that integrates the [Leaflet](https://leafletjs.com/) JavaScript mapping 
 -   Leaflet plugin support
 
 For license information see the [LICENSE](LICENSE.md) file.
+
+Documentation is at https://beastbytes.github.io/yii-leaflet/
