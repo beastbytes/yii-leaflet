@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace BeastBytes\Yii\Leaflet\Tests\types;
 
 use BeastBytes\Yii\Leaflet\Map;
-use BeastBytes\Yii\Leaflet\types\Point;
+use BeastBytes\Yii\Leaflet\Types\Point;
 use PHPUnit\Framework\TestCase;
 
 class PointTest extends TestCase

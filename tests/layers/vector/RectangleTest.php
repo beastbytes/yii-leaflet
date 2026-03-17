@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\layers\vector;
 
-use BeastBytes\Yii\Leaflet\layers\vector\Rectangle;
+use BeastBytes\Yii\Leaflet\Layers\Vector\Rectangle;
 use BeastBytes\Yii\Leaflet\Map;
-use BeastBytes\Yii\Leaflet\types\LatLng;
-use BeastBytes\Yii\Leaflet\types\LatLngBounds;
+use BeastBytes\Yii\Leaflet\Types\LatLng;
+use BeastBytes\Yii\Leaflet\Types\LatLngBounds;
 use PHPUnit\Framework\TestCase;
 
 class RectangleTest extends TestCase

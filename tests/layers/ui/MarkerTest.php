@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\layers\ui;
 
-use BeastBytes\Yii\Leaflet\layers\ui\Marker;
+use BeastBytes\Yii\Leaflet\Layers\UI\Marker;
 use BeastBytes\Yii\Leaflet\Map;
-use BeastBytes\Yii\Leaflet\types\LatLng;
-use BeastBytes\Yii\Leaflet\types\Point;
+use BeastBytes\Yii\Leaflet\Types\LatLng;
+use BeastBytes\Yii\Leaflet\Types\Point;
 use PHPUnit\Framework\TestCase;
 
 class MarkerTest extends TestCase

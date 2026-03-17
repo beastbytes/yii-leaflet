@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\layers\ui;
 
-use BeastBytes\Yii\Leaflet\layers\ui\Popup;
+use BeastBytes\Yii\Leaflet\Layers\UI\Popup;
 use BeastBytes\Yii\Leaflet\Map;
-use BeastBytes\Yii\Leaflet\types\LatLng;
+use BeastBytes\Yii\Leaflet\Types\LatLng;
 use PHPUnit\Framework\TestCase;
 
 class PopupTest extends TestCase

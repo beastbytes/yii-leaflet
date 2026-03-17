@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace BeastBytes\Yii\Leaflet\Tests\renderers;
 
 use BeastBytes\Yii\Leaflet\Map;
-use BeastBytes\Yii\Leaflet\renderers\Canvas;
+use BeastBytes\Yii\Leaflet\Renderers\Canvas;
 use PHPUnit\Framework\TestCase;
 
 class CanvasTest extends TestCase

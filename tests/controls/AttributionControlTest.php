@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\controls;
 
-use BeastBytes\Yii\Leaflet\controls\AttributionControl;
+use BeastBytes\Yii\Leaflet\Controls\Attribution;
 use BeastBytes\Yii\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 
@@ -16,7 +16,7 @@ class AttributionControlTest extends TestCase
 {
     public function test_attribution_control()
     {
-        $control = new AttributionControl();
+        $control = new Attribution();
 
         $this->assertSame(
             Map::LEAFLET_VAR . ".control.attribution()",

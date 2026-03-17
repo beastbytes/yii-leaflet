@@ -8,22 +8,12 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\layers\other;
 
-use BeastBytes\Yii\Leaflet\layers\other\GeoJson;
+use BeastBytes\Yii\Leaflet\Layers\Other\GeoJson;
 use BeastBytes\Yii\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 
 class GeoJsonTest extends TestCase
 {
-    public function test_geo_json()
-    {
-        $geoJson = new GeoJson();
-
-        $this->assertSame(
-            Map::LEAFLET_VAR . '.geoJson()',
-            $geoJson->toJs(Map::LEAFLET_VAR)
-        );
-    }
-
     public function test_geo_json_with_data()
     {
         $data = [

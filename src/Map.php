@@ -1,20 +1,17 @@
 <?php
-/**
- * @copyright Copyright © 2023 BeastBytes - All Rights Reserved
- * @license BSD 3-Clause
- */
 
 declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet;
 
-use BeastBytes\Yii\Leaflet\controls\Control;
-use BeastBytes\Yii\Leaflet\layers\Layer;
-use BeastBytes\Yii\Leaflet\types\LatLng;
-use BeastBytes\Yii\Leaflet\types\LatLngBounds;
+use BeastBytes\Yii\Leaflet\Controls\Control;
+use BeastBytes\Yii\Leaflet\Layers\Layer;
+use BeastBytes\Yii\Leaflet\Types\LatLng;
+use BeastBytes\Yii\Leaflet\Types\LatLngBounds;
 use InvalidArgumentException;
 use JsonException;
 use Yiisoft\Assets\AssetManager;
+use Yiisoft\Assets\Exception\InvalidConfigException;
 use Yiisoft\Html\Html;
 use Yiisoft\Strings\Inflector;
 use Yiisoft\View\WebView;
@@ -94,7 +91,10 @@ final class Map extends Widget
      */
     private array $mapLayers = [];
 
-    public function __construct(AssetManager $assetManager, private WebView $webView)
+    /**
+     * @throws InvalidConfigException
+     */
+    public function __construct(AssetManager $assetManager, private readonly WebView $webView)
     {
         $assetManager->register(LeafletAsset::class);
     }
@@ -106,10 +106,14 @@ final class Map extends Widget
         return $new;
     }
 
-    public function addClass(string $value): self
+    public function addClass(string ...$value): self
     {
         $new = clone $this;
-        Html::addCssClass($new->attributes, $value);
+
+        foreach ($value as $v) {
+            Html::addCssClass($new->attributes, $v);
+        }
+
         return $new;
     }
 

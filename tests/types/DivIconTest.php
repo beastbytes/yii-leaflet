@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace BeastBytes\Yii\Leaflet\Tests\types;
 
 use BeastBytes\Yii\Leaflet\Map;
-use BeastBytes\Yii\Leaflet\types\DivIcon;
+use BeastBytes\Yii\Leaflet\Types\DivIcon;
 use PHPUnit\Framework\TestCase;
 
 class DivIconTest extends TestCase

@@ -1,37 +1,33 @@
 <?php
-/**
- * @copyright Copyright © 2023 BeastBytes - All Rights Reserved
- * @license BSD 3-Clause
- */
 
 declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet;
 
-use BeastBytes\Yii\Leaflet\types\LatLngBounds;
+use BeastBytes\Yii\Leaflet\Types\LatLng;
+use BeastBytes\Yii\Leaflet\Types\LatLngBounds;
 
 /**
  * Defines the LatLngBounds for Leaflet components
  *
  * Use in components that have a bounds defined by a LatLngBounds
+ *
+ * @template T of array{float, float}|array{float, float, float}|array{lat: float, lng: float}|array{lat: float, lng: float, alt: float}|LatLng
  */
 trait BoundsTrait
 {
     /**
-     * @param LatLngBounds The bounds
+     * @param LatLngBounds $bounds The bounds
      */
     private LatLngBounds $bounds;
 
     /**
      * Sets the bounds property
-     * 
-     * The bounds can be a LatLngBounds object, an array of the corners of the bounds where a corner can be a LatLng
-     * object or an array of the form or [$lat, $lng]
      *
-     * @param array|LatLngBounds $bounds The bounds
+     * @param array{0: T, 1: T}|LatLngBounds $bounds The bounds
      */
     private function setBounds(array|LatLngBounds $bounds): void
     {
-        $this->bounds = is_array($bounds) ? new LatLngBounds($bounds[0], $bounds[1]) : $bounds;
+        $this->bounds = $bounds instanceof LatLngBounds ? $bounds : new LatLngBounds($bounds[0], $bounds[1]);
     }
 }

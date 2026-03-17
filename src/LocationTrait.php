@@ -1,19 +1,17 @@
 <?php
-/**
- * @copyright Copyright © 2023 BeastBytes - All Rights Reserved
- * @license BSD 3-Clause
- */
 
 declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet;
 
-use BeastBytes\Yii\Leaflet\types\LatLng;
+use BeastBytes\Yii\Leaflet\Types\LatLng;
 
 /**
  * Defines the geographical location of Leaflet components
  *
  * Use in components that have a location defined by a LatLng
+ *
+ * @template T of array{float, float}|array{float, float, float}|array{lat: float, lng: float}|array{lat: float, lng: float, alt: float}|LatLng
  */
 trait LocationTrait
 {
@@ -25,12 +23,10 @@ trait LocationTrait
     /**
      * Sets the geographical location of the component
      *
-     * The value is an array in the form [$lat, $lng], or a LatLng object
-     *
-     * @param array|LatLng $location The component's location
+     * @param T $location The component's location
      */
     private function setLocation(array|LatLng $location): void
     {
-        $this->location = is_array($location) ? new LatLng($location[0], $location[1]) : $location;
+        $this->location = $location instanceof LatLng ? $location : new LatLng($location);
     }
 }

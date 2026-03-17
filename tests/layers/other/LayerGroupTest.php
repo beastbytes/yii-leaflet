@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\layers\other;
 
-use BeastBytes\Yii\Leaflet\layers\other\LayerGroup;
-use BeastBytes\Yii\Leaflet\layers\ui\Marker;
+use BeastBytes\Yii\Leaflet\Layers\Other\LayerGroup;
+use BeastBytes\Yii\Leaflet\Layers\UI\Marker;
 use BeastBytes\Yii\Leaflet\Map;
-use BeastBytes\Yii\Leaflet\types\Point;
+use BeastBytes\Yii\Leaflet\Types\Point;
 use PHPUnit\Framework\TestCase;
 
 class LayerGroupTest extends TestCase

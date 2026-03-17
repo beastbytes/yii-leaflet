@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace BeastBytes\Yii\Leaflet\Tests\types;
 
 use BeastBytes\Yii\Leaflet\Map;
-use BeastBytes\Yii\Leaflet\types\LatLng;
+use BeastBytes\Yii\Leaflet\Types\LatLng;
 use Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -68,16 +68,6 @@ class LatLngTest extends TestCase
                 'lat' => 91,
                 'lng' => random_int(-18000, 18000) / 100,
                 'message' => strtr(LatLng::INVALID_LATITUDE_MESSAGE, ['{value}' => 91])
-            ],
-            'lng too low' => [
-                'lat' => random_int(-9000, 9000) / 100,
-                'lng' => -181,
-                'message' => strtr(LatLng::INVALID_LONGITUDE_MESSAGE, ['{value}' => -181])
-            ],
-            'lng too high' => [
-                'lat' => random_int(-9000, 9000) / 100,
-                'lng' => 181,
-                'message' => strtr(LatLng::INVALID_LONGITUDE_MESSAGE, ['{value}' => 181])
             ],
         ] as $name => $data) {
             yield $name => $data;

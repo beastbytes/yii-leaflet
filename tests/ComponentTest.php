@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests;
 
-use BeastBytes\Yii\Leaflet\controls\ZoomControl;
+use BeastBytes\Yii\Leaflet\Controls\Zoom;
 use BeastBytes\Yii\Leaflet\Map;
 use BeastBytes\Yii\Leaflet\Tests\support\plugins\TestPlugin;
 use BeastBytes\Yii\Leaflet\Tests\support\TestTrait;
@@ -32,7 +32,7 @@ class ComponentTest extends TestCase
                 'zoom' => 10
             ])
             ->addControls(
-                (new ZoomControl())->jsVar($jsVar)
+                (new Zoom())->jsVar($jsVar)
             );
 
         $content = $map->render();

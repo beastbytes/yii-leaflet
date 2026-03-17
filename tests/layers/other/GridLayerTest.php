@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\layers\other;
 
-use BeastBytes\Yii\Leaflet\layers\other\GridLayer;
+use BeastBytes\Yii\Leaflet\Layers\Other\GridLayer;
 use BeastBytes\Yii\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 

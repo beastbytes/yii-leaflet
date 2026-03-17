@@ -1,20 +1,16 @@
 <?php
-/**
- * @copyright Copyright © 2023 BeastBytes - All Rights Reserved
- * @license BSD 3-Clause
- */
 
 declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet;
 
-use BeastBytes\Yii\Leaflet\controls\Control;
-use BeastBytes\Yii\Leaflet\layers\Layer;
+use BeastBytes\Yii\Leaflet\Controls\Control;
+use BeastBytes\Yii\Leaflet\Layers\Layer;
 
 /**
  * Base class for Leaflet components
  */
-abstract class Component extends Base
+abstract class Component extends Base implements LeafletInterface
 {
     use EventsTrait;
 
@@ -25,9 +21,9 @@ abstract class Component extends Base
     private bool $addToMap = true;
 
     /**
-     * @var string Component JavaScript variable name
+     * @var ?string Component JavaScript variable name. Auto generated if NULL
      */
-    private string $jsVar = '';
+    private ?string $jsVar = null;
 
     /**
      * @var array Counters to ensure all components on a page are unique
@@ -39,14 +35,13 @@ abstract class Component extends Base
     ];
 
     /**
-     * @var bool $addToMap Whether to add the component to the map
+     * @param bool $addToMap Whether to add the component to the map
      * @return self
      */
     public function addToMap(bool $addToMap): self
     {
         $new = clone $this;
         $new->addToMap = $addToMap;
-
         return $new;
     }
 
@@ -60,32 +55,30 @@ abstract class Component extends Base
     }
 
     /**
-     * @var string $jsVar The component's JavaScript variable name
+     * @param string $jsVar The component's JavaScript variable name
      */
     public function jsVar(string $jsVar): self
     {
         $new = clone $this;
         $new->jsVar = $jsVar;
-
         return $new;
     }
 
     /**
      * @return string The component's JavaScript variable name
-     * @internal
      */
     public function getJsVar(): string
     {
-        if (empty($this->jsVar)) {
+        if ($this->jsVar === null) {
             if ($this instanceof Control) {
-                $key = 'control';
+                $type = 'control';
             } elseif ($this instanceof Layer) {
-                $key = 'layer';
+                $type = 'layer';
             } else {
-                $key = 'plugin';
+                $type = 'plugin';
             }
 
-            $this->jsVar = $key . self::$counters[$key]++;
+            $this->jsVar = $type . self::$counters[$type]++;
         }
 
         return $this->jsVar;

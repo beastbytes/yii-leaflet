@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\controls;
 
-use BeastBytes\Yii\Leaflet\controls\LayersControl;
+use BeastBytes\Yii\Leaflet\Controls\Layers;
 use BeastBytes\Yii\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 
@@ -20,7 +20,7 @@ class LayersControlTest extends TestCase
             'Marker' => 'marker'
         ];
 
-        $control = new LayersControl(overlays: array_keys($overlays), options: ['hideSingleBase' => true]);
+        $control = new Layers(overlays: array_keys($overlays), options: ['hideSingleBase' => true]);
         $control->setOverlays($overlays);
 
         $this->assertSame(

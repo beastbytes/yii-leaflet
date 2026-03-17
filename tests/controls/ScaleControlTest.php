@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\controls;
 
-use BeastBytes\Yii\Leaflet\controls\ScaleControl;
+use BeastBytes\Yii\Leaflet\Controls\Scale;
 use BeastBytes\Yii\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 
@@ -16,7 +16,7 @@ class ScaleControlTest extends TestCase
 {
     public function test_scale_control()
     {
-        $control = new ScaleControl();
+        $control = new Scale();
 
         $this->assertSame(
             Map::LEAFLET_VAR . ".control.scale()",

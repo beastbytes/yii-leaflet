@@ -1,8 +1,4 @@
 <?php
-/**
- * @copyright Copyright © 2023 BeastBytes - All Rights Reserved
- * @license BSD 3-Clause
- */
 
 declare(strict_types=1);
 
@@ -14,7 +10,7 @@ use Yiisoft\View\WebView;
 /**
  * Leaflet asset bundle
  */
-class LeafletAsset extends AssetBundle
+final class LeafletAsset extends AssetBundle
 {
     public array $css = ['leaflet.css'];
     public array $js = ['leaflet.js'];

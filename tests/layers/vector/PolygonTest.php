@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\layers\vector;
 
-use BeastBytes\Yii\Leaflet\layers\vector\Polygon;
+use BeastBytes\Yii\Leaflet\Layers\Vector\Polygon;
 use BeastBytes\Yii\Leaflet\Map;
-use BeastBytes\Yii\Leaflet\types\LatLng;
+use BeastBytes\Yii\Leaflet\Types\LatLng;
 use PHPUnit\Framework\TestCase;
 
 class PolygonTest extends TestCase

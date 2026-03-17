@@ -1,16 +1,9 @@
 <?php
-/**
- * @copyright Copyright © 2023 BeastBytes - All rights reserved
- * @license BSD 3-Clause
- */
 
 declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet;
 
-/**
- * @author Chris Yates
- */
 trait EventsTrait
 {
     /**
@@ -26,7 +19,7 @@ trait EventsTrait
      * Returns a new instance with the events added
      *
      * @param array<string, array|string> $events Events for the object
-     * @return \BeastBytes\Yii\Leaflet\EventsTrait|\BeastBytes\Yii\Leaflet\Component|\BeastBytes\Yii\Leaflet\Map
+     * @return Map|Component|EventsTrait
      */
     public function events(array $events): self
     {

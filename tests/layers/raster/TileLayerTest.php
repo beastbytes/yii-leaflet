@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\layers\raster;
 
-use BeastBytes\Yii\Leaflet\layers\raster\TileLayer;
+use BeastBytes\Yii\Leaflet\Layers\Raster\TileLayer;
 use BeastBytes\Yii\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 

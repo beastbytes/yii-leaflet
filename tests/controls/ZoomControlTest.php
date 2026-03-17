@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\controls;
 
-use BeastBytes\Yii\Leaflet\controls\ZoomControl;
+use BeastBytes\Yii\Leaflet\Controls\Zoom;
 use BeastBytes\Yii\Leaflet\Map;
 use PHPUnit\Framework\TestCase;
 
@@ -16,7 +16,7 @@ class ZoomControlTest extends TestCase
 {
     public function test_zoom_control()
     {
-        $control = new ZoomControl();
+        $control = new Zoom();
 
         $this->assertSame(
             Map::LEAFLET_VAR . ".control.zoom()",

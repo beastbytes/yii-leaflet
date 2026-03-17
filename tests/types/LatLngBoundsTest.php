@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace BeastBytes\Yii\Leaflet\Tests\types;
 
 use BeastBytes\Yii\Leaflet\Map;
-use BeastBytes\Yii\Leaflet\types\LatLng;
-use BeastBytes\Yii\Leaflet\types\LatLngBounds;
+use BeastBytes\Yii\Leaflet\Types\LatLng;
+use BeastBytes\Yii\Leaflet\Types\LatLngBounds;
 use PHPUnit\Framework\TestCase;
 
 class LatLngBoundsTest extends TestCase

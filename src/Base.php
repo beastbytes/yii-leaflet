@@ -1,8 +1,4 @@
 <?php
-/**
- * @copyright Copyright © 2023 BeastBytes - All Rights Reserved
- * @license BSD 3-Clause
- */
 
 declare(strict_types=1);
 
@@ -16,7 +12,7 @@ abstract class Base
     use OptionsTrait;
 
     /**
-     * @param array $options Component options
+     * @param array<string, mixed> $options Object options
      */
     public function __construct(array $options = []) {
         $this->options = $options;

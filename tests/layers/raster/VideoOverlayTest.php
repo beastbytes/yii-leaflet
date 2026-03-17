@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\layers\raster;
 
-use BeastBytes\Yii\Leaflet\layers\raster\VideoOverlay;
+use BeastBytes\Yii\Leaflet\Layers\Raster\VideoOverlay;
 use BeastBytes\Yii\Leaflet\Map;
-use BeastBytes\Yii\Leaflet\types\LatLng;
-use BeastBytes\Yii\Leaflet\types\LatLngBounds;
+use BeastBytes\Yii\Leaflet\Types\LatLng;
+use BeastBytes\Yii\Leaflet\Types\LatLngBounds;
 use PHPUnit\Framework\TestCase;
 
 class VideoOverlayTest extends TestCase

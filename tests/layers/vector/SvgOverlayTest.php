@@ -8,11 +8,20 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\layers\vector;
 
-use BeastBytes\Yii\Leaflet\layers\vector\SvgOverlay;
+use BeastBytes\Yii\Leaflet\Layers\Vector\SvgOverlay;
 use BeastBytes\Yii\Leaflet\Map;
-use BeastBytes\Yii\Leaflet\types\LatLng;
-use BeastBytes\Yii\Leaflet\types\LatLngBounds;
+use BeastBytes\Yii\Leaflet\Types\LatLng;
+use BeastBytes\Yii\Leaflet\Types\LatLngBounds;
 use PHPUnit\Framework\TestCase;
+
+const SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
+const SVG_OVERLAY = <<<'SVG_OVERLAY'
+const svgElement%%d=document.createElementNS("%s","svg");
+svgElement%%d.setAttribute("xmlns","%1$s");
+svgElement%%d.setAttribute("viewBox","%s");
+svgElement%%d.innerHTML='%s';
+%s.svgOverlay(svgElement%%d,%4$s.latLngBounds(%4$s.latLng(%s,%s),%4$s.latLng(%s,%s)),{alt:"svgOverlay"})
+SVG_OVERLAY;
 
 class SvgOverlayTest extends TestCase
 {
@@ -31,19 +40,17 @@ class SvgOverlayTest extends TestCase
         $svgOverlay = new SvgOverlay($innerHtml, $viewBox, $latLngBounds, ['alt' => 'svgOverlay']);
 
         $this->assertStringMatchesFormat(
-            'const svgElement%d=document.createElementNS("http://www.w3.org/2000/svg","svg");'
-            . 'svgElement%d.setAttribute("xmlns","http://www.w3.org/2000/svg");'
-            . 'svgElement%d.setAttribute("viewBox","' . $viewBox . '");'
-            . "svgElement%d.innerHTML='$innerHtml';"
-            . Map::LEAFLET_VAR . '.svgOverlay(svgElement%d,'
-            . Map::LEAFLET_VAR . ".latLngBounds("
-            . Map::LEAFLET_VAR . ".latLng($lat1,$lng1),"
-            . Map::LEAFLET_VAR . ".latLng($lat2,$lng2)"
-            . "),"
-            . '{alt:"svgOverlay"})',
+            sprintf(SVG_OVERLAY,
+                SVG_NAMESPACE,
+                $viewBox,
+                $innerHtml,
+                Map::LEAFLET_VAR,
+                $lat1,$lng1,$lat2,$lng2
+            ),
             $svgOverlay->toJs(Map::LEAFLET_VAR)
         );
     }
+
     public function test_svg_overlay_view_box_array()
     {
         $innerHtml = '<rect width="200" height="200"/><rect x="75" y="23" width="50" height="50" style="fill:red"/><rect x="75" y="123" width="50" height="50" style="fill:#0013ff"/>';
@@ -59,21 +66,19 @@ class SvgOverlayTest extends TestCase
         $svgOverlay = new SvgOverlay($innerHtml, $viewBox, $latLngBounds, ['alt' => 'svgOverlay']);
 
         $this->assertStringMatchesFormat(
-            'const svgElement%d=document.createElementNS("http://www.w3.org/2000/svg","svg");'
-            . 'svgElement%d.setAttribute("xmlns","http://www.w3.org/2000/svg");'
-            . 'svgElement%d.setAttribute("viewBox","' . implode(' ', $viewBox) . '");'
-            . "svgElement%d.innerHTML='$innerHtml';"
-            . Map::LEAFLET_VAR . '.svgOverlay(svgElement%d,'
-            . Map::LEAFLET_VAR . ".latLngBounds("
-            . Map::LEAFLET_VAR . ".latLng($lat1,$lng1),"
-            . Map::LEAFLET_VAR . ".latLng($lat2,$lng2)"
-            . "),"
-            . '{alt:"svgOverlay"})',
+            sprintf(SVG_OVERLAY,
+                SVG_NAMESPACE,
+                implode(' ', $viewBox),
+                $innerHtml,
+                Map::LEAFLET_VAR,
+                $lat1,$lng1,$lat2,$lng2
+            ),
             $svgOverlay->toJs(Map::LEAFLET_VAR)
         );
     }
     public function test_svg_overlay_namespace()
     {
+        $namespace = 'https://example.com/svg';
         $innerHtml = '<rect width="200" height="200"/><rect x="75" y="23" width="50" height="50" style="fill:red"/><rect x="75" y="123" width="50" height="50" style="fill:#0013ff"/>';
         $viewBox = '0 0 200 200';
         $lat1 = random_int(-9000, 9000) / 100;
@@ -85,19 +90,16 @@ class SvgOverlayTest extends TestCase
 
         $latLngBounds = new LatLngBounds($latLng1, $latLng2);
         $svgOverlay = new SvgOverlay($innerHtml, $viewBox, $latLngBounds, ['alt' => 'svgOverlay']);
-        $svgOverlay = $svgOverlay->namespace('https://example.com/svg');
+        $svgOverlay = $svgOverlay->namespace($namespace);
 
         $this->assertStringMatchesFormat(
-            'const svgElement%d=document.createElementNS("https://example.com/svg","svg");'
-            . 'svgElement%d.setAttribute("xmlns","https://example.com/svg");'
-            . 'svgElement%d.setAttribute("viewBox","' . $viewBox . '");'
-            . "svgElement%d.innerHTML='$innerHtml';"
-            . Map::LEAFLET_VAR . '.svgOverlay(svgElement%d,'
-            . Map::LEAFLET_VAR . ".latLngBounds("
-            . Map::LEAFLET_VAR . ".latLng($lat1,$lng1),"
-            . Map::LEAFLET_VAR . ".latLng($lat2,$lng2)"
-            . "),"
-            . '{alt:"svgOverlay"})',
+            sprintf(SVG_OVERLAY,
+                $namespace,
+                $viewBox,
+                $innerHtml,
+                Map::LEAFLET_VAR,
+                $lat1,$lng1,$lat2,$lng2
+            ),
             $svgOverlay->toJs(Map::LEAFLET_VAR)
         );
     }

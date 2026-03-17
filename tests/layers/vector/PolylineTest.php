@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace BeastBytes\Yii\Leaflet\Tests\layers\vector;
 
-use BeastBytes\Yii\Leaflet\layers\vector\Polyline;
+use BeastBytes\Yii\Leaflet\Layers\Vector\Polyline;
 use BeastBytes\Yii\Leaflet\Map;
-use BeastBytes\Yii\Leaflet\types\LatLng;
+use BeastBytes\Yii\Leaflet\Types\LatLng;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
